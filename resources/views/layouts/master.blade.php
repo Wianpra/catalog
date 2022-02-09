@@ -73,7 +73,7 @@
                                                     </ul>
                                                 </li>
                                                 <li class="mainmenu__item menu-item-has-children megamenu-holder">
-                                                    <a href="{{ url('catalog') }}" class="mainmenu__link">
+                                                    <a href="{{ url('product-catalog') }}" class="mainmenu__link">
                                                         <span class="mm-text">Catalog</span>
                                                     </a>
                                                 </li>
