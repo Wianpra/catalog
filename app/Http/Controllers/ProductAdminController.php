@@ -11,4 +11,8 @@ class ProductAdminController extends Controller
     {
         return view('_product');
     }
+    public function create()
+    {
+        return view('_createProduct');
+    }
 }

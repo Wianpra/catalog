@@ -1,45 +1,61 @@
 @extends('layouts._master')
+@extends('layouts._header')
+@section('headerName', 'Product')
+@section('nav', 'Product')
+
+@section('headerContent')
+<div class="col-lg-6 col-5 text-right">
+    <a href="{{ url('/product-admin/create') }}" class="btn btn-sm btn-neutral">Create Product</a>
+</div>
+@endsection
+
+@section('css')
+<!-- Page plugins -->
+<link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css">
+<link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-select-bs4/css/select.bootstrap4.min.css">
+@endsection
+
 @section('content')
 <!-- Page content -->
 <div class="container-fluid mt--6">
     <!-- Table -->
     <div class="row">
         <div class="col">
+            
             <div class="card">
                 <!-- Card header -->
-                <div class="card-header border-0">
-                    <h3 class="mb-0">Light table</h3>
+                <div class="card-header">
+                    <h3 class="mb-0">Data Product</h3>
                 </div>
-                <!-- Light table -->
-                <div class="table-responsive" data-toggle="list" data-list-values='["name", "budget", "status", "completion"]'>
-                    <table class="table align-items-center table-flush">
+                <div class="table-responsive py-4">
+                    <table class="table table-flush" id="datatable-basic">
                         <thead class="thead-light">
                             <tr>
-                                <th scope="col" class="sort" data-sort="name">Product</th>
-                                <th scope="col" class="sort" data-sort="name">Category</th>
-                                <th scope="col" class="sort" data-sort="budget">Price</th>
-                                <th scope="col" class="sort" data-sort="seen">Seen</th>
-                                <th scope="col" class="sort" data-sort="action">Action</th>
+                                <th>Product</th>
+                                <th>Images</th>
+                                <th>Category</th>
+                                <th>Description</th>
+                                <th>Seen</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody class="list">
+                        <tfoot>
                             <tr>
-                                <th scope="row">
-                                    <div class="media align-items-center">
-                                        <a href="#" class="avatar rounded-circle mr-3">
-                                            <img alt="Image placeholder" src="assets/_admin//assets/img/theme/bootstrap.jpg">
-                                        </a>
-                                        <div class="media-body">
-                                            <span class="name mb-0 text-sm">Argon Design System</span>
-                                        </div>
-                                    </div>
-                                </th>
-                                <td>
-                                    kursi lipat
-                                </td>
-                                <td class="budget">
-                                    Rp.100k
-                                </td>
+                                <th>Product</th>
+                                <th>Images</th>
+                                <th>Category</th>
+                                <th>Description</th>
+                                <th>Seen</th>
+                                <th>Action</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <tr>
+                                <td>Kursi</td>
+                                <td>*gambar</td>
+                                <td>Barang</td>
+                                <td>*ini deskripsi</td>
                                 <td>
                                     <i class="fas fa-eye"></i>
                                     1,5k
@@ -58,32 +74,6 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
-                <!-- Card footer -->
-                <div class="card-footer py-4">
-                    <nav aria-label="...">
-                        <ul class="pagination justify-content-end mb-0">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1">
-                                    <i class="fas fa-angle-left"></i>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                            </li>
-                            <li class="page-item active">
-                                <a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">
-                                    <i class="fas fa-angle-right"></i>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
                 </div>
             </div>
         </div>
@@ -115,4 +105,15 @@
         </div>
     </footer>
 </div>
+@endsection
+
+@section('script')
+<script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+<script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
+<script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
 @endsection

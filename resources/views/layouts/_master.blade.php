@@ -21,15 +21,16 @@
   <meta name="author" content="Creative Tim">
   <title>Argon Dashboard PRO - Premium Bootstrap 4 Admin Template</title>
   <!-- Favicon -->
-  <link rel="icon" href="assets/_admin//assets/img/brand/favicon.png" type="image/png">
+  <link rel="icon" href="{{ asset('/') }}assets/_admin/assets/img/brand/favicon.png" type="image/png">
   <!-- Fonts -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <link rel="stylesheet" href="https:/fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
   <!-- Icons -->
-  <link rel="stylesheet" href="assets/_admin//assets/vendor/nucleo/css/nucleo.css" type="text/css">
-  <link rel="stylesheet" href="assets/_admin//assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
+  <link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/nucleo/css/nucleo.css" type="text/css">
+  <link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
   <!-- Page plugins -->
+  @yield('css')
   <!-- Argon CSS -->
-  <link rel="stylesheet" href="assets/_admin//assets/css/argon.css?v=1.1.0" type="text/css">
+  <link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/css/argon.css?v=1.1.0" type="text/css">
 </head>
 
 <body>
@@ -38,8 +39,8 @@
     <div class="scrollbar-inner">
       <!-- Brand -->
       <div class="sidenav-header d-flex align-items-center">
-        <a class="navbar-brand" href="assets/_admin//pages/dashboards/dashboard.html">
-          <img src="assets/_admin//assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
+        <a class="navbar-brand" href="{{ asset('/') }}assets/_admin/pages/dashboards/dashboard.html">
+          <img src="{{ asset('/') }}assets/_admin/assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
         </a>
         <div class="ml-auto">
           <!-- Sidenav toggler -->
@@ -65,10 +66,10 @@
               <div class="collapse" id="navbar-dashboards">
                 <ul class="nav nav-sm flex-column">
                   <li class="nav-item">
-                    <a href="assets/_admin//pages/dashboards/dashboard.html" class="nav-link">Dashboard</a>
+                    <a href="{{ asset('/') }}assets/_admin/pages/dashboards/dashboard.html" class="nav-link">Dashboard</a>
                   </li>
                   <li class="nav-item">
-                    <a href="assets/_admin//pages/dashboards/alternative.html" class="nav-link">Alternative</a>
+                    <a href="{{ asset('/') }}assets/_admin/pages/dashboards/alternative.html" class="nav-link">Alternative</a>
                   </li>
                 </ul>
               </div>
@@ -81,34 +82,34 @@
               <div class="collapse" id="navbar-examples">
                 <ul class="nav nav-sm flex-column">
                   <li class="nav-item">
-                    <a href="assets/_admin//pages/examples/pricing.html" class="nav-link">Pricing</a>
+                    <a href="{{ asset('/') }}assets/_admin/pages/examples/pricing.html" class="nav-link">Pricing</a>
                   </li>
                   <li class="nav-item">
-                    <a href="assets/_admin//pages/examples/login.html" class="nav-link">Login</a>
+                    <a href="{{ asset('/') }}assets/_admin/pages/examples/login.html" class="nav-link">Login</a>
                   </li>
                   <li class="nav-item">
-                    <a href="assets/_admin//pages/examples/register.html" class="nav-link">Register</a>
+                    <a href="{{ asset('/') }}assets/_admin/pages/examples/register.html" class="nav-link">Register</a>
                   </li>
                   <li class="nav-item">
-                    <a href="assets/_admin//pages/examples/lock.html" class="nav-link">Lock</a>
+                    <a href="{{ asset('/') }}assets/_admin/pages/examples/lock.html" class="nav-link">Lock</a>
                   </li>
                   <li class="nav-item">
-                    <a href="assets/_admin//pages/examples/timeline.html" class="nav-link">Timeline</a>
+                    <a href="{{ asset('/') }}assets/_admin/pages/examples/timeline.html" class="nav-link">Timeline</a>
                   </li>
                   <li class="nav-item">
-                    <a href="assets/_admin//pages/examples/profile.html" class="nav-link">Profile</a>
+                    <a href="{{ asset('/') }}assets/_admin/pages/examples/profile.html" class="nav-link">Profile</a>
                   </li>
                 </ul>
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="assets/_admin//pages/widgets.html">
+              <a class="nav-link" href="{{ asset('/') }}assets/_admin/pages/widgets.html">
                 <i class="ni ni-archive-2 text-green"></i>
                 <span class="nav-link-text">Widgets</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="assets/_admin//pages/charts.html">
+              <a class="nav-link" href="{{ asset('/') }}assets/_admin/pages/charts.html">
                 <i class="ni ni-chart-pie-35 text-info"></i>
                 <span class="nav-link-text">Charts</span>
               </a>
@@ -170,7 +171,7 @@
                     <div class="row align-items-center">
                       <div class="col-auto">
                         <!-- Avatar -->
-                        <img alt="Image placeholder" src="assets/_admin//assets/img/theme/team-1.jpg" class="avatar rounded-circle">
+                        <img alt="Image placeholder" src="{{ asset('/') }}assets/_admin/assets/img/theme/team-1.jpg" class="avatar rounded-circle">
                       </div>
                       <div class="col ml--2">
                         <div class="d-flex justify-content-between align-items-center">
@@ -189,7 +190,7 @@
                     <div class="row align-items-center">
                       <div class="col-auto">
                         <!-- Avatar -->
-                        <img alt="Image placeholder" src="assets/_admin//assets/img/theme/team-2.jpg" class="avatar rounded-circle">
+                        <img alt="Image placeholder" src="{{ asset('/') }}assets/_admin/assets/img/theme/team-2.jpg" class="avatar rounded-circle">
                       </div>
                       <div class="col ml--2">
                         <div class="d-flex justify-content-between align-items-center">
@@ -208,7 +209,7 @@
                     <div class="row align-items-center">
                       <div class="col-auto">
                         <!-- Avatar -->
-                        <img alt="Image placeholder" src="assets/_admin//assets/img/theme/team-3.jpg" class="avatar rounded-circle">
+                        <img alt="Image placeholder" src="{{ asset('/') }}assets/_admin/assets/img/theme/team-3.jpg" class="avatar rounded-circle">
                       </div>
                       <div class="col ml--2">
                         <div class="d-flex justify-content-between align-items-center">
@@ -227,7 +228,7 @@
                     <div class="row align-items-center">
                       <div class="col-auto">
                         <!-- Avatar -->
-                        <img alt="Image placeholder" src="assets/_admin//assets/img/theme/team-4.jpg" class="avatar rounded-circle">
+                        <img alt="Image placeholder" src="{{ asset('/') }}assets/_admin/assets/img/theme/team-4.jpg" class="avatar rounded-circle">
                       </div>
                       <div class="col ml--2">
                         <div class="d-flex justify-content-between align-items-center">
@@ -246,7 +247,7 @@
                     <div class="row align-items-center">
                       <div class="col-auto">
                         <!-- Avatar -->
-                        <img alt="Image placeholder" src="assets/_admin//assets/img/theme/team-5.jpg" class="avatar rounded-circle">
+                        <img alt="Image placeholder" src="{{ asset('/') }}assets/_admin/assets/img/theme/team-5.jpg" class="avatar rounded-circle">
                       </div>
                       <div class="col ml--2">
                         <div class="d-flex justify-content-between align-items-center">
@@ -317,7 +318,7 @@
               <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="media align-items-center">
                   <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="assets/_admin//assets/img/theme/team-4.jpg">
+                    <img alt="Image placeholder" src="{{ asset('/') }}assets/_admin/assets/img/theme/team-4.jpg">
                   </span>
                   <div class="media-body ml-2 d-none d-lg-block">
                     <span class="mb-0 text-sm  font-weight-bold">John Snow</span>
@@ -357,43 +358,21 @@
     </nav>
     <!-- Header -->
     <!-- Header -->
-    <div class="header bg-primary pb-6">
-      <div class="container-fluid">
-        <div class="header-body">
-          <div class="row align-items-center py-4">
-            <div class="col-lg-6 col-7">
-              <h6 class="h2 text-white d-inline-block mb-0">Tables</h6>
-              <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
-                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                  <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="#">Tables</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Tables</li>
-                </ol>
-              </nav>
-            </div>
-            <div class="col-lg-6 col-5 text-right">
-              <a href="#" class="btn btn-sm btn-neutral">New</a>
-              <a href="#" class="btn btn-sm btn-neutral">Filters</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    @yield('header')
     @yield('content')
   </div>
   <!-- Argon Scripts -->
   <!-- Core -->
-  <script src="assets/_admin//assets/vendor/jquery/dist/jquery.min.js"></script>
-  <script src="assets/_admin//assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/_admin//assets/vendor/js-cookie/js.cookie.js"></script>
-  <script src="assets/_admin//assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
-  <script src="assets/_admin//assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
+  <script src="{{ asset('/') }}assets/_admin/assets/vendor/jquery/dist/jquery.min.js"></script>
+  <script src="{{ asset('/') }}assets/_admin/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{{ asset('/') }}assets/_admin/assets/vendor/js-cookie/js.cookie.js"></script>
+  <script src="{{ asset('/') }}assets/_admin/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+  <script src="{{ asset('/') }}assets/_admin/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
   <!-- Optional JS -->
-  <script src="assets/_admin//assets/vendor/list.js/dist/list.min.js"></script>
+  <script src="{{ asset('/') }}assets/_admin/assets/vendor/list.js/dist/list.min.js"></script>
   <!-- Argon JS -->
-  <script src="assets/_admin//assets/js/argon.js?v=1.1.0"></script>
-  <!-- Demo JS - remove this in your project -->
-  <script src="assets/_admin//assets/js/demo.min.js"></script>
+  @yield('script')
+  <script src="{{ asset('/') }}assets/_admin/assets/js/argon.js?v=1.1.0"></script>
 </body>
 
 </html>
