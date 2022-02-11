@@ -59,59 +59,31 @@
           <!-- Nav items -->
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="#navbar-dashboards" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-dashboards">
+              <a class="nav-link" href="{{ url('dashboard') }}">
                 <i class="ni ni-shop text-primary"></i>
-                <span class="nav-link-text">Dashboards</span>
+                <span class="nav-link-text">Dashboard</span>
               </a>
-              <div class="collapse" id="navbar-dashboards">
-                <ul class="nav nav-sm flex-column">
-                  <li class="nav-item">
-                    <a href="{{ asset('/') }}assets/_admin/pages/dashboards/dashboard.html" class="nav-link">Dashboard</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ asset('/') }}assets/_admin/pages/dashboards/alternative.html" class="nav-link">Alternative</a>
-                  </li>
-                </ul>
-              </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
-                <i class="ni ni-ungroup text-orange"></i>
-                <span class="nav-link-text">Examples</span>
-              </a>
-              <div class="collapse" id="navbar-examples">
-                <ul class="nav nav-sm flex-column">
-                  <li class="nav-item">
-                    <a href="{{ asset('/') }}assets/_admin/pages/examples/pricing.html" class="nav-link">Pricing</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ asset('/') }}assets/_admin/pages/examples/login.html" class="nav-link">Login</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ asset('/') }}assets/_admin/pages/examples/register.html" class="nav-link">Register</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ asset('/') }}assets/_admin/pages/examples/lock.html" class="nav-link">Lock</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ asset('/') }}assets/_admin/pages/examples/timeline.html" class="nav-link">Timeline</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ asset('/') }}assets/_admin/pages/examples/profile.html" class="nav-link">Profile</a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ asset('/') }}assets/_admin/pages/widgets.html">
+              <a class="nav-link" href="#navbar-product" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-products">
                 <i class="ni ni-archive-2 text-green"></i>
-                <span class="nav-link-text">Widgets</span>
+                <span class="nav-link-text">Products</span>
               </a>
+              <div class="collapse" id="navbar-products">
+                <ul class="nav nav-sm flex-column">
+                  <li class="nav-item">
+                    <a href="{{ url('product-admin') }}" class="nav-link">Product</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ url('product-admin/create') }}" class="nav-link">Create Product</a>
+                  </li>
+                </ul>
+              </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ asset('/') }}assets/_admin/pages/charts.html">
-                <i class="ni ni-chart-pie-35 text-info"></i>
-                <span class="nav-link-text">Charts</span>
+              <a class="nav-link" href="{{ url('category-admin') }}">
+                <i class="ni ni-ungroup text-orange"></i>
+                <span class="nav-link-text">Category</span>
               </a>
             </li>
           </ul>
