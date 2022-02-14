@@ -11,4 +11,12 @@ class CategoryAdminController extends Controller
     {
         return view('_category');
     }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'category' => 'required|unique:categorys|max:255',
+        ]);
+        dd($request->all());
+    }
 }

@@ -15,17 +15,18 @@
                             <div class="text-center text-muted mb-4">
                                 <small>Create Category</small>
                             </div>
-                            <form role="form">
+                            <form role="form" action="{{ url('category-admin/store') }}" method="post">
+                                @csrf
                                 <div class="form-group">
                                     <div class="input-group input-group-merge input-group-alternative">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-ungroup"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="Write Category" type="text">
+                                        <input name="category" class="form-control" placeholder="Write Category" type="text">
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                    <button type="button" class="btn btn-primary my-2">Add Category</button>
+                                    <button type="submit" class="btn btn-primary my-2">Add Category</button>
                                 </div>
                             </form>
                         </div>
