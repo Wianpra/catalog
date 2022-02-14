@@ -21,7 +21,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/product-catalog', 'ProductController@index');
+
 Route::get('/product-admin', 'ProductAdminController@index');
 Route::get('/product-admin/create', 'ProductAdminController@create');
+Route::post('/product-admin/store', 'ProductAdminController@store');
+
 Route::get('/category-admin', 'CategoryAdminController@index');
 Route::post('/category-admin/store', 'CategoryAdminController@store');

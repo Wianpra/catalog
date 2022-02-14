@@ -17,40 +17,41 @@
         </div>
         <!-- Card body -->
         <div class="card-body">
-            <form>
+            <form action="{{ url('/product-admin/store') }}" method="post" enctype="multipart/form-data">
+                @csrf
                 <!-- Input groups with icon -->
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
+                            <label class="form-control-label" for="exampleFormControlname1">Name Product</label>
                             <div class="input-group input-group-merge">
-                                <input class="form-control" placeholder="Name" type="text">
+                                <input class="form-control" name="name" placeholder="Name" id="exampleFormControlname1" type="text">
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <select class="form-control" data-toggle="select">
-                            <option>- - Choose Caegory - -</option>
-                            <option>Badges</option>
-                            <option>Buttons</option>
-                            <option>Cards</option>
-                            <option>Forms</option>
-                            <option>Modals</option>
+                        <label class="form-control-label" for="exampleFormControlselect1">Category</label>
+                        <select id="exampleFormControlselect1" class="form-control" name="category" data-toggle="select">
+                            <option value="">- - Choose Caegory - -</option>
+                            @foreach ($category as $item)
+                            <option value="{{ $item->id }}">{{ $item->category }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <div data-toggle="quill" data-quill-placeholder="Write Description">
-                            </div>
+                            <label class="form-control-label" for="exampleFormControlTextarea1">Description</label>
+                            <textarea class="form-control" name="description" placeholder="Enter Description" id="exampleFormControlTextarea1" rows="3"></textarea>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            
+                            <label class="form-control-label">File Upload</label>
                             <!-- Multiple -->
                             <div class="dropzone dropzone-multiple" data-toggle="dropzone" data-dropzone-multiple data-dropzone-url="http://">
                                 <div class="fallback">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="customFileUploadMultiple" multiple>
+                                        <input name="img[]" type="file" class="custom-file-input" id="customFileUploadMultiple" multiple>
                                         <label class="custom-file-label" for="customFileUploadMultiple">Choose file</label>
                                     </div>
                                 </div>
@@ -83,6 +84,9 @@
                                 </ul>
                             </div>
                         </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary my-2">Add Product</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -94,14 +98,6 @@
         <script src="{{ asset('/') }}assets/_admin/assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
         <script src="{{ asset('/') }}assets/_admin/assets/vendor/nouislider/distribute/nouislider.min.js"></script>
         <script src="{{ asset('/') }}assets/_admin/assets/vendor/quill/dist/quill.min.js"></script>
-        <script src="{{ asset('/') }}assets/_admin/assets/vendor/dropzone/dist/min/dropzone.min.js"></script>
+        <script src="{{ asset('/') }}assets/_admin/assets/vendor/dropzone/dist/dropzone.js"></script>
         <script src="{{ asset('/') }}assets/_admin/assets/vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
-        
-        <script src="{{ asset('/') }}assets/_admin/assets/js/argon.js?v=1.1.0"></script>
-        <div class="backdrop d-xl-none" data-action="sidenav-unpin" data-target="undefined"></div>
-        <input type="file" class="dz-hidden-input" accept="image/*" style="visibility: hidden; position: absolute; top: 0px; left: 0px; height: 0px; width: 0px;">
-        <input type="file" multiple="multiple" class="dz-hidden-input" style="visibility: hidden; position: absolute; top: 0px; left: 0px; height: 0px; width: 0px;">
-        <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
-            <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
-        </div>
         @endsection

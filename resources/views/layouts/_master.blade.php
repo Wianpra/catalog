@@ -65,7 +65,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#navbar-product" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-products">
+              <a class="nav-link" href="#navbar-products" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-products">
                 <i class="ni ni-archive-2 text-green"></i>
                 <span class="nav-link-text">Products</span>
               </a>
@@ -84,6 +84,12 @@
               <a class="nav-link" href="{{ url('category-admin') }}">
                 <i class="ni ni-ungroup text-orange"></i>
                 <span class="nav-link-text">Category</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/') }}">
+                <i class="ni ni-atom text-danger"></i>
+                <span class="nav-link-text">Situs</span>
               </a>
             </li>
           </ul>

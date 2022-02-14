@@ -51,14 +51,27 @@
                             </tr>
                         </tfoot>
                         <tbody>
+                            @foreach ($product as $item)
                             <tr>
-                                <td>Kursi</td>
-                                <td>*gambar</td>
-                                <td>Barang</td>
-                                <td>*ini deskripsi</td>
+                                <td>{{ $item->name }}</td>
+                                <td>
+                                    @if ($item->img == null)
+                                        < No Image >
+                                    @else
+                                        {{ $item->img }}
+                                    @endif
+                                </td>
+                                <td>
+                                    {{ $item->category }}
+                                </td>
+                                <td>{{ $item->description }}</td>
                                 <td>
                                     <i class="fas fa-eye"></i>
-                                    1,5k
+                                    @if ($item->seen == null)
+                                    0
+                                    @else
+                                    {{ $item->seen }}
+                                    @endif
                                 </td>
                                 <td>
                                     <a href="#!" class="table-action table-action-info" data-toggle="tooltip" data-original-title="Info product">
@@ -72,6 +85,7 @@
                                     </a>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

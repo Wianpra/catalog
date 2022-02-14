@@ -71,8 +71,11 @@
                             </tr>
                         </tfoot>
                         <tbody>
+                            @foreach ($category as $item)
                             <tr>
-                                <td>Barang</td>
+                                <td>
+                                        {{ $item->category }}
+                                </td>
                                 <td class="col-2">
                                     <a href="#!" class="table-action table-action-info" data-toggle="tooltip" data-original-title="Info product">
                                         <i class="fas fa-info"></i>
@@ -85,6 +88,7 @@
                                     </a>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
