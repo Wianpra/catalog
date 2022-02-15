@@ -58,7 +58,13 @@
                                     @if ($item->img == null)
                                         < No Image >
                                     @else
-                                        {{ $item->img }}
+                                    @php
+                                        $img = unserialize($item->img);
+                                        $count = count($img);
+                                    @endphp
+                                        @for ($i = 0; $i < $count; $i++)
+                                            <img src="{{ asset('images/'.$img[$i]) }}" alt="" class="img-responsive img-rounded img-thumbnail" width="200px" height="200px" >
+                                        @endfor
                                     @endif
                                 </td>
                                 <td>

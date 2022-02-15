@@ -7,7 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Category;
 use App\Product;
+use Illuminate\Support\Str;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class ProductAdminController extends Controller
 {
@@ -30,15 +33,42 @@ class ProductAdminController extends Controller
             'category' => 'required|max:255',
             'description' => 'required|max:65535',
         ]);
+        $img = serialize($request->imgs);
+
         $data = [
             'name' => $request->input('name'),
             'category' => $request->input('category'),
             'description' => $request->input('description'),
+            'img' => $img,
         ];
-        DB::transaction(function () use($data) {
+        $saved = false;
+        $saved = DB::transaction(function () use($data) {
             Product::create($data);
+            return true;
         });
-        Alert::success('Success!', 'Data added successfully');
-        return redirect('product-admin');
+        if ($saved) {
+            Alert::success('Success!', 'Data added successfully');
+            return redirect('product-admin');
+        } else {
+            Alert::error('gagal!', 'data gagal di upload');
+            return back();
+        }
+        
+        
+    }
+
+    public function storeGambar(Request $request)
+    {
+        $image = $request->file('file');
+        $imageName = $image->getClientoriginalName();
+        $image->move(public_path('images'), $imageName);
+        return response()->json(['name' => $imageName]);
+    }
+
+    public function removeGambar(Request $request)
+    {
+        $fileName = public_path('images/').$_POST['name'];
+        unlink($fileName);
+        return response()->json(['name' => $_POST['name']]);
     }
 }

@@ -6,6 +6,7 @@
 @section('css')
 <link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/select2/dist/css/select2.min.css">
 <link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/quill/dist/quill.core.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.css">
 @endsection
 
 @section('content')
@@ -47,49 +48,16 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label class="form-control-label">File Upload</label>
-                            <!-- Multiple -->
-                            <div class="dropzone dropzone-multiple" data-toggle="dropzone" data-dropzone-multiple data-dropzone-url="http://">
-                                <div class="fallback">
-                                    <div class="custom-file">
-                                        <input name="img[]" type="file" class="custom-file-input" id="customFileUploadMultiple" multiple>
-                                        <label class="custom-file-label" for="customFileUploadMultiple">Choose file</label>
-                                    </div>
-                                </div>
-                                <ul class="dz-preview dz-preview-multiple list-group list-group-lg list-group-flush">
-                                    <li class="list-group-item px-0">
-                                        <div class="row align-items-center">
-                                            <div class="col-auto">
-                                                <div class="avatar">
-                                                    <img class="avatar-img rounded" src="..." alt="..." data-dz-thumbnail>
-                                                </div>
-                                            </div>
-                                            <div class="col ml--3">
-                                                <h4 class="mb-1" data-dz-name>...</h4>
-                                                <p class="small text-muted mb-0" data-dz-size>...</p>
-                                            </div>
-                                            <div class="col-auto">
-                                                <div class="dropdown">
-                                                    <a href="#" class="dropdown-ellipses dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="fe fe-more-vertical"></i>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a href="#" class="dropdown-item" data-dz-remove>
-                                                            Remove
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
+                            <div class="needsclick dropzone" id="dropzone">
+                                
                             </div>
                         </div>
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary my-2">Add Product</button>
                         </div>
-                    </form>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
         @endsection
         
@@ -98,6 +66,50 @@
         <script src="{{ asset('/') }}assets/_admin/assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
         <script src="{{ asset('/') }}assets/_admin/assets/vendor/nouislider/distribute/nouislider.min.js"></script>
         <script src="{{ asset('/') }}assets/_admin/assets/vendor/quill/dist/quill.min.js"></script>
-        <script src="{{ asset('/') }}assets/_admin/assets/vendor/dropzone/dist/dropzone.js"></script>
         <script src="{{ asset('/') }}assets/_admin/assets/vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.js"></script>
+        <script>
+        Dropzone.options.dropzone =
+        {
+            url: '{{route('store-gambar')}}',
+            maxFilesize: 10,
+            renameFile: function (file) {
+                var dt = new Date();
+                var time = dt.getTime();
+                return time + '_' + file.name;
+            },
+            headers: {
+            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+            },
+            acceptedFiles: ".jpeg,.jpg,.png,.gif",
+            addRemoveLinks: true,
+            timeout: 60000,
+            success: function (file, response) {
+                console.log(response)
+                $('form').append('<input type="hidden" name="imgs[]" value="' + response.name + '">')
+            },
+            error: function (file, response) {
+                return false;
+            },
+            removedfile: function(file) {
+                var fileName = file.upload.filename; 
+                
+                $.ajax({
+                type: 'POST',
+                url: '{{route('remove-gambar')}}',
+                data: {name: fileName,request: 'delete'},
+                headers: {
+                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                },
+                sucess: function(response){
+                    console.log('success: ' + response)
+                }
+                });
+                $('form').find('input[name="imgs[]"][value="' + file.upload.filename + '"]').remove()
+                var _ref;
+                return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+            },
+        };
+        </script>
+        
         @endsection
