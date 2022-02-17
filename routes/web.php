@@ -33,4 +33,4 @@ Route::post('remove-gambar', 'ProductAdminController@removeGambar')->name('remov
 Route::get('/category-admin', 'CategoryAdminController@index');
 Route::post('/category-admin/store', 'CategoryAdminController@store');
 Route::get('/category-admin/{id}/edit', 'CategoryAdminController@edit');
-Route::patch('/category-admin/{id}/update', 'CategoryAdminController@update');
+Route::post('/category-admin-update/{id}', 'CategoryAdminController@update');

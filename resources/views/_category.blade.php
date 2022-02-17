@@ -108,7 +108,7 @@
                         
                     </div>
                     <div class="text-center">
-                        <button type="button" class="btn btn-primary mb-5 btn-update-save">Edit Category</button>
+                        <button type="submit" class="btn btn-primary mb-5">Edit Category</button>
                     </div>
                 </form>
             </div>
@@ -155,6 +155,7 @@
 <script>
     $('.btn-edit').on('click', function(){
         let id = $(this).data('id')
+        var action = "/category-admin-update/"+id
         console.log(id)
         $.ajax({
             url: `/category-admin/${id}/edit`,
@@ -162,23 +163,7 @@
             success: function(data){
                 $('#modal-edit').find('.modal-edit-body').html(data)
                 $('#modal-edit').modal('show')
-            },
-            error: function(error){
-                console.log(error)
-            },
-        })
-    })
-    $('.btn-update-save').on('click', function(){
-        let id = $('#form-update-simpan').find('#id_data').val()
-        let formData = $('#form-update-simpan').serialize()
-        console.log(formData)
-        $.ajax({
-            url: `/category-admin/${id}/update`,
-            method: "PATCH",
-            data: formData,
-            success: function(data){
-                $('#modal-edit').modal('hide')
-                window.location.assign('category-admin')
+                $('#form-update-simpan').attr('action', action)
             },
             error: function(error){
                 console.log(error)

@@ -46,5 +46,6 @@ class CategoryAdminController extends Controller
         Category::where('id', $id)->update([
             'category' => $request->category,
         ]);
+        return back();
     }
 }
