@@ -30,4 +30,21 @@ class CategoryAdminController extends Controller
         Alert::success('Success!', 'Data added successfully');
         return back();
     }
+    
+
+    public function edit($id)
+    {
+        $data = Category::find($id);
+        $category = Category::select('*')->where('id', '=', $id)->first();
+        return view('setup-edit-category', compact('category'));
+    }
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'category' => 'required|unique:categories|max:255',
+        ]);
+        Category::where('id', $id)->update([
+            'category' => $request->category,
+        ]);
+    }
 }

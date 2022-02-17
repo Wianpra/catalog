@@ -9,12 +9,13 @@
     <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
         <div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
             <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create Category</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
                 <div class="modal-body p-0">
                     <div class="card bg-secondary border-0 mb-0">
                         <div class="card-body px-lg-5 py-lg-5">
-                            <div class="text-center text-muted mb-4">
-                                <small>Create Category</small>
-                            </div>
                             <form role="form" action="{{ url('category-admin/store') }}" method="post">
                                 @csrf
                                 <div class="form-group">
@@ -74,16 +75,13 @@
                             @foreach ($category as $item)
                             <tr>
                                 <td>
-                                        {{ $item->category }}
+                                    {{ $item->category }}
                                 </td>
                                 <td class="col-2">
-                                    <a href="#!" class="table-action table-action-info" data-toggle="tooltip" data-original-title="Info product">
-                                        <i class="fas fa-info"></i>
-                                    </a>
-                                    <a href="#!" class="table-action table-action-edit" data-toggle="tooltip" data-original-title="Edit product">
+                                    <a href="#" class="table-action btn-edit table-action-edit" data-toggle="tooltip" data-original-title="Edit category" data-id="{{ $item->id }}">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href="#!" class="table-action table-action-delete" data-toggle="tooltip" data-original-title="Delete product">
+                                    <a href="{{ url('category-admin/delete') }}" class="table-action table-action-delete" data-toggle="tooltip" data-original-title="Delete category">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </td>
@@ -92,6 +90,27 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+    </div>
+    
+    {{-- MODAL EDIT --}}
+    <div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="modal-edit" aria-hidden="true">
+        <div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Category</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="form-update-simpan" method="POST">
+                    @csrf
+                    <div class="modal-body modal-edit-body p-0">
+                        
+                    </div>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-primary mb-5 btn-update-save">Edit Category</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -133,4 +152,39 @@
 <script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
 <script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
 <script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
+<script>
+    $('.btn-edit').on('click', function(){
+        let id = $(this).data('id')
+        console.log(id)
+        $.ajax({
+            url: `/category-admin/${id}/edit`,
+            method: "GET",
+            success: function(data){
+                $('#modal-edit').find('.modal-edit-body').html(data)
+                $('#modal-edit').modal('show')
+            },
+            error: function(error){
+                console.log(error)
+            },
+        })
+    })
+    $('.btn-update-save').on('click', function(){
+        let id = $('#form-update-simpan').find('#id_data').val()
+        let formData = $('#form-update-simpan').serialize()
+        console.log(formData)
+        $.ajax({
+            url: `/category-admin/${id}/update`,
+            method: "PATCH",
+            data: formData,
+            success: function(data){
+                $('#modal-edit').modal('hide')
+                window.location.assign('category-admin')
+            },
+            error: function(error){
+                console.log(error)
+            },
+        })
+    })
+</script>
+
 @endsection

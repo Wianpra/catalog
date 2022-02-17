@@ -63,7 +63,7 @@
                                         $count = count($img);
                                     @endphp
                                         @for ($i = 0; $i < $count; $i++)
-                                            <img src="{{ asset('images/'.$img[$i]) }}" alt="" class="img-responsive img-rounded img-thumbnail" width="200px" height="200px" >
+                                            <img src="{{ asset('images/'.$img[$i]) }}" alt="" class="img-responsive img-rounded img-thumbnail" width="75px" height="75px" >
                                         @endfor
                                     @endif
                                 </td>
@@ -80,10 +80,10 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="#!" class="table-action table-action-info" data-toggle="tooltip" data-original-title="Info product">
+                                    <a href="{{ url('product-admin/info') }}/{{ $item->id }}" class="table-action table-action-info" data-toggle="tooltip" data-original-title="Info product">
                                         <i class="fas fa-info"></i>
                                     </a>
-                                    <a href="#!" class="table-action table-action-edit" data-toggle="tooltip" data-original-title="Edit product">
+                                    <a href="{{ url('product-admin/edit') }}/{{ $item->id }}" class="table-action table-action-edit" data-toggle="tooltip" data-original-title="Edit product">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <a href="#!" class="table-action table-action-delete" data-toggle="tooltip" data-original-title="Delete product">

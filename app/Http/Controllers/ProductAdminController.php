@@ -53,8 +53,33 @@ class ProductAdminController extends Controller
             Alert::error('gagal!', 'data gagal di upload');
             return back();
         }
+    }
+
+    public function edit($id)
+    {
+        Product::findOrFail($id);
+        $category = Category::all();
+        $product = Product::where('id', $id)->select('*')->first();
+        return view('_editProduct', compact('product', 'category'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|max:255',
+            'category' => 'required|max:255',
+            'description' => 'required|max:65535',
+        ]);
+        $data = [
+            'name' => $request->input('name'),
+            'category' => $request->input('category'),
+            'description' => $request->input('description'),
+        ];
         
-        
+        DB::transaction(function () use($data, $id) {
+            Product::findOrFail($id)->update($data);
+        });
+        return redirect('product-admin');
     }
 
     public function storeGambar(Request $request)
@@ -70,5 +95,11 @@ class ProductAdminController extends Controller
         $fileName = public_path('images/').$_POST['name'];
         unlink($fileName);
         return response()->json(['name' => $_POST['name']]);
+    }
+    public function showImg($id)
+    {
+        $data = Product::findOrFail($id);
+        $img = Product::select('*')->where('id', '=', $id)->first();
+        return view('show-img', compact('img'));
     }
 }
