@@ -121,4 +121,13 @@ class ProductAdminController extends Controller
         $img = Product::select('*')->where('id', '=', $id)->first();
         return view('show-img', compact('img'));
     }
+
+    public function getImage($id)
+    {
+        $img = unserialize(Product::findOrFail($id)->img);
+        $count = count($img);
+        $data = [$img, $count];
+        return response()->json($data);
+
+    }
 }
