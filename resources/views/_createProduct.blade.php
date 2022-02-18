@@ -45,7 +45,7 @@
                             <label class="form-control-label" for="exampleFormControlTextarea1">Description</label>
                             {{-- <textarea class="form-control" name="description" placeholder="Enter Description" id="exampleFormControlTextarea1" rows="3"></textarea> --}}
                             <input type="hidden" id="quill-html" name="description">
-                            <div data-toggle="quill" data-quill-placeholder="Write Description"></div>
+                            <div data-toggle="quill" data-quill-placeholder="Write Description" id="quill-description"></div>
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -56,7 +56,7 @@
                             </div>
                         </div>
                         <div class="text-center">
-                            <button type="submit" id="btn-submit" class="btn btn-primary my-2">Add Product</button>
+                            <button type="button" id="btn-submit" class="btn btn-primary my-2">Add Product</button>
                         </div>
                     </div>
                 </div>
@@ -116,7 +116,20 @@
         </script>
         <script>
             $('#btn-submit').on('click', function() { 
-                
+                var productName = $('#exampleFormControlname1').val();
+                var productCategory = $('#exampleFormControlselect1').val();
+                var productDescription = $('#quill-description > .ql-editor').html();
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ url('/product-admin/store') }}',
+                    data: {name: productName, category: productCategory, description: productDescription},
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    },
+                    success: function(data){
+                        location.replace("{{ url('/product-admin')}}")
+                    }
+                });
             })
         </script>
         @endsection

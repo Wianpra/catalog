@@ -27,7 +27,6 @@ class ProductAdminController extends Controller
     }
     public function store(Request $request)
     {
-        dd($request->all());
         $request->validate([
             'name' => 'required|max:255',
             'category' => 'required|max:255',
@@ -41,18 +40,11 @@ class ProductAdminController extends Controller
             'description' => $request->input('description'),
             'img' => $img,
         ];
-        $saved = false;
-        $saved = DB::transaction(function () use($data) {
+        DB::transaction(function () use($data) {
             Product::create($data);
-            return true;
         });
-        if ($saved) {
-            Alert::success('Success!', 'Data Added Successfully');
-            return redirect('product-admin');
-        } else {
-            Alert::error('Failed!', 'Data Upload Failed');
-            return back();
-        }
+        
+        return response()->json();
     }
 
     public function edit($id)
