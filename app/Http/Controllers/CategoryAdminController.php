@@ -52,11 +52,16 @@ class CategoryAdminController extends Controller
 
     public function delete($id)
     {
-        $delete = Category::where('id', $id)->delete();
-        $changeProduct = Product::where('category', $id)->update([
-            'category' => null
-        ]);
-        Alert::success('Deleted', 'Data deleted successfully');
-        return redirect('category-admin');
+        $cek = Product::where('category', $id)->count();
+        if ( $cek > 0 ) {
+            alert()->showConfirmButton('Oke')
+                ->error('Selected category is used by  '. $cek .'  products, you cant delete it! <br> Change the category on the related product first!');
+            return back();
+        } else {
+            $delete = Category::where('id', $id)->delete();
+            Alert::success('Deleted', 'Data deleted successfully');
+            return redirect('category-admin');
+        }
+        
     }
 }
