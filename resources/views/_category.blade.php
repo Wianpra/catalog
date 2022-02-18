@@ -41,6 +41,7 @@
 
 @section('css')
 <!-- Page plugins -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.9/sweetalert2.min.css">
 <link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css">
 <link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-select-bs4/css/select.bootstrap4.min.css">
@@ -81,7 +82,7 @@
                                     <a href="#" class="table-action btn-edit table-action-edit" data-toggle="tooltip" data-original-title="Edit category" data-id="{{ $item->id }}">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href="{{ url('category-admin/delete') }}" class="table-action table-action-delete" data-toggle="tooltip" data-original-title="Delete category">
+                                    <a href="#" class="table-action btn-delete table-action-delete" data-id="{{ $item->id }}" data-toggle="tooltip" data-original-title="Delete category">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </td>
@@ -152,6 +153,7 @@
 <script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
 <script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
 <script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 <script>
     $('.btn-edit').on('click', function(){
         let id = $(this).data('id')
@@ -168,6 +170,23 @@
             error: function(error){
                 console.log(error)
             },
+        })
+    })
+    $('.btn-delete').on('click', function(){
+        let id = $(this).data('id')
+        var action = "/category-admin/delete/"+id
+        Swal.fire({
+            title: 'Warning!',
+            icon: 'info',
+            html: 'Are you sure you want to delete the data? <br> NB : deleted data cannot be recovered',
+            showCancelButton: true,
+            showDenyButton: true,
+            showConfirmButton: false,
+            denyButtonText: 'Delete',
+        }).then((result) => {
+            if (result.isDenied) {
+                window.location.href = action
+            }
         })
     })
 </script>

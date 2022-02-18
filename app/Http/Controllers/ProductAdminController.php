@@ -16,10 +16,9 @@ class ProductAdminController extends Controller
 {
     public function index()
     {
-        $product = Product::select('products.name as name', 'products.img as img', 'products.id as id', 'categories.category as category', 'products.description', 'products.seen')
-            ->join('categories', 'categories.id', '=', 'products.category')
-            ->get();
-        return view('_product', compact('product'));
+        $product = Product::all();
+        $category = Category::all();
+        return view('_product', compact('product', 'category'));
     }
     public function create()
     {
@@ -47,10 +46,10 @@ class ProductAdminController extends Controller
             return true;
         });
         if ($saved) {
-            Alert::success('Success!', 'Data added successfully');
+            Alert::success('Success!', 'Data Added Successfully');
             return redirect('product-admin');
         } else {
-            Alert::error('gagal!', 'data gagal di upload');
+            Alert::error('Failed!', 'Data Upload Failed');
             return back();
         }
     }
@@ -79,6 +78,25 @@ class ProductAdminController extends Controller
         DB::transaction(function () use($data, $id) {
             Product::findOrFail($id)->update($data);
         });
+        return redirect('product-admin');
+    }
+
+    public function delete($id)
+    {
+        $delete = Product::where('id', $id)->delete();
+        Alert::success('Deleted', 'Data deleted successfully');
+        return redirect('product-admin');
+    }
+
+    public function updateCategory(Request $request, $id)
+    {
+        $data = [
+            'category' => $request->input('category'),
+        ];
+        DB::transaction(function () use($data, $id) {
+            Product::findOrFail($id)->update($data);
+        });
+        Alert::success('Success!', 'Data Update Successfully');
         return redirect('product-admin');
     }
 

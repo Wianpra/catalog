@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Category;
+use App\Product;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class CategoryAdminController extends Controller
@@ -47,5 +48,15 @@ class CategoryAdminController extends Controller
             'category' => $request->category,
         ]);
         return back();
+    }
+
+    public function delete($id)
+    {
+        $delete = Category::where('id', $id)->delete();
+        $changeProduct = Product::where('category', $id)->update([
+            'category' => null
+        ]);
+        Alert::success('Deleted', 'Data deleted successfully');
+        return redirect('category-admin');
     }
 }
