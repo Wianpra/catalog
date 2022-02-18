@@ -1,7 +1,8 @@
 @extends('layouts._master')
 @extends('layouts._header')
 @section('headerName', 'Category')
-@section('nav', 'Category')
+@section('nav', 'Data Category')
+@section('headerURL', 'category-admin')
 
 @section('headerContent')
 <div class="col-lg-6 col-5 text-right">

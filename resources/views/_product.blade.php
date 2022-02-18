@@ -1,7 +1,7 @@
 @extends('layouts._master')
 @extends('layouts._header')
 @section('headerName', 'Product')
-@section('nav', 'Product')
+@section('nav', 'Data Product')
 
 @section('headerContent')
 <div class="col-lg-6 col-5 text-right">

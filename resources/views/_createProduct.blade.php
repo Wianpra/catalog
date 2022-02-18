@@ -2,6 +2,7 @@
 @extends('layouts._header')
 @section('headerName', 'Product')
 @section('nav', 'Create Product')
+@section('headerURL', 'product-admin')
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/select2/dist/css/select2.min.css">
@@ -42,7 +43,9 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label class="form-control-label" for="exampleFormControlTextarea1">Description</label>
-                            <textarea class="form-control" name="description" placeholder="Enter Description" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            {{-- <textarea class="form-control" name="description" placeholder="Enter Description" id="exampleFormControlTextarea1" rows="3"></textarea> --}}
+                            <input type="hidden" id="quill-html" name="description">
+                            <div data-toggle="quill" data-quill-placeholder="Write Description"></div>
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -53,7 +56,7 @@
                             </div>
                         </div>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary my-2">Add Product</button>
+                            <button type="submit" id="btn-submit" class="btn btn-primary my-2">Add Product</button>
                         </div>
                     </div>
                 </div>
@@ -69,47 +72,51 @@
         <script src="{{ asset('/') }}assets/_admin/assets/vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.js"></script>
         <script>
-        Dropzone.options.dropzone =
-        {
-            url: '{{route('store-gambar')}}',
-            maxFilesize: 10,
-            renameFile: function (file) {
-                var dt = new Date();
-                var time = dt.getTime();
-                return time + '_' + file.name;
-            },
-            headers: {
-            'X-CSRF-TOKEN': "{{ csrf_token() }}"
-            },
-            acceptedFiles: ".jpeg,.jpg,.png,.gif",
-            addRemoveLinks: true,
-            timeout: 60000,
-            success: function (file, response) {
-                console.log(response)
-                $('form').append('<input type="hidden" name="imgs[]" value="' + response.name + '">')
-            },
-            error: function (file, response) {
-                return false;
-            },
-            removedfile: function(file) {
-                var fileName = file.upload.filename; 
-                
-                $.ajax({
-                type: 'POST',
-                url: '{{route('remove-gambar')}}',
-                data: {name: fileName,request: 'delete'},
-                headers: {
-                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+            Dropzone.options.dropzone =
+            {
+                url: '{{route('store-gambar')}}',
+                maxFilesize: 10,
+                renameFile: function (file) {
+                    var dt = new Date();
+                    var time = dt.getTime();
+                    return time + '_' + file.name;
                 },
-                sucess: function(response){
-                    console.log('success: ' + response)
-                }
-                });
-                $('form').find('input[name="imgs[]"][value="' + file.upload.filename + '"]').remove()
-                var _ref;
-                return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
-            },
-        };
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                },
+                acceptedFiles: ".jpeg,.jpg,.png,.gif",
+                addRemoveLinks: true,
+                timeout: 60000,
+                success: function (file, response) {
+                    console.log(response)
+                    $('form').append('<input type="hidden" name="imgs[]" value="' + response.name + '">')
+                },
+                error: function (file, response) {
+                    return false;
+                },
+                removedfile: function(file) {
+                    var fileName = file.upload.filename; 
+                    
+                    $.ajax({
+                        type: 'POST',
+                        url: '{{route('remove-gambar')}}',
+                        data: {name: fileName,request: 'delete'},
+                        headers: {
+                            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                        },
+                        sucess: function(response){
+                            console.log('success: ' + response)
+                        }
+                    });
+                    $('form').find('input[name="imgs[]"][value="' + file.upload.filename + '"]').remove()
+                    var _ref;
+                    return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+                },
+            };
         </script>
-        
+        <script>
+            $('#btn-submit').on('click', function() { 
+                
+            })
+        </script>
         @endsection

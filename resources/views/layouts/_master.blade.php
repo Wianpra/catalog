@@ -21,7 +21,7 @@
   <meta name="author" content="Creative Tim">
   <title>Argon Dashboard PRO - Premium Bootstrap 4 Admin Template</title>
   <!-- Favicon -->
-  <link rel="icon" href="{{ asset('/') }}assets/_admin/assets/img/brand/favicon.png" type="image/png">
+  <link rel="icon" href="{{ asset('/') }}images/Logo-Circle.png" type="image/png">
   <!-- Fonts -->
   <link rel="stylesheet" href="https:/fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
   <!-- Icons -->
@@ -39,8 +39,8 @@
     <div class="scrollbar-inner">
       <!-- Brand -->
       <div class="sidenav-header d-flex align-items-center">
-        <a class="navbar-brand" href="{{ asset('/') }}assets/_admin/pages/dashboards/dashboard.html">
-          <img src="{{ asset('/') }}assets/_admin/assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
+        <a class="navbar-brand" href="{{ url('dashboard') }}">
+          <img src="{{ asset('/') }}images/logo-black2.png" class="navbar-brand-img" alt="...">
         </a>
         <div class="ml-auto">
           <!-- Sidenav toggler -->

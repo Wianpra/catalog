@@ -2,6 +2,7 @@
 @extends('layouts._header')
 @section('headerName', 'Product')
 @section('nav', 'Edit Product')
+@section('headerURL', 'product-admin')
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/select2/dist/css/select2.min.css">
@@ -42,7 +43,8 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label class="form-control-label" for="exampleFormControlTextarea1">Description</label>
-                            <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3">{{ $product->description }}</textarea>
+                            {{-- <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3">{{ $product->description }}</textarea> --}}
+                            <div data-toggle="quill" data-quill-placeholder="Quill WYSIWYG"></div>
                         </div>
                     </div>
                     <div class="col-md-12">

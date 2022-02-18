@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicons -->
-    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('/') }}images/Logo-Circle.png" type="image/x-icon">
     <link rel="apple-touch-icon" href="assets/img/icon.png">
 
     <!-- ************************* CSS Files ************************* -->
@@ -47,8 +47,8 @@
                                 <div class="header__main-inner">
                                     <div class="header__main-left">
                                         <div class="logo">
-                                            <a href="index.html" class="logo--normal">
-                                                <img src="assets/img/logo/logo.png" alt="Logo">
+                                            <a href="{{ url('/') }}" class="logo--normal">
+                                                <img src="{{ asset('/') }}images/logo-black2.png" alt="Logo">
                                             </a>
                                         </div>
                                     </div>
@@ -56,21 +56,9 @@
                                         <nav class="main-navigation text-center d-none d-lg-block">
                                             <ul class="mainmenu">
                                                 <li class="mainmenu__item menu-item-has-children">
-                                                    <a href="index.html" class="mainmenu__link">
+                                                    <a href="{{ url('/') }}" class="mainmenu__link">
                                                         <span class="mm-text">Home</span>
                                                     </a>
-                                                    <ul class="sub-menu">
-                                                        <li>
-                                                            <a href="index.html">
-                                                                <span class="mm-text">Home One</span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="index-02.html">
-                                                                <span class="mm-text">Home Two</span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
                                                 </li>
                                                 <li class="mainmenu__item menu-item-has-children megamenu-holder">
                                                     <a href="{{ url('product-catalog') }}" class="mainmenu__link">
