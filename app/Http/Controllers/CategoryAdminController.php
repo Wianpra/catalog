@@ -55,7 +55,7 @@ class CategoryAdminController extends Controller
         $cek = Product::where('category', $id)->count();
         if ( $cek > 0 ) {
             alert()->showConfirmButton('Oke')
-                ->error('Selected category is used by  '. $cek .'  products, you cant delete it! <br> Change the category on the related product first!');
+                ->error('Selected category is used! <br> You cant delete it!');
             return back();
         } else {
             $delete = Category::where('id', $id)->delete();
