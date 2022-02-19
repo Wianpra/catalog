@@ -21,6 +21,7 @@
 
     <!-- style css -->
     <link rel="stylesheet" href="assets/css/main.css">
+    @livewireStyles
 </head>
 
 <body>
@@ -552,6 +553,7 @@
 
     <!-- Main JS -->
     <script src="assets/js/main.js"></script>
+    @livewireScripts
 </body>
 
 </html>

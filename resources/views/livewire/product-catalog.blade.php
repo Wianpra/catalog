@@ -44,7 +44,14 @@
                                         <div class="product-inner">
                                             <div class="product-image">
                                                 <figure class="product-image--holder">
-                                                    <img src="assets/img/products/prod-04-270x300.jpg" alt="Product">
+                                                    @php
+                                                        $img = unserialize($item->img);
+                                                    @endphp
+                                                    @if ( $img == null )
+                                                        <img src="assets/img/products/prod-04-270x300.jpg" alt="Products">
+                                                    @else
+                                                        <img src="{{ asset('images/'.$img[0]) }}" alt="Product">
+                                                    @endif
                                                 </figure>
                                                 <a href="product-details.html" class="product-overlay"></a>
                                                 <div class="product-action">
@@ -58,7 +65,7 @@
                                                     <a href="product-details.html">
                                                         @foreach ($category as $data)
                                                             @if ( $item->category == $data->id)
-                                                                
+                                                                {{ $data->category }}
                                                             @endif
                                                         @endforeach
                                                         
@@ -72,7 +79,15 @@
                                         <div class="product-inner">
                                             <figure class="product-image">
                                                 <a href="product-details.html">
-                                                    <img src="assets/img/products/prod-04-270x300.jpg" alt="Products">
+                                                    
+                                                    @php
+                                                        $img = unserialize($item->img);
+                                                    @endphp
+                                                    @if ( $img == null )
+                                                        <img src="assets/img/products/prod-04-270x300.jpg" alt="Products">
+                                                    @else
+                                                        <img src="{{ asset('images/'.$img[0]) }}" class="img-responsive" alt="Product">
+                                                    @endif
                                                 </a>
                                                 <div class="product-thumbnail-action">
                                                     <a data-bs-toggle="modal" data-bs-target="#productModal" class="action-btn quick-view">
@@ -119,48 +134,14 @@
                             <div class="shop-widget mb--40">
                                 <h3 class="widget-title mb--25">Category</h3>
                                 <ul class="widget-list category-list">
-                                    <li>
-                                        <a href="shop.html">
-                                            <span class="category-title">Winter Collection</span>
-                                            <i class="fa fa-angle-double-right"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="shop.html">
-                                            <span class="category-title">Women’s Clothes</span>
-                                            <i class="fa fa-angle-double-right"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="shop.html">
-                                            <span class="category-title">Men’s Clothes</span>
-                                            <i class="fa fa-angle-double-right"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="shop.html">
-                                            <span class="category-title">Kid’s Clothes</span>
-                                            <i class="fa fa-angle-double-right"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="shop.html">
-                                            <span class="category-title">Uncategorized</span>
-                                            <i class="fa fa-angle-double-right"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="shop.html">
-                                            <span class="category-title">Accessories</span>
-                                            <i class="fa fa-angle-double-right"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="shop.html">
-                                            <span class="category-title">New Arrival</span>
-                                            <i class="fa fa-angle-double-right"></i>
-                                        </a>
-                                    </li>
+                                    @foreach ($category as $data)
+                                        <li>
+                                            <a wire:click.prevent="filterCategory({{ $data->id }})" role="button">
+                                                <span class="category-title">{{ $data->category }}</span>
+                                                <i class="fa fa-angle-double-right"></i>
+                                            </a>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </aside>
