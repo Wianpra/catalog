@@ -20,15 +20,13 @@
                                 </div>
                                 <div class="col-md-7">
                                     <div class="shop-toolbar__right d-flex justify-content-md-end justify-content-start flex-sm-row flex-column">
-                                        <p class="product-pages">Showing Result  08 Among  72</p>
-                                        <div class="product-view-mode ml--50 ml-xs--0">
-                                            <a class="active" href="#" data-target="grid">
-                                                <img src="assets/img/icons/grid.png" alt="Grid">
-                                            </a>
-                                            <a href="#" data-target="list">
-                                                <img src="assets/img/icons/list.png" alt="Grid">
-                                            </a>
-                                        </div>
+                                        <p class="product-pages">
+                                            @if ( $countProduct > 12)
+                                            Showing Result 12 Among {{ $countProductAll }}
+                                            @else
+                                            Showing Result {{ $countProduct }} Among {{ $countProductAll }}
+                                            @endif
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -37,90 +35,48 @@
                             <div class="row">
                                 @foreach ($product as $item)
                                 <div class="col-xl-4 col-sm-6 mb--50">
-                                    <div class="ft-product">
-                                        <div class="product-inner">
-                                            <div class="product-image">
-                                                <figure class="product-image--holder">
-                                                    @php
-                                                    $img = unserialize($item->img);
-                                                    @endphp
-                                                    @if ( $img == null )
-                                                    <img src="assets/img/products/prod-04-270x300.jpg" class="img-thumbnail" alt="Products">
-                                                    @else
-                                                    <img src="{{ asset('images/'.$img[0]) }}" alt="Product" class="img-thumbnail">
-                                                    @endif
-                                                </figure>
-                                                <a href="product-details.html" class="product-overlay"></a>
-                                                <div class="product-action">
-                                                    <a data-bs-toggle="modal" data-bs-target="#productModal" class="action-btn">
-                                                        <i class="la la-eye"></i>
-                                                    </a>
-                                                    @if ($item->seen = null)
-                                                    0
-                                                    @else
-                                                    {{ $item->seen }}
-                                                    @endif
-                                                </div>
-                                            </div>
-                                            <div class="product-info">
-                                                <div class="product-category">
-                                                    <a style="text-transform: capitalize" href="product-details.html">
-                                                        @foreach ($category as $data)
-                                                        @if ( $item->category == $data->id)
-                                                        {{ $data->category }}
+                                    <a href="{{ url('/product-detail') }}/{{ $item->id }}">
+                                        <div class="ft-product">
+                                            <div class="product-inner">
+                                                <div class="product-image">
+                                                    <figure class="product-image--holder">
+                                                        @php
+                                                        $img = unserialize($item->img);
+                                                        @endphp
+                                                        @if ( $img == null )
+                                                        <img src="assets/img/products/prod-04-270x300.jpg" class="img-thumbnail" alt="Products">
+                                                        @else
+                                                        <img src="{{ asset('images/'.$img[0]) }}" alt="Product" class="img-thumbnail">
                                                         @endif
-                                                        @endforeach
-                                                        
-                                                    </a>
+                                                    </figure>
                                                 </div>
-                                                <h3 class="product-title"><a style="text-transform: capitalize" href="product-details.html">{{ $item->name }}</a></h3>
+                                                <div class="product-info">
+                                                    <div class="product-category">
+                                                        <p style="text-transform: capitalize">
+                                                            @foreach ($category as $data)
+                                                            @if ( $item->category == $data->id)
+                                                            {{ $data->category }}
+                                                            @endif
+                                                            @endforeach
+                                                            
+                                                        </p>
+                                                    </div>
+                                                    <h3 class="product-title">
+                                                        <div class="row">
+                                                            <p class="col-6" style="text-transform: capitalize">{{ $item->name }}</p>
+                                                            <div class="float-right col-6">
+                                                                @if ($item->seen == null)
+                                                                <i class="la la-eye"></i> 10101010
+                                                                @else
+                                                                <i class="la la-eye"></i> {{ $item->seen }}
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                    </h3>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="ft-product-list">
-                                        <div class="product-inner">
-                                            <figure class="product-image img-thumbnail">
-                                                <a href="product-details.html">
-                                                    
-                                                    @php
-                                                    $img = unserialize($item->img);
-                                                    @endphp
-                                                    @if ( $img == null )
-                                                    <img src="assets/img/products/prod-04-270x300.jpg" class="img-thumbnail mx-auto d-block" alt="Products">
-                                                    @else
-                                                    <img src="{{ asset('images/'.$img[0]) }}" style="height: 300px; object-fit: contain;" class="mx-auto d-block" alt="Product">
-                                                    @endif
-                                                </a>
-                                                <div class="product-thumbnail-action">
-                                                    <a data-bs-toggle="modal" data-bs-target="#productModal" class="action-btn quick-view">
-                                                        <i class="la la-eye"></i>
-                                                    </a>
-                                                </div>
-                                                @if ($item->seen = null)
-                                                0
-                                                @else
-                                                {{ $item->seen }}
-                                                @endif
-                                            </figure>
-                                            <div class="product-info">
-                                                <h3 class="product-title mb--25">
-                                                    <a href="product-details.html">{{ $item->name }}</a>
-                                                </h3>
-                                                <p class="product-short-description mb--20">
-                                                    {{ $item->description }}
-                                                </p>  
-                                                <div class="ft-product-action-list d-flex align-items-center">
-                                                    <a href="cart.html" class="btn btn-size-md">Add To Cart</a>
-                                                    <a href="wishlist.html" class="ml--20 action-btn">
-                                                        <i class="la la-heart-o"></i>
-                                                    </a>
-                                                    <a href="wishlist.html" class="ml--20 action-btn">
-                                                        <i class="la la-repeat"></i>
-                                                    </a>
-                                                </div>                                            
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </a>
                                 </div>
                                 @endforeach
                             </div>

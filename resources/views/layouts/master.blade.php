@@ -4,11 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Beck - Furniture eCommerce Bootstrap 5 Template</title>
+    <title>@yield('headerName') | ORCANA</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicons -->
-    <link rel="shortcut icon" href="{{ asset('/') }}images/Logo-Circle.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('/') }}assets/img/Logo-Circle.png" type="image/x-icon">
     <link rel="apple-touch-icon" href="assets/img/icon.png">
 
     <!-- ************************* CSS Files ************************* -->
@@ -49,126 +49,35 @@
                                     <div class="header__main-left">
                                         <div class="logo">
                                             <a href="{{ url('/') }}" class="logo--normal">
-                                                <img src="{{ asset('/') }}images/logo-black2.png" alt="Logo">
+                                                <img src="{{ asset('/') }}assets/img/logo-black2.png" alt="Logo">
                                             </a>
                                         </div>
                                     </div>
                                     <div class="header__main-center">
                                         <nav class="main-navigation text-center d-none d-lg-block">
                                             <ul class="mainmenu">
-                                                <li class="mainmenu__item menu-item-has-children">
+                                                <li class="mainmenu__item">
                                                     <a href="{{ url('/') }}" class="mainmenu__link">
                                                         <span class="mm-text">Home</span>
                                                     </a>
                                                 </li>
-                                                <li class="mainmenu__item menu-item-has-children megamenu-holder">
+                                                <li class="mainmenu__item">
                                                     <a href="{{ url('product-catalog') }}" class="mainmenu__link">
                                                         <span class="mm-text">Catalog</span>
                                                     </a>
                                                 </li>
-                                                <li class="mainmenu__item menu-item-has-children">
-                                                    <a href="blog.html" class="mainmenu__link">
-                                                        <span class="mm-text">Blog</span>
-                                                    </a>
-                                                    <ul class="sub-menu">
-                                                        <li class="menu-item-has-children">
-                                                            <a href="#">
-                                                                <span class="mm-text">Blog Grid</span>
-                                                            </a>
-                                                            <ul class="sub-menu">
-                                                                <li>
-                                                                    <a href="blog-left-sidebar.html">
-                                                                        <span class="mm-text">Left Sidebar</span>
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="blog.html">
-                                                                        <span class="mm-text">Right Sidebar</span>
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="blog-01-column.html">
-                                                                        <span class="mm-text">One Column</span>
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="blog-02-columns.html">
-                                                                        <span class="mm-text">Two Columns</span>
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="blog-03-columns.html">
-                                                                        <span class="mm-text">Three Columns</span>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-                                                        <li class="menu-item-has-children">
-                                                            <a href=""><span class="mm-text">Blog Details</span></a>
-                                                            <ul class="sub-menu">
-                                                                <li>
-                                                                    <a href="blog-details-image.html">
-                                                                        <span class="mm-text">Image Post</span>
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="blog-details-audio.html">
-                                                                        <span class="mm-text">Audio Post</span>
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="blog-details-video.html">
-                                                                        <span class="mm-text">Video Post</span>
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="blog-details-gallery.html">
-                                                                        <span class="mm-text">Gallery Post</span>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li class="mainmenu__item menu-item-has-children">
+                                                <li class="mainmenu__item">
                                                     <a href="#" class="mainmenu__link">
-                                                        <span class="mm-text">Pages</span>
+                                                        <span class="mm-text">Product Knowledges</span>
                                                     </a>
-                                                    <ul class="sub-menu">
-                                                        <li>
-                                                            <a href="my-account.html">
-                                                                <span class="mm-text">My Account</span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="checkout.html">
-                                                                <span class="mm-text">Checkout</span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="cart.html">
-                                                                <span class="mm-text">Cart</span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="compare.html">
-                                                                <span class="mm-text">Compare</span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="order-tracking.html">
-                                                                <span class="mm-text">Track Order</span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="wishlist.html">
-                                                                <span class="mm-text">Wishlist</span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
                                                 </li>
                                                 <li class="mainmenu__item">
-                                                    <a href="contact-us.html" class="mainmenu__link">
+                                                    <a href="#" class="mainmenu__link">
+                                                        <span class="mm-text">About Us</span>
+                                                    </a>
+                                                </li>
+                                                <li class="mainmenu__item">
+                                                    <a href="#" class="mainmenu__link">
                                                         <span class="mm-text">Contact Us</span>
                                                     </a>
                                                 </li>
@@ -181,12 +90,6 @@
                                                 <div class="header-toolbar__item header-toolbar--search-btn">
                                                     <a href="#searchForm" class="header-toolbar__btn toolbar-btn">
                                                         <i class="la la-search"></i>
-                                                    </a>
-                                                </div>
-                                                <div class="header-toolbar__item header-toolbar--minicart-btn">
-                                                    <a href="#miniCart" class="header-toolbar__btn toolbar-btn">
-                                                        <i class="la la-shopping-cart"></i>
-                                                        <span>01</span>
                                                     </a>
                                                 </div>
                                                 <div class="header-toolbar__item d-block d-lg-none">

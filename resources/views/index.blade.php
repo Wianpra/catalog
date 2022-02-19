@@ -1,5 +1,5 @@
 @extends('layouts.master')
-
+@section('headerName', 'Home')
 @section('content')
     <!-- Main Content Wrapper Start -->
     <main class="main-content-wrapper">

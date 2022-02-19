@@ -1,7 +1,7 @@
 @extends('layouts._master')
 @extends('layouts._header')
 @section('headerName', 'Product')
-@section('nav', 'Data Product')
+@section('nav', 'List Product')
 
 @section('headerContent')
 <div class="col-lg-6 col-5 text-right">
@@ -29,7 +29,7 @@
             <div class="card">
                 <!-- Card header -->
                 <div class="card-header">
-                    <h3 class="mb-0">Data Product</h3>
+                    <h3 class="mb-0">List Product</h3>
                 </div>
                 <div class="table-responsive py-4">
                     <table class="table table-flush" id="datatable-basic">
@@ -38,8 +38,8 @@
                                 <th>Product</th>
                                 <th>Images</th>
                                 <th>Category</th>
-                                <th>Description</th>
                                 <th>Seen</th>
+                                <th>Description</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -48,8 +48,8 @@
                                 <th>Product</th>
                                 <th>Images</th>
                                 <th>Category</th>
-                                <th>Description</th>
                                 <th>Seen</th>
+                                <th>Description</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
@@ -82,7 +82,7 @@
                                         @endforeach
                                         @endif
                                     </td>
-                                    <td>{{ $item->description }}</td>
+
                                     <td>
                                         <i class="fas fa-eye"></i>
                                         @if ($item->seen == null)
@@ -91,6 +91,13 @@
                                         {{ $item->seen }}
                                         @endif
                                     </td>
+                                    
+                                    <td>
+                                        @php
+                                            echo $item->description;
+                                        @endphp
+                                    </td>
+
                                     <td>
                                         <a href="{{ url('product-admin/edit') }}/{{ $item->id }}" class="table-action table-action-edit" data-toggle="tooltip" data-original-title="Edit product">
                                             <i class="fas fa-edit"></i>

@@ -20,11 +20,15 @@ class ProductCatalog extends Component
     public function render()
     {
         if ( $this->categoryId == null ) {
+            $countProductAll = Product::count();
+            $countProduct = Product::count();
             $product = Product::all();
         } else {
+            $countProductAll = Product::count();
+            $countProduct = Product::where('category', $this->categoryId)->count();
             $product = Product::where('category', $this->categoryId)->get();
         }
         $category = Category::all();
-        return view('livewire.product-catalog', compact('product', 'category'));
+        return view('livewire.product-catalog', compact('product', 'category', 'countProduct', 'countProductAll'));
     }
 }
