@@ -31,6 +31,8 @@ Route::post('/edit-category-product/{id}', 'ProductAdminController@updateCategor
 Route::get('/product-admin-delete/{id}', 'ProductAdminController@delete');
 Route::post('store-gambar', 'ProductAdminController@storeGambar')->name('store-gambar');
 Route::post('remove-gambar', 'ProductAdminController@removeGambar')->name('remove-gambar');
+Route::post('delete-gambar/{id}', 'ProductAdminController@deleteGambar')->name('delete-gambar');
+Route::get('get-image/{id}', 'ProductAdminController@getImage');
 
 Route::get('/category-admin', 'CategoryAdminController@index');
 Route::post('/category-admin/store', 'CategoryAdminController@store');

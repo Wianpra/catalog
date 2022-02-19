@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css">
 <link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-select-bs4/css/select.bootstrap4.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 @endsection
 
 @section('content')
@@ -57,7 +58,7 @@
                             <tr>
                                 <td>{{ $item->name }}</td>
                                 <td>
-                                    <a type="button" class="btn btn-sm btn-neutral" data-id="" data-toggle="modal" data-target="#view-img">View Images</a>
+                                    <a type="button" class="btn btn-sm btn-neutral" onclick="viewImage({{$item->id}})">View Images</a>
                                     {{-- @if ($item->img == null)
                                         < No Image >
                                         @else
@@ -74,11 +75,11 @@
                                         @if ( $item->category == null)
                                         <a type="button" class="btn btn-sm btn-neutral edit-category-product" data-id="{{$item->id}}" data-toggle="modal" data-target="#set-category">Set Category</a>
                                         @else
-                                            @foreach ($category as $data)
-                                                @if($item->category == $data->id)
-                                                    {{ $data->category }}
-                                                @endif
-                                            @endforeach
+                                        @foreach ($category as $data)
+                                        @if($item->category == $data->id)
+                                        {{ $data->category }}
+                                        @endif
+                                        @endforeach
                                         @endif
                                     </td>
                                     <td>{{ $item->description }}</td>
@@ -133,6 +134,9 @@
             </div>
         </footer>
     </div>
+    
+    @endsection
+    @section('modal')
     <div class="modal fade" id="set-category" tabindex="-1" role="dialog" aria-labelledby="set-category" aria-hidden="true">
         <div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
             <div class="modal-content">
@@ -165,6 +169,41 @@
             </div>
         </div>
     </div>
+    
+    <div class="modal fade" id="modalViewImg" tabindex="-1" role="dialog" aria-labelledby="modalViewImg" aria-hidden="true">
+        <div class="modal-dialog modal- modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">View image</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 mx-auto">
+                        <div id="carouselImage" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators" id="count-image">
+                            </ol>
+                            <div class="carousel-inner" id="data-image">
+                                
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselImage" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselImage" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     @endsection
     
     @section('script')
@@ -193,6 +232,45 @@
                 }
             })
         })
+        
+        function viewImage(id) {
+            $.ajax({
+                type: 'GET',
+                url: "{{url('get-image')}}"+ '/' + id,
+                beforeSend: function() {
+                    $('#data-image').html('')
+                    $('#count-image').html('')
+                },
+                success: function(data){
+                    data[0].forEach(function (item, index) {
+                        if (index == 0) {
+                            $('#data-image').append(`
+                            <div class="carousel-item active">
+                                <img class="d-block w-100" src="{{asset('images/${item}')}}">
+                            </div>`)
+                        } else {
+                            $('#data-image').append(`
+                            <div class="carousel-item">
+                                <img class="d-block w-100" src="{{asset('images/${item}')}} ">
+                            </div>`)
+                        }
+                        
+                    })
+                    for (let index = 0; index < data[1]; index++) {
+                        if (index == 0) {
+                            $('#count-image').append(`
+                            <li data-target="#carouselImage" data-slide-to="${index}" class="active"></li>`)
+                        } else {
+                            $('#count-image').append(`
+                            <li data-target="#carouselImage" data-slide-to="${index}"></li>`)
+                        }
+                        
+                    }
+
+                    $('#modalViewImg').modal('show')
+                }
+            });
+        }
     </script>
     <script src="{{ asset('/') }}assets/_admin/assets/vendor/select2/dist/js/select2.min.js"></script>
     <script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
@@ -204,4 +282,5 @@
     <script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
     <script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
     @endsection

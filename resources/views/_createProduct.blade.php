@@ -7,7 +7,8 @@
 @section('css')
 <link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/select2/dist/css/select2.min.css">
 <link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/quill/dist/quill.core.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.css">
+<link rel="stylesheet" href="{{ asset('/') }}assets/css/dropzone.min.css">
+<link rel="stylesheet" href="{{ asset('/') }}assets/css/basic.min.css">
 @endsection
 
 @section('content')
@@ -19,7 +20,7 @@
         </div>
         <!-- Card body -->
         <div class="card-body">
-            <form action="{{ url('/product-admin/store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ url('/product-admin/store') }}" method="post" enctype="multipart/form-data" id="createProduct">
                 @csrf
                 <!-- Input groups with icon -->
                 <div class="row">
@@ -51,7 +52,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label class="form-control-label">File Upload</label>
-                            <div class="needsclick dropzone" id="dropzone">
+                            <div class="dz-default dropzone" id="dropzone">
                                 
                             </div>
                         </div>
@@ -70,11 +71,12 @@
         <script src="{{ asset('/') }}assets/_admin/assets/vendor/nouislider/distribute/nouislider.min.js"></script>
         <script src="{{ asset('/') }}assets/_admin/assets/vendor/quill/dist/quill.min.js"></script>
         <script src="{{ asset('/') }}assets/_admin/assets/vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.js"></script>
+        <script src="{{ asset('/') }}assets/js/dropzone.min.js"></script>
         <script>
             Dropzone.options.dropzone =
             {
                 url: '{{route('store-gambar')}}',
+                maxFiles: 5, 
                 maxFilesize: 10,
                 renameFile: function (file) {
                     var dt = new Date();
@@ -88,8 +90,7 @@
                 addRemoveLinks: true,
                 timeout: 60000,
                 success: function (file, response) {
-                    console.log(response)
-                    $('form').append('<input type="hidden" name="imgs[]" value="' + response.name + '">')
+                    $('#createProduct').append('<input type="hidden" name="imgs[]" value="' + response.name + '">')
                 },
                 error: function (file, response) {
                     return false;
@@ -104,11 +105,10 @@
                         headers: {
                             'X-CSRF-TOKEN': "{{ csrf_token() }}"
                         },
-                        sucess: function(response){
-                            console.log('success: ' + response)
+                        success: function(response){
                         }
                     });
-                    $('form').find('input[name="imgs[]"][value="' + file.upload.filename + '"]').remove()
+                    $('#createProduct').find('input[name="imgs[]"][value="' + file.upload.filename + '"]').remove()
                     var _ref;
                     return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
                 },
@@ -118,11 +118,12 @@
             $('#btn-submit').on('click', function() { 
                 var productName = $('#exampleFormControlname1').val();
                 var productCategory = $('#exampleFormControlselect1').val();
+                var gambar = $("input[name='imgs[]']").map(function(){return $(this).val();}).get();
                 var productDescription = $('#quill-description > .ql-editor').html();
                 $.ajax({
                     type: 'POST',
                     url: '{{ url('/product-admin/store') }}',
-                    data: {name: productName, category: productCategory, description: productDescription},
+                    data: {name: productName, category: productCategory, description: productDescription, imgs: gambar},
                     headers: {
                         'X-CSRF-TOKEN': "{{ csrf_token() }}"
                     },

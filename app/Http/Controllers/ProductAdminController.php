@@ -62,10 +62,13 @@ class ProductAdminController extends Controller
             'category' => 'required|max:255',
             'description' => 'required|max:65535',
         ]);
+
+        $img = serialize($request->imgs);
         $data = [
             'name' => $request->input('name'),
             'category' => $request->input('category'),
             'description' => $request->input('description'),
+            'img' => $img,
         ];
         
         DB::transaction(function () use($data, $id) {
@@ -76,7 +79,18 @@ class ProductAdminController extends Controller
 
     public function delete($id)
     {
-        $delete = Product::where('id', $id)->delete();
+        $product = Product::findOrFail($id);
+
+        $img = unserialize($product->img);
+        for ($i=0; $i < count($img); $i++) { 
+            $fileName = public_path('images/').$img[$i];
+            unlink($fileName);
+        }
+        
+        DB::transaction(function () use ($product) {
+            $product->delete();
+        });
+        
         Alert::success('Deleted', 'Data deleted successfully');
         return redirect('product-admin');
     }
@@ -112,5 +126,39 @@ class ProductAdminController extends Controller
         $data = Product::findOrFail($id);
         $img = Product::select('*')->where('id', '=', $id)->first();
         return view('show-img', compact('img'));
+    }
+
+    public function getImage($id)
+    {
+        $img = unserialize(Product::findOrFail($id)->img);
+        $count = count($img);
+        $data = [$img, $count];
+        return response()->json($data);
+
+    }
+
+    public function deleteGambar($id, Request $request)
+    {
+        $product = Product::findOrFail($id);
+        $data = unserialize($product->img);
+        $imgs = array();
+        $j = 0;
+        for ($i=0; $i < count($data); $i++) { 
+            if ($i != $request->name) {
+                $imgs[$j] = $data[$i];
+                $j++;
+            }else {
+                $img = $data[$i];
+            }
+        }
+
+        $fileName = public_path('images/').$img;
+        unlink($fileName);
+
+        $params['img'] = serialize($imgs);
+        DB::transaction(function () use ($params, $product) {
+            $product->update($params);
+        });
+        return response()->json();
     }
 }

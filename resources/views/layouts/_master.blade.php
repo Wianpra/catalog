@@ -339,6 +339,7 @@
     @yield('header')
     @include('sweetalert::alert')
     @yield('content')
+    @yield('modal')
   </div>
   <!-- Argon Scripts -->
   <!-- Core -->
