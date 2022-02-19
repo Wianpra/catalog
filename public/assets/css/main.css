@@ -539,7 +539,7 @@ a, button, .item-overlay, .global-overlay, .pagination li .page-number, .scroll-
   height: auto; }
 
 .banner__link, .product-overlay, .ft-product-list .product-thumbnail-action, .variation-form .product-color-variations .product-color-variation-btn:after, .global-overlay, .hamburger-icon, .page-title-area:after, .quantity-input, .banner__image img, .blog__inner:hover .item-overlay, .slick-dots li button, .form__input, .newsletter-form__input, .searchform__input, .searchform--2, .searchform--2 .searchform__input, .cart-form__input, .product-image--holder img, .group-product-table tr, .tab-style-1 .nav-link:after, .product-gallery__nav-image--single img, .product-gallery__large-image img {
-  width: 100%; }
+  width: 100%; height: 300px; object-fit: contain;}
 
 .banner__link, .product-overlay, .ft-product-list .product-thumbnail-action, .variation-form .product-color-variations .product-color-variation-btn:after, .global-overlay, .hamburger-icon, .page-title-area:after, .quantity-input, .quantity .qtybutton, .banner__info, .banner.h-100 .banner__inner, .banner.h-100 .banner__image,
 .banner.h-100 .banner__image img, .blog__inner:hover .item-overlay, .slick-dots li button, .nice-select:after, .mini-cart-inner, .offcanvas-navigation, .tagcloud a:after {
