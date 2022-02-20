@@ -10,11 +10,11 @@
                                 <div class="col-md-5 mb-sm--30 mb-xs--10">
                                     <div class="shop-toolbar__left">
                                         <div class="product-ordering">
-                                            <select wire:model="selected()" class="product-ordering__select nice-select">
+                                            {{-- <select wire:model="selected()" class="product-ordering__select nice-select">
                                                 <option value="popular">Relevance</option>
                                                 <option value="asc">Name, A to Z</option>
                                                 <option value="desc">Name, Z to A</option>
-                                            </select>
+                                            </select> --}}
                                         </div>
                                     </div>
                                 </div>
