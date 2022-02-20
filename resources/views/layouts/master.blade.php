@@ -14,13 +14,15 @@
     <!-- ************************* CSS Files ************************* -->
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="{{ asset('/') }}assets/css/bootstrap.css">
 
     <!-- Vendor CSS -->
-    <link rel="stylesheet" href="assets/css/vendor.css">
+    <link rel="stylesheet" href="{{ asset('/') }}assets/css/vendor.css">
 
     <!-- style css -->
-    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="{{ asset('/') }}assets/css/main.css">
+    
+    @yield('script')
     @livewireStyles
 </head>
 
@@ -49,7 +51,7 @@
                                     <div class="header__main-left">
                                         <div class="logo">
                                             <a href="{{ url('/') }}" class="logo--normal">
-                                                <img src="{{ asset('/') }}assets/img/logo-black2.png" alt="Logo">
+                                                <img src="{{ asset('/') }}assets/img/logo-black2.png" alt="Logo" style="width: 80% !important;">
                                             </a>
                                         </div>
                                     </div>
@@ -452,11 +454,12 @@
     <!-- ************************* JS Files ************************* -->
 
     <!-- jQuery JS -->
-    <script src="assets/js/vendor.js"></script>
+    <script src="{{ asset('/') }}assets/js/vendor.js"></script>
 
     <!-- Main JS -->
-    <script src="assets/js/main.js"></script>
+    <script src="{{ asset('/') }}assets/js/main.js"></script>
     @livewireScripts
+    @yield('script')
 </body>
 
 </html>

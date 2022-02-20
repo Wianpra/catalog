@@ -35,6 +35,7 @@
                     <table class="table table-flush" id="datatable-basic">
                         <thead class="thead-light">
                             <tr>
+                                <th>No</th>
                                 <th>Product</th>
                                 <th>Images</th>
                                 <th>Category</th>
@@ -45,6 +46,7 @@
                         </thead>
                         <tfoot>
                             <tr>
+                                <th>No</th>
                                 <th>Product</th>
                                 <th>Images</th>
                                 <th>Category</th>
@@ -54,8 +56,12 @@
                             </tr>
                         </tfoot>
                         <tbody>
+                            @php
+                                $no = 0;
+                            @endphp
                             @foreach ($product as $item)
                             <tr>
+                                <td>{{ ++$no }}</td>
                                 <td>{{ $item->name }}</td>
                                 <td>
                                     <a type="button" class="btn btn-sm btn-neutral" onclick="viewImage({{$item->id}})">View Images</a>

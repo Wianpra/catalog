@@ -10,10 +10,10 @@
                                 <div class="col-md-5 mb-sm--30 mb-xs--10">
                                     <div class="shop-toolbar__left">
                                         <div class="product-ordering">
-                                            <select class="product-ordering__select nice-select">
-                                                <option value="0">Relevance</option>
-                                                <option value="1">Name, A to Z</option>
-                                                <option value="2">Name, Z to A</option>
+                                            <select wire:model="selected()" class="product-ordering__select nice-select">
+                                                <option value="popular">Relevance</option>
+                                                <option value="asc">Name, A to Z</option>
+                                                <option value="desc">Name, Z to A</option>
                                             </select>
                                         </div>
                                     </div>
@@ -46,7 +46,7 @@
                                                         @if ( $img == null )
                                                         <img src="assets/img/products/prod-04-270x300.jpg" class="img-thumbnail" alt="Products">
                                                         @else
-                                                        <img src="{{ asset('images/'.$img[0]) }}" alt="Product" class="img-thumbnail">
+                                                        <img src="{{ asset('images/'.$img[0]) }}"  style=" height: 300px !important; " alt="Product" class="img-thumbnail">
                                                         @endif
                                                     </figure>
                                                 </div>
@@ -64,9 +64,9 @@
                                                     <h3 class="product-title">
                                                         <div class="row">
                                                             <p class="col-6" style="text-transform: capitalize">{{ $item->name }}</p>
-                                                            <div class="float-right col-6">
+                                                            <div class="float-right col-6" style="text-align:right !important;">
                                                                 @if ($item->seen == null)
-                                                                <i class="la la-eye"></i> 10101010
+                                                                <i class="la la-eye"></i> 0
                                                                 @else
                                                                 <i class="la la-eye"></i> {{ $item->seen }}
                                                                 @endif
@@ -81,16 +81,9 @@
                                 @endforeach
                             </div>
                         </div>
-                        <nav class="pagination-wrap">
-                            <ul class="pagination">
-                                <li><span class="page-number current">1</span></li>
-                                <li><a href="#" class="page-number">2</a></li>
-                                <li><span class="dot"></span></li>
-                                <li><span class="dot"></span></li>
-                                <li><span class="dot"></span></li>
-                                <li><a href="#" class="page-number">16</a></li>
-                            </ul>
-                        </nav>
+                        @if (count($product))
+                            {{ $product->links('livewire-pagitation-product-link') }}
+                        @endif
                     </div>
                     <div class="col-xl-3 col-lg-4 order-lg-1">
                         <aside class="shop-sidebar">

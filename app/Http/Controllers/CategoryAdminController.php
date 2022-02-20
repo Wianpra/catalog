@@ -35,7 +35,7 @@ class CategoryAdminController extends Controller
 
     public function edit($id)
     {
-        $data = Category::find($id);
+        $data = Category::findOrFail($id);
         $category = Category::select('*')->where('id', '=', $id)->first();
         return view('setup-edit-category', compact('category'));
     }
@@ -52,6 +52,7 @@ class CategoryAdminController extends Controller
 
     public function delete($id)
     {
+        Product::findOrFail($id);
         $cek = Product::where('category', $id)->count();
         if ( $cek > 0 ) {
             alert()->showConfirmButton('Oke')
