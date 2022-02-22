@@ -29,11 +29,11 @@
                                         <img src="{{ asset('/') }}assets/img/products/prod-08-700x778.png" alt="Products">
                                     </figure>
                                     @else
-                                        @for ($i=0; $i < $count; $i++)
-                                            <figure class="product-gallery__image zoom">
-                                                <img src="{{ asset('images/'.$img[$i]) }}" alt="Products">
-                                            </figure>
-                                        @endfor
+                                    @for ($i=0; $i < $count; $i++)
+                                    <figure class="product-gallery__image zoom">
+                                        <img src="{{ asset('images/'.$img[$i]) }}" alt="Products">
+                                    </figure>
+                                    @endfor
                                     @endif
                                 </div>
                             </div>
@@ -82,11 +82,11 @@
                                 <img src="{{ asset('/') }}assets/img/products/prod-08-170x195.png" alt="Products" class="img-thumbnail">
                             </figure>
                             @else
-                                @for ($i=0; $i < $count; $i++)
-                                    <figure class="product-gallery__nav-image--single">
-                                        <img src="{{ asset('images/'.$img[$i]) }}" alt="Products" style="height: 170px !important" class="img-thumbnail">
-                                    </figure>
-                                @endfor
+                            @for ($i=0; $i < $count; $i++)
+                            <figure class="product-gallery__nav-image--single">
+                                <img src="{{ asset('images/'.$img[$i]) }}" alt="Products" style="height: 170px !important" class="img-thumbnail">
+                            </figure>
+                            @endfor
                             @endif
                         </div>
                     </div>
@@ -98,20 +98,32 @@
                 <h3 class="product-title mb--20">{{ $product->name }}</h3>
                 <p class="product-short-description mb--20">
                     @php
-                        echo $product->description;
+                    echo $product->description;
                     @endphp
                 </p>
-                <div class="product-action d-flex flex-sm-row align-items-sm-center flex-column align-items-start mb--30">
-                    <button type="button" class="btn btn-size-sm btn-shape-square" onclick="window.location.href='cart.html'">
+                <div class="product-action d-flex flex-sm-row align-items-sm-center flex-column align-items-start mb--10">
+                    <button type="button" class="btn btn-size-sm btn-shape-square col-3" id="button1" onclick="fungsiShow()">
                         Order
                     </button>
-                </div>  
+                    <button type="button" class="btn btn-size-sm btn-shape-square col-3" id="button2" onclick="fungsiHide()" hidden>
+                        X
+                    </button>
+                    <button class="btn btn-size-sm btn-shape-square col-3" id="wa" onclick="wa('{{ $product->name }}')" hidden>
+                        <img src="{{ asset('/') }}assets/img/wa.png" alt="" srcset="" width="22">
+                    </button>
+                    <button class="btn btn-size-sm btn-shape-square col-3" id="line" onclick="line()" hidden>
+                        <img src="{{ asset('/') }}assets/img/line.png" alt="" srcset="" width="22">
+                    </button>
+                    <button class="btn btn-size-sm btn-shape-square col-3" id="ex" onclick="inaexport()" hidden>
+                        <img src="{{ asset('/') }}assets/img/ex.png" alt="" srcset="" width="22">
+                    </button>
+                </div>
                 <div class="product-footer-meta">
                     <p><span>Category:</span>
                         @foreach ($category as $item)
-                            @if ( $product->category == $item->id)
-                                {{ $item->category }}                                
-                            @endif
+                        @if ( $product->category == $item->id)
+                        {{ $item->category }}                                
+                        @endif
                         @endforeach
                     </p>
                 </div>
@@ -295,4 +307,30 @@
     </div>
 </div>
 <!-- Main Content Wrapper End -->
+@endsection
+
+@section('script')
+<script>
+    function fungsiShow() {
+        document.getElementById("wa").hidden = false;
+        document.getElementById("line").hidden = false;
+        document.getElementById("ex").hidden = false;
+        document.getElementById("button2").hidden = false;
+        document.getElementById("button1").hidden = true;
+    }
+    function fungsiHide() {
+        document.getElementById("wa").hidden = true;
+        document.getElementById("line").hidden = true;
+        document.getElementById("ex").hidden = true;
+        document.getElementById("button2").hidden = true;
+        document.getElementById("button1").hidden = false;
+    }
+    function wa(data){
+        let text = "Hi, Sis ^^ Is product " + data + " still available?";
+        // let text = "Hai, kak ^^ Apakah produk " + data + " masih ada?";
+        let url = "https://api.whatsapp.com/send?phone=6285325556514&text=";
+        let encoded = encodeURI(text);
+        window.open(url+text, "_blank");
+    }
+</script>
 @endsection
