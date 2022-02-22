@@ -9,6 +9,15 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    public function home()
+    {
+        $top = Product::orderBy('seen', 'desc')->take(3)->get();
+        $discount = Product::orderBy('seen', 'desc')->take(1)->first();
+        $new = Product::orderBy('created_at', 'asc')->take(3)->get();
+        $newest = Product::orderBy('created_at', 'asc')->take(1)->first();
+        return view('index', compact('top', 'discount', 'new', 'newest'));
+    }
+
     public function index()
     {
         return view('product');

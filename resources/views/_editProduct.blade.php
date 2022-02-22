@@ -21,7 +21,7 @@
         <div class="card-body">
                 
                 <!-- Input groups with icon -->
-                <div class="row">
+                <div class="row" id="updateProduct">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="form-control-label" for="exampleFormControlname1">Name Product</label>
@@ -46,32 +46,9 @@
                             <div data-toggle="quill" data-quill-placeholder="Quill WYSIWYG" id="quill-description"></div>
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <label class="form-control-label">Image</label>
-                        <table class="table">
-                            @if ($product->img == null)
-                            < No Image >
-                            @else
-                            @php
-                            $img = unserialize($product->img);
-                            $count = count($img);
-                            @endphp
-                            @for ($i = 0; $i < $count; $i++)
-                            <tr>
-                                <td>
-                                    <img src="{{ asset('images/'.$img[$i])}}" alt="" class="img-responsive img-rounded img-thumbnail" width="200px" height="200px">
-                                </td>
-                                <td>
-                                    <a href="#!" class="table-action table-action-delete btn-delete-product" data-toggle="tooltip" data-original-title="Delete product" onclick="deleteGambar({{$product->id}}, {{$i}})">
-                                        <i class="fas fa-trash"></i> Hapus
-                                    </a>
-                                </td>
-                            </tr>
-                            <input type="hidden" name="imgs[]" value="{{ $img[$i] }}">
-                            @endfor
-                            @endif
-                        </table>
-                    </div>
+                    @php
+                    $img = json_encode(unserialize($product->img));
+                    @endphp
                     <div class="col-md-12">
                         <div class="form-group">
                             <label class="form-control-label">File Upload</label>
@@ -94,6 +71,16 @@
         <script src="{{ asset('/') }}assets/_admin/assets/vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.js"></script>
         <script>
+            $(window).on("load", function () {
+                $('#quill-description > .ql-editor').html(`{!! $product->description !!}`);
+                $('.dz-image img').attr('width', 125)
+                $('.dz-image img').attr('height', 125);
+                // $('.dz-remove').addClass('mt-3 btn btn-danger btn-sm')
+                // $('#jenis_stok').trigger('change')
+                // $('#jenis_diskon').trigger('change')
+                // console.log(gambar);
+            })
+            
             Dropzone.options.dropzone =
             {
                 url: '{{route('store-gambar')}}',
@@ -103,6 +90,22 @@
                     var dt = new Date();
                     var time = dt.getTime();
                     return time + '_' + file.name;
+                },
+                init: function () {
+                    var thisDropzone = this;
+                    var gambar = "{{$img}}";
+                    var array = JSON.parse(gambar.replace(/&quot;/g,'"')); 
+                    
+                    $.each(array, function (value, key) {
+                        var mockFile = { name: key };
+                        
+                        thisDropzone.files.push(mockFile);
+                        thisDropzone.emit("addedfile", mockFile);
+                        thisDropzone.emit("thumbnail", mockFile, `{{asset('images')}}`+ "/" + key);
+                        thisDropzone.emit("complete", mockFile);
+
+                        $('#updateProduct').append('<input type="hidden" name="imgs[]" value="' + key + '">')
+                    })
                 },
                 headers: {
                     'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -118,7 +121,7 @@
                     return false;
                 },
                 removedfile: function(file) {
-                    var fileName = file.upload.filename; 
+                    var fileName = file.name; 
                     
                     $.ajax({
                         type: 'POST',
@@ -131,7 +134,7 @@
                             console.log('success: ' + response)
                         }
                     });
-                    $('#updateProduct').find('input[name="imgs[]"][value="' + file.upload.filename + '"]').remove()
+                    $('#updateProduct').find('input[name="imgs[]"][value="' + file.name + '"]').remove()
                     var _ref;
                     return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
                 },
@@ -151,21 +154,6 @@
                     },
                     success: function(data){
                         location.replace("{{ url('/product-admin')}}")
-                    }
-                });
-            }
-            
-            function deleteGambar(id, name) {
-                $.ajax({
-                    type: 'POST',
-                    url: "{{url('delete-gambar')}}" + '/' + id,
-                    data: {name: name},
-                    headers: {
-                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                    },
-                    success: function(response){
-                        console.log('success: ' + response)
-                        location.reload()
                     }
                 });
             }

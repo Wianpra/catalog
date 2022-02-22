@@ -71,6 +71,8 @@ class ProductAdminController extends Controller
             'img' => $img,
         ];
         
+        
+        
         DB::transaction(function () use($data, $id) {
             Product::findOrFail($id)->update($data);
         });

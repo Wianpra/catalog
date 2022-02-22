@@ -12,10 +12,12 @@ class ProductCatalog extends Component
     use WithPagination;
     public $categoryId;
     public $orderBy;
+    public $search;
     
     public function filterCategory($id)
     {
         $this->categoryId = $id;
+        $this->search = null;
     }
 
     public function updateSelected($orderBy)
@@ -23,32 +25,36 @@ class ProductCatalog extends Component
         $this->orderBy = $orderBy;
     }
 
+    public function Searching()
+    {
+        $this->search = $this->search;
+    }
+
     public function render()
     {
         if ( $this->categoryId == null ) {
-
             $countProductAll = Product::count();
             $countProduct = Product::count();
 
             if ( $this->orderBy == null || $this->orderBy == "popular") {
-                $product = Product::orderBy('seen', 'desc')->paginate(9);
+                $product = $this->search === null ? Product::orderBy('seen', 'desc')->paginate(9) : Product::orderBy('seen', 'desc')->where('name', 'like', '%' . $this->search . '%')->paginate(9);
             } elseif( $this->orderBy == 'asc' ) {
-                $product = Product::orderBy('name', 'asc')->paginate(9);
+                $product = $this->search === null ? Product::orderBy('name', 'asc')->paginate(9) : Product::orderBy('name', 'asc')->where('name', 'like', '%' . $this->search . '%')->paginate(9);
             } else {
-                $product = Product::orderBy('name', 'desc')->paginate(9);
+                $product = $this->search === null ? Product::orderBy('name', 'desc')->paginate(9) : Product::orderBy('name', 'desc')->where('name', 'like', '%' . $this->search . '%')->paginate(9);
             }
 
         } else {
-
+            
             $countProductAll = Product::count();
             $countProduct = Product::where('category', $this->categoryId)->count();
             
             if ( $this->orderBy == null || $this->orderBy == "popular") {
-                $product = Product::where('category', $this->categoryId)->orderBy('seen', 'asc')->paginate(9);
+                $product = $this->search === null ? Product::where('category', $this->categoryId)->orderBy('seen', 'asc')->paginate(9) : Product::where('category', $this->categoryId)->orderBy('seen', 'asc')->where('name', 'like', '%' . $this->search . '%')->paginate(9);
             } elseif( $this->orderBy == 'asc' ) {
-                $product = Product::where('category', $this->categoryId)->orderBy('name', 'asc')->paginate(9);
+                $product = $this->search === null ? Product::where('category', $this->categoryId)->orderBy('name', 'asc')->paginate(9) : Product::where('category', $this->categoryId)->orderBy('name', 'asc')->where('name', 'like', '%' . $this->search . '%')->paginate(9);
             } else {
-                $product = Product::where('category', $this->categoryId)->orderBy('name', 'desc')->paginate(9);
+                $product = $this->search === null ? Product::where('category', $this->categoryId)->orderBy('name', 'desc')->paginate(9) : Product::where('category', $this->categoryId)->orderBy('name', 'desc')->where('name', 'like', '%' . $this->search . '%')->paginate(9);
             }
 
         }

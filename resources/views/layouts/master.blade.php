@@ -134,7 +134,7 @@
                             <div class="footer-widget">
                                 <div class="textwidget">
                                     <figure class="footer-logo mb--30">
-                                        <img src="assets/img/logo/logo.png" alt="Logo">
+                                        <img src="{{ asset('/') }}assets/img/logo-black2.png" alt="Logo" width="290 px" height="80px">
                                     </figure>
                                     <p>On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms. </p>
                                 </div>
@@ -195,46 +195,11 @@
                     </div>
                 </div>
             </div>
-            <div class="footer-middle ptb--40">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-11">
-                            <div class="footer-widget">
-                                <div class="taglist">
-                                    <span>Tags:</span>
-                                    <a href="#">Minimal eCommerce</a>
-                                    <a href="#">Marketing</a>
-                                    <a href="#">User Exprience</a>
-                                    <a href="#">Ali Express</a>
-                                    <a href="#">Web</a>
-                                    <a href="#">Digital Expo</a>
-                                    <a href="#">Web Search</a>
-                                    <a href="#">Affiliate</a>
-                                    <a href="#">UCWeb</a>
-                                    <a href="#">Support</a>
-                                    <a href="#">Template</a>
-                                    <a href="#">Best Queality</a>
-                                    <a href="#">Mobile</a>
-                                    <a href="#">24 Support</a>
-                                    <a href="#">Ali Express</a>
-                                    <a href="#">Web</a>
-                                    <a href="#">Laptop</a>
-                                    <a href="#">Web Search</a>
-                                    <a href="#">Affiliate</a>
-                                    <a href="#">Photoshop</a>
-                                    <a href="#">Support</a>
-                                    <a href="#">Template</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="footer-bottom">
                 <div class="container-fluid">
                     <div class="row border-top ptb--20">
                         <div class="col-12 text-center">
-                            <p class="copyright-text">&copy; Beck 2021 Made With <i class="la la-heart"></i> By Hasthemes</p>
+                            <p class="copyright-text">&copy; Lunarian</p>
                         </div>
                     </div>
                 </div>
@@ -422,27 +387,7 @@
             </div>
         </div>
         <!-- OffCanvas Menu End -->
-
         
-
-        <!-- Searchform Popup Start -->
-        <div class="searchform__popup" id="searchForm">
-            <a href="#" class="btn-close"><i class="la la-remove"></i></a>
-            <div class="searchform__body">
-                <p>Start typing and press Enter to search</p>
-                <form class="searchform">
-                    <input type="text" name="popup-search" id="popup-search" class="searchform__input" placeholder="Search Entire Store...">
-                    <button type="submit" class="searchform__submit"><i class="la la-search"></i></button>
-                </form>
-            </div>
-        </div>
-        <!-- Searchform Popup End -->
-
-        
-
-        <!-- Global Overlay Start -->
-        <div class="global-overlay"></div>
-        <!-- Global Overlay End -->
 
         <!-- Global Overlay Start -->
         <a class="scroll-to-top" href=""><i class="la la-angle-double-up"></i></a>

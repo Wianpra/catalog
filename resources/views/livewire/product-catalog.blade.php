@@ -113,4 +113,18 @@
         </div>
     </div>
     <!-- Main Content Wrapper Start -->
+
+
+<!-- Searchform Popup Start -->
+<div class="searchform__popup" id="searchForm">
+    <a href="#" class="btn-close"><i class="la la-remove"></i></a>
+    <div class="searchform__body">
+        <p>Start typing and press Enter to search</p>
+        <form class="searchform" wire:submit.prevent="Searching">
+            <input type="text" wire:model.defer="search" name="popup-search" id="popup-search" class="searchform__input" placeholder="Search Entire Store..." style="height: 50px">
+            <button type="submit" class="searchform__submit" data-dismiss="#searchForm"><i class="la la-search"></i></button>
+        </form>
+    </div>
+</div>
+<!-- Searchform Popup End -->
 </div>
