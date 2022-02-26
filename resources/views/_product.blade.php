@@ -16,7 +16,8 @@
 <link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css">
 <link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-select-bs4/css/select.bootstrap4.min.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+<link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/quill/dist/quill.core.css">
+{{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous"> --}}
 @endsection
 
 @section('content')
@@ -57,7 +58,7 @@
                         </tfoot>
                         <tbody>
                             @php
-                                $no = 0;
+                            $no = 0;
                             @endphp
                             @foreach ($product as $item)
                             <tr>
@@ -88,7 +89,7 @@
                                         @endforeach
                                         @endif
                                     </td>
-
+                                    
                                     <td>
                                         <i class="fas fa-eye"></i>
                                         @if ($item->seen == null)
@@ -99,11 +100,9 @@
                                     </td>
                                     
                                     <td>
-                                        @php
-                                            echo $item->description;
-                                        @endphp
+                                        <a type="button" class="btn btn-edit-description btn-sm btn-neutral" data-id="{{ $item->id }}">View Description</a>
                                     </td>
-
+                                    
                                     <td>
                                         <a href="{{ url('product-admin/edit') }}/{{ $item->id }}" class="table-action table-action-edit" data-toggle="tooltip" data-original-title="Edit product">
                                             <i class="fas fa-edit"></i>
@@ -217,9 +216,47 @@
             </div>
         </div>
     </div>
+    
+    {{-- MODAL description --}}
+    <div class="modal fade" id="modal-edit-description" tabindex="-1" role="dialog" aria-labelledby="modal-edit-description" aria-hidden="true">
+        <div class="modal-dialog modal- modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">View Description</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body modal-edit-body p-0">
+                    <div class="card bg-secondary border-0 mb-0">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <div  data-toggle="quill" id="quill-description"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary mb-5" id="button-save-desc">Edit Description</button>
+                </div>
+            </div>
+        </div>
+    </div>
     @endsection
     
     @section('script')
+    
+    <script src="{{ asset('/') }}assets/_admin/assets/vendor/quill/dist/quill.min.js"></script>
+    <script src="{{ asset('/') }}assets/_admin/assets/vendor/select2/dist/js/select2.min.js"></script>
+    <script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+    <script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
     <script>
         $('.edit-category-product').on('click', function(){
             let id = $(this).data('id')
@@ -279,21 +316,45 @@
                         }
                         
                     }
-
+                    
                     $('#modalViewImg').modal('show')
                 }
             });
         }
+        
+        $('.btn-edit-description').on('click', function(){
+            let id = $(this).data('id')
+            console.log(id)
+            $.ajax({
+                url: `/view-edit-description/${id}`,
+                method: "GET",
+                success: function(data){
+                    console.log(data)
+                    $('#quill-description > .ql-editor').html(data.description);
+                    $('#modal-edit-description').modal('show')
+                    $('#button-save-desc').attr('onClick', 'updateDescription(' + id + ')')
+                },
+                error: function(error){
+                    console.log(error)
+                },
+            })
+        })
+        
+
+        function updateDescription(id) {
+                var productDescription = $('#quill-description > .ql-editor').html();
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ url('/save-description/update') }}' + '/' + id,
+                    data: {description: productDescription},
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    },
+                    success: function(data){
+                        location.replace("{{ url('/product-admin')}}")
+                    }
+                });
+            }
     </script>
-    <script src="{{ asset('/') }}assets/_admin/assets/vendor/select2/dist/js/select2.min.js"></script>
-    <script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
-    <script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
-    <script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script> --}}
     @endsection
