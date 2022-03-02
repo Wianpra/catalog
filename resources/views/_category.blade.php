@@ -68,7 +68,7 @@
                                 <th  class="col-1">No</th>
                                 <th>Main Category</th>
                                 <th>Sub Category</th>
-                                <th class="col-2">Action</th>
+                                <th class="col-1">Action</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -76,7 +76,7 @@
                                 <th class="col-1">No</th>
                                 <th>Main Category</th>
                                 <th>Sub Category</th>
-                                <th class="col-2">Action</th>
+                                <th class="col-1">Action</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -92,12 +92,9 @@
                                 <td>
                                     <button class="btn btn-sm btn-neutral" onclick="subCategory({{$item->id}})">View Sub Category</button>
                                 </td>
-                                <td class="col-2">
+                                <td class="col-1">
                                     <a href="#" class="table-action table-action-edit" onclick="editMain({{$item->id}})">
                                         <i class="fas fa-edit"></i>
-                                    </a>
-                                    <a href="#" class="table-action table-action-delete" onclick="deleteMain({{$item->id}})">
-                                        <i class="fas fa-trash"></i>
                                     </a>
                                 </td>
                             </tr>

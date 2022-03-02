@@ -2335,8 +2335,8 @@ a, button, .item-overlay, .global-overlay, .pagination li .page-number, .scroll-
 
 @media (min-width: 75em) {
   .main-navigation .mainmenu__item > a {
-    padding-right: 40px;
-    padding-left: 40px; } }
+    padding-right: 35px;
+    padding-left: 35px; } }
 
 .main-navigation .mainmenu__item:first-child > a {
   padding-left: 0; }
