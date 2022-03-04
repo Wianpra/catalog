@@ -48,4 +48,9 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('/sub-category/delete/{id}', 'CategoryAdminController@deleteSub');
     Route::get('/main-category/edit/{id}', 'CategoryAdminController@editMain');
     Route::post('/save-main-category/update/{id}', 'CategoryAdminController@updateMain');
+
+    Route::get('/profile-admin', 'DashboardController@profile');
+    Route::get('/dashboard', 'DashboardController@index');
+    Route::get('/profile-admin/edit/{id}', 'DashboardController@editProfile');
+    Route::post('/profile-admin/update/{id}', 'DashboardController@updateProfile');
 });

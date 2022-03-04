@@ -307,7 +307,7 @@
                 <div class="dropdown-header noti-title">
                   <h6 class="text-overflow m-0">Welcome!</h6>
                 </div>
-                <a href="{{ url('/profile') }}" class="dropdown-item">
+                <a href="{{ url('/profile-admin') }}" class="dropdown-item">
                   <i class="ni ni-support-16"></i>
                   <span>Company Profile</span>
                 </a>
