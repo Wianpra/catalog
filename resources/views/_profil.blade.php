@@ -63,30 +63,36 @@
                 <div class="modal-body p-0">
                     <div class="card bg-secondary border-0 mb-0">
                         <div class="card-body">
-                            <form role="form" action="{{ url('profile-admin/update') }}/{{ Auth::user()->id }}" method="post">
+                            <form onsubmit="return validateForm()" role="form" action="{{ url('profile-admin/update') }}/{{ Auth::user()->id }}" method="post">
                                 @csrf
-                                <div class="form-group">
-                                    <div class="input-group input-group-merge input-group-alternative">
+                                <div class="form-group" id="nameDanger">
+                                    <div class="input-group input-group-prepend">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-single-02"></i></span>
                                         </div>
-                                        <input name="name" class="form-control" id="nameVal" type="text" onkeydown="return event.key != 'Enter';">
+                                        <input style="border-top-right-radius: 0.25rem; border-bottom-right-radius: 0.25rem;" type="text" class="form-control" id="nameVal" name="name">
+                                        <div class="invalid-feedback text-left" id="nameText">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="input-group input-group-merge input-group-alternative">
+                                <div class="form-group" id="emailDanger">
+                                    <div class="input-group input-group-prepend">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                                         </div>
-                                        <input name="email" class="form-control" id="emailVal" type="email" onkeydown="return event.key != 'Enter';">
+                                        <input style="border-top-right-radius: 0.25rem; border-bottom-right-radius: 0.25rem;" type="text" class="form-control" id="emailVal" name="email">
+                                        <div class="invalid-feedback text-left" id="emailText">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="input-group input-group-merge input-group-alternative">
+                                <div class="form-group" id="passDanger">
+                                    <div class="input-group input-group-prepend">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                         </div>
-                                        <input name="password" class="form-control" placeholder="********" type="password" onkeydown="return event.key != 'Enter';">
+                                        <input style="border-top-right-radius: 0.25rem; border-bottom-right-radius: 0.25rem;" type="password" class="form-control" placeholder="********" name="password" id="passVal">
+                                        <div class="invalid-feedback text-left" id="passText">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="text-center">
@@ -113,6 +119,80 @@
                 $('#emailVal').val(data.email)
             }
         })
+    }
+    
+</script>
+<script>
+    function validateForm() {
+        // name
+        if (document.getElementById('nameVal').value == "") {
+            $('#nameText').html("Name can not be empty");
+            document.getElementById('nameVal').classList.add("is-invalid");
+            document.getElementById('nameDanger').classList.add("has-danger");
+            $('#nameVal').focus();
+            return false;
+        }else{
+            document.getElementById('nameVal').classList.remove("is-invalid");
+            document.getElementById('nameDanger').classList.remove("has-danger");
+        }
+        if (document.getElementById('nameVal').value.length > 255) {
+            $('#nameVal').html("Name cannot be longer than 255 characters");
+            document.getElementById('nameVal').classList.add("is-invalid");
+            document.getElementById('nameDanger').classList.add("has-danger");
+            $('#nameVal').focus();
+            return false;
+        }else{
+            document.getElementById('nameVal').classList.remove("is-invalid");
+            document.getElementById('nameDanger').classList.remove("has-danger");
+        }
+        
+        // email
+        if (document.getElementById('emailVal').value == "") {
+            $('#emailText').html("Email can not be empty");
+            document.getElementById('emailVal').classList.add("is-invalid");
+            document.getElementById('emailDanger').classList.add("has-danger");
+            $('#emailVal').focus();
+            return false;
+        }else{
+            document.getElementById('emailVal').classList.remove("is-invalid");
+            document.getElementById('emailDanger').classList.remove("has-danger");
+        }
+        if (document.getElementById('emailVal').value.length > 255) {
+            $('#emailText').html("Email cannot be longer than 255 characters");
+            document.getElementById('emailVal').classList.add("is-invalid");
+            document.getElementById('emailDanger').classList.add("has-danger");
+            $('#emailVal').focus();
+            return false;
+        }else{
+            document.getElementById('emailVal').classList.remove("is-invalid");
+            document.getElementById('emailDanger').classList.remove("has-danger");
+        }
+        
+        // password
+        if (document.getElementById('passVal').value != "") {
+            if (document.getElementById('passVal').value.length < 8) {
+                $('#passText').html("Password cannot be less than 8 characters");
+                document.getElementById('passVal').classList.add("is-invalid");
+                document.getElementById('passDanger').classList.add("has-danger");
+                $('#passVal').focus();
+                return false;
+            }else{
+                document.getElementById('passVal').classList.remove("is-invalid");
+                document.getElementById('passDanger').classList.remove("has-danger");
+            }
+
+            if (document.getElementById('passVal').value.length > 255) {
+                $('#passText').html("Password cannot be longer than 255 characters");
+                document.getElementById('passVal').classList.add("is-invalid");
+                document.getElementById('passDanger').classList.add("has-danger");
+                $('#passVal').focus();
+                return false;
+            }else{
+                document.getElementById('passVal').classList.remove("is-invalid");
+                document.getElementById('passDanger').classList.remove("has-danger");
+            }
+        }
+        return true;
     }
 </script>
 @endsection

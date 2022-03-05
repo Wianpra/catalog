@@ -27,20 +27,9 @@ class DashboardController extends Controller
     }
     public function updateProfile(Request $request, $id)
     {
-        if ($request->input('password') == null) {
-            $request->validate([
-                'name' => 'required|max:255',
-                'email' => 'required|max:255|email',
-                'password' => 'max:255',
-            ]);
-        } else {
-            $request->validate([
-                'name' => 'required|max:255',
-                'email' => 'required|max:255|email',
-                'password' => 'max:255|min:8',
-            ]);
-        }
-        
+        $request->validate([
+            'email' => 'email',
+        ]);
 
         if ($request->input('password') == null) {
             
