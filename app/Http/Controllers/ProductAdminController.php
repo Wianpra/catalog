@@ -55,6 +55,26 @@ class ProductAdminController extends Controller
         return view('_editProduct', compact('product', 'category'));
     }
 
+    public function viewDescription($id)
+    {
+        $data = Product::findOrFail($id);
+        return response()->json($data);
+    }
+
+    public function saveDescription(Request $request, $id)
+    {
+        $request->validate([
+            'description' => 'required|max:65535',
+        ]);
+        $data = [
+            'description' => $request->input('description'),
+        ];
+        DB::transaction(function () use($data, $id) {
+            Product::findOrFail($id)->update($data);
+        });
+        return response()->json();
+    }
+
     public function update(Request $request, $id)
     {
         $request->validate([

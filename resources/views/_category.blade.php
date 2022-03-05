@@ -12,7 +12,9 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Create Category</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body p-0">
                     <div class="card bg-secondary border-0 mb-0">
@@ -24,7 +26,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-ungroup"></i></span>
                                         </div>
-                                        <input name="category" class="form-control" placeholder="Write Category" type="text">
+                                        <input name="main_category" class="form-control" placeholder="Write Category" type="text" onkeydown="return event.key != 'Enter';">
                                     </div>
                                 </div>
                                 <div class="text-center">
@@ -63,28 +65,36 @@
                     <table class="table table-flush" id="datatable-basic">
                         <thead class="thead-light">
                             <tr>
-                                <th>Category</th>
-                                <th class="col-2">Action</th>
+                                <th  class="col-1">No</th>
+                                <th>Main Category</th>
+                                <th>Sub Category</th>
+                                <th class="col-1">Action</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>Category</th>
-                                <th class="col-2">Action</th>
+                                <th class="col-1">No</th>
+                                <th>Main Category</th>
+                                <th>Sub Category</th>
+                                <th class="col-1">Action</th>
                             </tr>
                         </tfoot>
                         <tbody>
+                            @php
+                            $no = 0;
+                            @endphp
                             @foreach ($category as $item)
                             <tr>
+                                <td class="col-1">{{ ++$no }}</td>
                                 <td>
-                                    {{ $item->category }}
+                                    {{ $item->main_category }}
                                 </td>
-                                <td class="col-2">
-                                    <a href="#" class="table-action btn-edit table-action-edit" data-toggle="tooltip" data-original-title="Edit category" data-id="{{ $item->id }}">
+                                <td>
+                                    <button class="btn btn-sm btn-neutral" onclick="subCategory({{$item->id}})">View Sub Category</button>
+                                </td>
+                                <td class="col-1">
+                                    <a href="#" class="table-action table-action-edit" onclick="editMain({{$item->id}})">
                                         <i class="fas fa-edit"></i>
-                                    </a>
-                                    <a href="#" class="table-action btn-delete table-action-delete" data-id="{{ $item->id }}" data-toggle="tooltip" data-original-title="Delete category">
-                                        <i class="fas fa-trash"></i>
                                     </a>
                                 </td>
                             </tr>
@@ -96,23 +106,88 @@
         </div>
     </div>
     
-    {{-- MODAL EDIT --}}
-    <div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="modal-edit" aria-hidden="true">
+    {{-- MODAL EDIT SUB CATEGORY --}}
+    <div class="modal fade" id="modal-edit-sub" tabindex="-1" role="dialog" aria-labelledby="modal-edit-sub" aria-hidden="true">
         <div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Edit Category</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <form id="form-update-simpan" method="POST">
                     @csrf
                     <div class="modal-body modal-edit-body p-0">
-                        
-                    </div>
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary mb-5">Edit Category</button>
+                        <div class="card bg-secondary border-0 mb-0">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="input-group mr-0 col-8">
+                                        <input name="sub_category" id="sub-edit-value" class="form-control" type="text" onkeydown="return event.key != 'Enter';">
+                                    </div>
+                                    <button type="button" id="btn-save-edit-sub" class="btn btn-primary col-3 ml-2">Save</button>
+                                </div>                                
+                            </div>
+                        </div>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+    {{-- MODAL VIEW --}}
+    <div class="modal fade" id="modal-show-sub" tabindex="-1" role="dialog" aria-labelledby="modal-show-sub" aria-hidden="true">
+        <div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Sub Category</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body modal-edit-body-sub p-0">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <form id="form-update-simpan-sub" method="POST">
+                                <div class="row">
+                                    <div class="input-group mr-0 col-8">
+                                        <input name="sub_category" id="valueSub" class="form-control form-control-sm" placeholder="Add Sub Category" type="text" onkeydown="return event.key != 'Enter';">
+                                    </div>
+                                    <button type="button" id="btn-save-add-sub" class="btn btn-sm btn-primary col-3 ml-2">Save</button>
+                                </div>
+                            </form>
+                        </div>
+                        <table class="table" id="table-data-sub">
+                            
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- MODAL VIEW MAIN--}}
+    <div class="modal fade" id="modal-show-main" tabindex="-1" role="dialog" aria-labelledby="modal-show-main" aria-hidden="true">
+        <div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Main Category</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body modal-edit-body-sub p-0">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <form id="form-update-simpan-main" method="POST">
+                                <div class="row">
+                                    <div class="input-group mr-0 col-8">
+                                        <input name="main_category" id="main-edit-value" class="form-control" type="text" onkeydown="return event.key != 'Enter';">
+                                    </div>
+                                    <button type="button" id="btn-save-edit-main" class="btn btn-primary col-3 ml-2">Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -156,26 +231,98 @@
 <script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 <script>
-    $('.btn-edit').on('click', function(){
-        let id = $(this).data('id')
-        var action = "/category-admin-update/"+id
-        console.log(id)
+    function subCategory(id) {
         $.ajax({
-            url: `/category-admin/${id}/edit`,
+            url: `/category-admin-sub-edit/${id}`,
             method: "GET",
+            beforeSend: function() {
+                $('#table-data-sub').html('')
+            },
             success: function(data){
-                $('#modal-edit').find('.modal-edit-body').html(data)
-                $('#modal-edit').modal('show')
-                $('#form-update-simpan').attr('action', action)
+                let no = 0
+                data[0].forEach(function (item, index) {
+                    if (index == 0) {
+                        $('#table-data-sub').append(`
+                        <tr>
+                            <td class="col-1"> ${++no}. </td>
+                            <td> ${item.category} </td>
+                            <td class="col-2">
+                                <a href="#" class="table-action table-action-edit" onclick="editSub(${item.id})">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="#" class="table-action table-action-delete" onclick="deleteSub(${item.id})">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        `)
+                    } else {
+                        $('#table-data-sub').append(`
+                        <tr>
+                            <td class="col-1"> ${++no}. </td>
+                            <td> ${item.category} </td>
+                            <td class="col-2">
+                                <a href="#" class="table-action table-action-edit" onclick="editSub(${item.id})">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="#" class="table-action table-action-delete" onclick="deleteSub(${item.id})">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        `)
+                    }
+                })
+                $('#modal-show-sub').modal('show')
+                $('#btn-save-add-sub').attr('onClick', 'addSub(' + id + ')')
             },
             error: function(error){
                 console.log(error)
             },
         })
-    })
-    $('.btn-delete').on('click', function(){
-        let id = $(this).data('id')
-        var action = "/category-admin/delete/"+id
+    }
+    function addSub(id) {
+        var valSub = $('#valueSub').val();
+        $.ajax({
+            type: 'POST',
+            url: '{{ url('/save-sub-category/store') }}' + '/' + id,
+            data: {category: valSub, main_category: id},
+            headers: {
+                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+            },
+            success: function(data){
+                location.replace("{{ url('/category-admin')}}")
+            }
+        });
+    }
+    function editSub(id) {
+        $.ajax({
+            url: '{{ url('/sub-category/edit') }}' + '/' + id,
+            type: 'GET',
+            success: function(data) {
+                $('#modal-show-sub').modal('hide')
+                $('#modal-edit-sub').modal('show')
+                $('#sub-edit-value').val(data.category)
+                $('#btn-save-edit-sub').attr('onClick', 'updateSub(' + id + ')')
+            }
+        })
+    }
+    function updateSub(id) {
+        var valSubEdit = $('#sub-edit-value').val();
+        $.ajax({
+            type: 'POST',
+            url: '{{ url('/save-sub-category/update') }}' + '/' + id,
+            data: {category: valSubEdit},
+            headers: {
+                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+            },
+            success: function(data){
+                location.replace("{{ url('/category-admin')}}")
+            }
+        });
+    }
+    function deleteSub(id) {
+        var action = "/sub-category/delete/"+id
         Swal.fire({
             title: 'Warning!',
             icon: 'info',
@@ -189,7 +336,32 @@
                 window.location.href = action
             }
         })
-    })
+    }
+    function editMain(id) {
+        $.ajax({
+            url: '{{ url('/main-category/edit') }}' + '/' + id,
+            type: 'GET',
+            success: function(data) {
+                $('#modal-show-main').modal('show')
+                $('#main-edit-value').val(data.main_category)
+                $('#btn-save-edit-main').attr('onClick', 'updateMain(' + id + ')')
+            }
+        })
+    }
+    function updateMain(id) {
+        var valMainEdit = $('#main-edit-value').val();
+        $.ajax({
+            type: 'POST',
+            url: '{{ url('/save-main-category/update') }}' + '/' + id,
+            data: {main_category: valMainEdit},
+            headers: {
+                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+            },
+            success: function(data){
+                location.replace("{{ url('/category-admin')}}")
+            }
+        });
+    }
 </script>
 
 @endsection

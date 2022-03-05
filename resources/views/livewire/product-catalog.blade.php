@@ -82,7 +82,7 @@
                             </div>
                         </div>
                         @if (count($product))
-                            {{ $product->links('livewire-pagitation-product-link') }}
+                        {{ $product->links('livewire-pagitation-product-link') }}
                         @endif
                     </div>
                     <div class="col-xl-3 col-lg-4 order-lg-1">
@@ -91,18 +91,34 @@
                                 <h3 class="widget-title mb--25">Category</h3>
                                 <ul class="widget-list category-list">
                                     <li>
-                                        <a wire:click.prevent="filterCategory(null)" role="button">
-                                            <span style="text-transform: capitalize" class="category-title">All</span>
-                                            <i class="fa fa-angle-double-right"></i>
-                                        </a>
+                                                <button  style="background-color: white;border: 0px solid white;" wire:click.prevent="filterMainCategory(null)" role="button">
+                                                    <span style="text-transform: capitalize" class="category-title">All</span>
+                                                </button>
                                     </li>
-                                    @foreach ($category as $data)
+                                    @foreach ($main_category as $data)
                                     <li>
-                                        <a wire:click.prevent="filterCategory({{ $data->id }})" role="button">
-                                            <span style="text-transform: capitalize" class="category-title">{{ $data->category }}</span>
-                                            <i class="fa fa-angle-double-right"></i>
-                                        </a>
+                                        <div class="row">
+                                            <div class="col-10">
+                                                <button style="background-color: white;border: 0px solid white;" wire:click.prevent="filterMainCategory({{ $data->id }})" role="button">
+                                                    <span style="text-transform: capitalize" class="category-title">{{ $data->main_category }}</span>
+                                                </button>
+                                            </div>
+                                            <div class="col-2">
+                                                <button id="button-main{{ $data->id }}" style="background-color: white;border: 0px solid white;" onclick="showMain({{ $data->id }})">
+                                                    <i class="fa fa-angle-right" id="arrow{{ $data->id }}"></i>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </li>
+                                        @foreach ($category as $item)
+                                            @if ( $data->id == $item->main_category )
+                                                <li style="margin-left: 50px; display:none" class="displaySub{{$data->id}}">
+                                                    <a wire:click.prevent="filterCategory({{ $item->id }})" role="button">
+                                                        <span style="text-transform: capitalize" class="category-title">{{ $item->category }}</span>
+                                                    </a>
+                                                </li>
+                                            @endif
+                                        @endforeach
                                     @endforeach
                                 </ul>
                             </div>
@@ -113,18 +129,41 @@
         </div>
     </div>
     <!-- Main Content Wrapper Start -->
-
-
-<!-- Searchform Popup Start -->
-<div class="searchform__popup" id="searchForm">
-    <a href="#" class="btn-close"><i class="la la-remove"></i></a>
-    <div class="searchform__body">
-        <p>Start typing and press Enter to search</p>
-        <form class="searchform" wire:submit.prevent="Searching">
-            <input type="text" wire:model.defer="search" name="popup-search" id="popup-search" class="searchform__input" placeholder="Search Entire Store..." style="height: 50px">
-            <button type="submit" class="searchform__submit" data-dismiss="#searchForm"><i class="la la-search"></i></button>
-        </form>
+    
+    
+    <script>
+        function showMain(id) {
+            var elems = document.getElementsByClassName('displaySub'+id);
+            var element = document.getElementById('arrow'+id);
+            for (var i=0;i<elems.length;i+=1){
+                elems[i].style.display = 'block';
+            };
+            element.classList.add("fa-angle-down");
+            element.classList.remove("fa-angle-right");
+            $('#button-main'+id).attr('onClick', 'hideMain(' + id + ')');
+        }
+        function hideMain(id) {
+            var elems = document.getElementsByClassName('displaySub'+id);
+            var element = document.getElementById('arrow'+id);
+            for (var i=0;i<elems.length;i+=1){
+                elems[i].style.display = 'none';
+            };
+            element.classList.remove("fa-angle-down");
+            element.classList.add("fa-angle-right");
+            $('#button-main'+id).attr('onClick', 'showMain(' + id + ')');
+        }
+    </script>
+    
+    <!-- Searchform Popup Start -->
+    <div class="searchform__popup" id="searchForm">
+        <a href="#" class="btn-close"><i class="la la-remove"></i></a>
+        <div class="searchform__body">
+            <p>Start typing and press Enter to search</p>
+            <form class="searchform" wire:submit.prevent="Searching">
+                <input type="text" wire:model.defer="search" name="popup-search" id="popup-search" class="searchform__input" placeholder="Search Entire Store..." style="height: 50px">
+                <button type="submit" class="searchform__submit" data-dismiss="#searchForm"><i class="la la-search"></i></button>
+            </form>
+        </div>
     </div>
-</div>
-<!-- Searchform Popup End -->
+    <!-- Searchform Popup End -->
 </div>
