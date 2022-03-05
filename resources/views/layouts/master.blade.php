@@ -79,7 +79,7 @@
                                                     </a>
                                                 </li>
                                                 <li class="mainmenu__item">
-                                                    <a href="#" class="mainmenu__link">
+                                                    <a href="{{ route('contact-us') }}" class="mainmenu__link">
                                                         <span class="mm-text">Contact Us</span>
                                                     </a>
                                                 </li>

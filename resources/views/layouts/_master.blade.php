@@ -28,6 +28,12 @@
   <link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/nucleo/css/nucleo.css" type="text/css">
   <link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
   <!-- Page plugins -->
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="{{ asset('/') }}assets/css/bootstrap.css">
+
+  <!-- Vendor CSS -->
+  <link rel="stylesheet" href="{{ asset('/') }}assets/css/vendor.css">
+
   @yield('css')
   <!-- Argon CSS -->
   <link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/css/argon.css?v=1.1.0" type="text/css">
@@ -84,6 +90,12 @@
               <a class="nav-link" href="{{ url('category-admin') }}">
                 <i class="ni ni-ungroup text-orange"></i>
                 <span class="nav-link-text">Category</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('sosmed-admin') }}">
+                <i class="la la-whatsapp text-green"></i>
+                <span class="nav-link-text">Social Media</span>
               </a>
             </li>
             <li class="nav-item">

@@ -73,7 +73,7 @@
         <script>
             $(window).on("load", function () {
                 $('#quill-description > .ql-editor').html(`{!! $product->description !!}`);
-                $('.dz-image img').attr('width', 125)
+                $('.dz-image img').attr('width', 125);
                 $('.dz-image img').attr('height', 125);
                 // $('.dz-remove').addClass('mt-3 btn btn-danger btn-sm')
                 // $('#jenis_stok').trigger('change')

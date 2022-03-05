@@ -20,6 +20,7 @@ Route::get('/', 'ProductController@home');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/product-catalog', 'ProductController@index');
 Route::get('/product-detail/{id}', 'ProductController@detail');
+Route::get('contact-us', 'ContactUsContoroller@index')->name('contact-us');
 
 Route::get('/product-admin', 'ProductAdminController@index');
 Route::get('/product-admin/create', 'ProductAdminController@create');
@@ -38,3 +39,7 @@ Route::post('/category-admin/store', 'CategoryAdminController@store');
 Route::get('/category-admin/{id}/edit', 'CategoryAdminController@edit');
 Route::post('/category-admin-update/{id}', 'CategoryAdminController@update');
 Route::get('/category-admin/delete/{id}', 'CategoryAdminController@delete');
+
+Route::get('sosmed-admin', 'ContactUsContoroller@admin')->name('sosmed-admin');
+Route::get('get-sosmed', 'ContactUsContoroller@getSosmed')->name('get-sosmed');
+Route::post('store-sosmed', 'ContactUsContoroller@storeSosmed')->name('store-sosmed');
