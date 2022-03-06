@@ -34,14 +34,14 @@
                                     @endphp
                                     @if ($item->nama == 'Whatsapp' && $item->fungsi == "Complain")
                                     <div class="col-12">
-                                        <a href="" class="social__link">
-                                            <i class="la la-{{$nama}}" ></i><span style="font-size: 18px"> {{"(+".$content1.")".$content2}}</span>
+                                        <a href="https://wa.me/{{$item->content}}" class="social__link" target="_blank">
+                                            <i class="la la-{{$nama}}" ></i><span style="font-size: 18px"> {{"(+".$content1.")".$content2." (".$item->username.")"}}</span>
                                         </a>
                                     </div>
                                     @elseif ($item->nama != 'Whatsapp')
                                     <div class="col-12">
-                                        <a href="" class="social__link">
-                                            <i class="la la-{{$nama}}"></i><span style="font-size: 18px">  {{$item->content}}</span>
+                                        <a href="{{$item->content}}" class="social__link" target="_blank">
+                                            <i class="la la-{{$nama}}"></i><span style="font-size: 18px">  {{$item->username}}</span>
                                         </a>
                                     </div>
                                     @endif

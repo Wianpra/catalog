@@ -102,21 +102,28 @@
                     @endphp
                 </p>
                 <div class="product-action d-flex flex-sm-row align-items-sm-center flex-column align-items-start mb--10">
-                    <button type="button" class="btn btn-size-sm btn-shape-square col-3" id="button1" onclick="fungsiShow()">
+                    <button type="button" class="btn btn-size-sm btn-shape-square col-3" id="button1" onclick="fungsiShow({{$data}})">
                         Order
                     </button>
-                    <button type="button" class="btn btn-size-sm btn-shape-square col-3" id="button2" onclick="fungsiHide()" hidden>
+                    <button type="button" class="btn btn-size-sm btn-shape-square col-3" id="button2" onclick="fungsiHide({{$data}})" hidden>
                         X
                     </button>
-                    <button class="btn btn-size-sm btn-shape-square col-3" id="wa" onclick="wa('{{ $product->name }}')" hidden>
-                        <img src="{{ asset('/') }}assets/img/wa.png" alt="" srcset="" width="22">
-                    </button>
-                    <button class="btn btn-size-sm btn-shape-square col-3" id="line" onclick="line()" hidden>
-                        <img src="{{ asset('/') }}assets/img/line.png" alt="" srcset="" width="22">
-                    </button>
-                    <button class="btn btn-size-sm btn-shape-square col-3" id="ex" onclick="inaexport()" hidden>
-                        <img src="{{ asset('/') }}assets/img/ex.png" alt="" srcset="" width="22">
-                    </button>
+                    @foreach ($data as $item)
+                    @php
+                    $nama = strtolower($item->nama);
+                    $content1 = Str::substr($item->content, 0, 2);
+                    $content2 = Str::substr($item->content, 2);
+                    @endphp
+                    @if ($item->nama == 'Whatsapp' && $item->fungsi == "Coconut Product")
+                    <a href="https://wa.me/{{$item->content}}" class="btn btn-size-sm btn-shape-square col-3" id="{{$item->nama}}" target="_blank" hidden>
+                        <i class="la la-{{$nama}}" ></i>
+                    </a>
+                    @elseif ($item->nama != 'Whatsapp')
+                    <a href="{{$item->content}}" class="btn btn-size-sm btn-shape-square col-3" id="{{$item->nama}}" target="_blank" hidden>
+                        <i class="la la-{{$nama}}"></i>
+                    </a>
+                    @endif
+                    @endforeach
                 </div>
                 <div class="product-footer-meta">
                     <p><span>Category:</span>
@@ -311,17 +318,17 @@
 
 @section('script')
 <script>
-    function fungsiShow() {
-        document.getElementById("wa").hidden = false;
-        document.getElementById("line").hidden = false;
-        document.getElementById("ex").hidden = false;
+    function fungsiShow(data) {
+        data.forEach(function(item) {
+            document.getElementById(item.nama).hidden = false;
+        });
         document.getElementById("button2").hidden = false;
         document.getElementById("button1").hidden = true;
     }
-    function fungsiHide() {
-        document.getElementById("wa").hidden = true;
-        document.getElementById("line").hidden = true;
-        document.getElementById("ex").hidden = true;
+    function fungsiHide(data) {
+        data.forEach(function(item) {
+            document.getElementById(item.nama).hidden = true;
+        });
         document.getElementById("button2").hidden = true;
         document.getElementById("button1").hidden = false;
     }

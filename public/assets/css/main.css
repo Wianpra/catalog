@@ -1130,8 +1130,7 @@ a, button, .item-overlay, .global-overlay, .pagination li .page-number, .scroll-
 10 - Layout - Header
 *****************************/
 /*-- 10.00 - Header --*/
-.header .logo {
-  display: block; }
+
   .header .logo--transparent {
     height: 0;
     opacity: 0;
@@ -1287,7 +1286,7 @@ a, button, .item-overlay, .global-overlay, .pagination li .page-number, .scroll-
   width: 100%;
   z-index: 999;
   margin: 0;
-  background-color: #ffffff;
+  background-color: #fdedc9;
   -webkit-animation: fadeInDown 0.8s ease-in-out;
   -moz-animation: fadeInDown 0.8s ease-in-out;
   -ms-animation: fadeInDown 0.8s ease-in-out;

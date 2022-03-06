@@ -31,6 +31,7 @@ class ContactUsContoroller extends Controller
         $request->validate([
             'nama' => 'required',
             'content' => 'required', 
+            'user' => 'required',
         ]);
 
         for ($i=0; $i < count($request->nama) ; $i++) { 
@@ -40,11 +41,13 @@ class ContactUsContoroller extends Controller
                         'nama' => $request->nama[$i],
                         'content' => $request->content[$i],
                         'fungsi' => $request->function[$i],
+                        'username' => $request->user[$i],
                     ]);
                 }elseif ($request->nama[$i] != 'Whatsapp') {
                     SocialMedia::findOrFail($request->data[$i])->update([
                         'nama' => $request->nama[$i],
                         'content' => $request->content[$i],
+                        'username' => $request->user[$i],
                     ]);
                 }
             } elseif($request->data[$i] == 'new') {
@@ -52,6 +55,7 @@ class ContactUsContoroller extends Controller
                 $sosmed->nama = $request->nama[$i];
                 $sosmed->content = $request->content[$i];
                 $sosmed->fungsi = $request->function[$i];
+                $sosmed->username = $request->user[$i];
                 $sosmed->save();
             }
         }

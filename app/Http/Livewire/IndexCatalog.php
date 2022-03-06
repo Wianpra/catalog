@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Product;
 use App\Category;
+use App\SocialMedia;
 
 class IndexCatalog extends Component
 {
@@ -22,6 +23,7 @@ class IndexCatalog extends Component
         return view('livewire.index-catalog', [
             'product' => $this->search === null ? Product::orderBy('seen', 'desc')->paginate(4) : Product::orderBy('seen', 'desc')->where('name', 'like', '%' . $this->search . '%')->paginate(4),
             'category' => Category::take(7)->get(),
+            'data' => SocialMedia::all(),
         ]);
     }
 }

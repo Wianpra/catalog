@@ -44,7 +44,7 @@
         <!-- Header Start -->
         <header class="header">
             <div class="header__inner fixed-header">
-                <div class="header__main">
+                <div class="header__main bg-color" data-bg-color="#fdedc9">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-12">
@@ -57,7 +57,7 @@
                                         </div>
                                     </div>
                                     <div class="header__main-center">
-                                        <nav class="main-navigation text-center d-none d-lg-block">
+                                        <nav class="main-navigation text-centerk">
                                             <ul class="mainmenu">
                                                 <li class="mainmenu__item">
                                                     <a href="{{ url('/') }}" class="mainmenu__link">

@@ -17,7 +17,8 @@ class CreateSocialMediaTable extends Migration
             $table->id();
             $table->string('nama');
             $table->string('content');
-            $table->string('fungsi');
+            $table->string('fungsi')->nullable();
+            $table->string('username');
             $table->timestamps();
             $table->softDeletes();
         });

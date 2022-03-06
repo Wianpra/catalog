@@ -37,7 +37,7 @@
                     <form action="{{ route('store-sosmed') }}" method="POST">
                         @csrf
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
                                         <h3>Data Social Media Whatsapp</h3>
@@ -47,7 +47,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
                                         <h3>Data Others Social Media</h3>
@@ -108,11 +108,11 @@
                         $('#formWhatsapp').append(`
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-4">
                                     <label for="">Number</label>
                                     <input type="text" class="form-control" name="content[]" value="`+ item.content +`">
                                 </div>
-                                <div class="col-6">
+                                <div class="col-4">
                                     <label for="">Function</label>
                                     <select name="function[]" id="`+item.id+`" class="form-control">
                                         <option value="">-- Choose Function --</option>
@@ -120,6 +120,10 @@
                                         <option value="Wood Product & Marine Product">Wood Product & Marine Product</option>
                                         <option value="Coconut Product">Coconut Product</option>
                                     </select>
+                                </div>
+                                <div class="col-4">
+                                    <label for="">Username</label>
+                                    <input type="text" class="form-control" name="user[]" value="`+ item.username +`">
                                 </div>
                             </div>
                             <input type="hidden" class="form-control" name="nama[]" value="`+ item.nama +`">
@@ -130,16 +134,20 @@
                             $('#formSosmed').append(`
                             <div class="form-group">
                                 <div class="row">
-                                    <div class="col-6">
+                                    <div class="col-4">
                                         <label for="">Social Media Name</label>
                                         <input type="text" class="form-control" name="nama[]" value="`+ item.nama +`">
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-4">
                                         <label for="">URL/Number</label>
                                         <input type="text" class="form-control" name="content[]" value="`+ item.content +`">
                                     </div>
+                                    <div class="col-4">
+                                        <label for="">Username</label>
+                                        <input type="text" class="form-control" name="user[]" value="`+ item.username +`">
+                                    </div>
                                 </div>
-                                <input type="hidenn" class="form-control" name="function[]" value="">
+                                <input type="hidden" class="form-control" name="function[]" value="">
                                 <input type="hidden" class="form-control" name="data[]" value="`+ item.id +`">
                             </div>`)
                         }
@@ -154,16 +162,20 @@
         $('#formSosmed').append(`
         <div class="form-group">
             <div class="row">
-                <div class="col-6">
+                <div class="col-4">
                     <label for="">Social Media Name</label>
                     <input type="text" class="form-control" name="nama[]">
                 </div>
-                <div class="col-6">
+                <div class="col-4">
                     <label for="">URL/Number</label>
                     <input type="text" class="form-control" name="content[]">
                 </div>
+                <div class="col-4">
+                    <label for="">Username</label>
+                    <input type="text" class="form-control" name="user[]">
+                </div>
             </div>
-            <input type="hidenn" class="form-control" name="function[]" value="">
+            <input type="hidden" class="form-control" name="function[]" value="">
             <input type="hidden" class="form-control" name="data[]" value="new">
         </div>`)
         $('#buttonSosmed').html('')
@@ -174,11 +186,11 @@
         $('#formWhatsapp').append(`
         <div class="form-group">
             <div class="row">
-                <div class="col-6">
+                <div class="col-4">
                     <label for="">Number</label>
                     <input type="text" class="form-control" name="content[]">
                 </div>
-                <div class="col-6">
+                <div class="col-4">
                     <label for="">Function</label>
                     <select name="function[]" class="form-control">
                         <option value="">-- Choose Function --</option>
@@ -186,6 +198,10 @@
                         <option value="Wood Product & Marine Product">Wood Product & Marine Product</option>
                         <option value="Coconut Product">Coconut Product</option>
                     </select>
+                </div>
+                <div class="col-4">
+                    <label for="">Username</label>
+                    <input type="text" class="form-control" name="user[]">
                 </div>
             </div>
             <input type="hidden" class="form-control" name="nama[]" value="Whatsapp">

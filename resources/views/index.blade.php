@@ -5,47 +5,29 @@
 <main class="main-content-wrapper">
     <!-- Slider area Start -->
     <section class="homepage-slider mb--75 mb-md--55">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="element-carousel slick-right-bottom"
-                    data-slick-options='{
-                        "slidesToShow": 1, 
-                        "arrows": true,
-                        "prevArrow": {"buttonClass": "slick-btn slick-prev", "iconClass": "la la-arrow-left" },
-                        "nextArrow": {"buttonClass": "slick-btn slick-next", "iconClass": "la la-arrow-right" }
-                    }' 
-                    data-slick-responsive='[{"breakpoint": 768, "settings": {"arrows": false}}]'>
-                    @foreach ($new as $value)
-                    @php
-                    $img = unserialize($value->img);
-                    @endphp
-                    <div class="item">
-                        <div class="single-slide d-flex align-items-center bg-color" data-bg-color="#E2C28E">
-                            <div class="row align-items-center g-0 w-100">
-                                <div class="col-xl-7 col-md-6 mb-sm--50">
-                                    <figure data-animation="fadeInUp" data-duration=".3s" data-delay=".3s" class="plr--15">
-                                        <img src="{{ asset('images/'.$img[0]) }}" alt="Slider O1 image" class="mx-auto" width="661px" height="390px">
-                                    </figure>
-                                </div>
-                                <div class="col-md-6 col-lg-5 offset-lg-1 offset-xl-0">
-                                    <div class="slider-content">
-                                        <div class="slider-content__text mb--40 mb-md--30">
-                                            <p class="mb--15" data-animation="fadeInUp" data-duration=".3s" data-delay=".3s">#New Treand</p>
-                                            <p class="mb--20" data-animation="fadeInUp" data-duration=".3s" data-delay=".3s">Enlight your world. Make yourself more bright.</p>
-                                            <h1 class="heading__primary lh-pt7" data-animation="fadeInUp" data-duration=".3s" data-delay=".3s">{{$value->name}}</h1>
-                                        </div>
-                                        <div class="slider-content__btn">
-                                            <a href="{{ url('/product-detail') }}/{{ $value->id }}" class="btn btn-outline btn-brw-2" data-animation="fadeInUp" data-duration=".3s" data-delay=".6s">Shop Now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="element-carousel slick-right-bottom"
+                data-slick-options='{
+                    "slidesToShow": 1, 
+                    "arrows": true,
+                    "prevArrow": {"buttonClass": "slick-btn slick-prev", "iconClass": "la la-arrow-left" },
+                    "nextArrow": {"buttonClass": "slick-btn slick-next", "iconClass": "la la-arrow-right" }
+                }' 
+                data-slick-responsive='[{"breakpoint": 768, "settings": {"arrows": false}}]'>
+                @foreach ($new as $value)
+                @php
+                $img = unserialize($value->img);
+                @endphp
+                <div class="item">
+                    <div class="single-slide align-items-center bg-color" data-bg-color="#fdedc9">
+                        <figure data-animation="fadeInUp" data-duration=".3s" data-delay=".3s" class="plr--15">
+                            <img src="https://c0.wallpaperflare.com/preview/565/228/846/japanese-japan-restaurant-culture.jpg" alt="Slider O1 image" class="mx-auto" width="100%">
+                        </figure>
                     </div>
-                    
-                    @endforeach
                 </div>
+                
+                @endforeach
             </div>
         </div>
     </div>
@@ -84,15 +66,26 @@
                                 </figure>
                                 <a href="{{ url('/product-detail') }}/{{ $value->id }}" class="product-overlay"></a>
                                 <div class="product-action">
-                                    <a data-bs-toggle="modal" data-bs-target="#productModal" class="action-btn">
-                                        <i class="la la-eye"></i>
-                                    </a>
-                                    <a href="wishlist.html" class="action-btn">
-                                        <i class="la la-heart-o"></i>
-                                    </a>
-                                    <a href="wishlist.html" class="action-btn">
-                                        <i class="la la-repeat"></i>
-                                    </a>
+                                    @foreach ($data as $item)
+                                    @php
+                                    $nama = strtolower($item->nama);
+                                    $content1 = Str::substr($item->content, 0, 2);
+                                    $content2 = Str::substr($item->content, 2);
+                                    @endphp
+                                    @if ($item->nama == 'Whatsapp' && $item->fungsi == "Coconut Product")
+                                    <div class="col-12">
+                                        <a href="https://wa.me/{{$item->content}}" class="action-btn" target="_blank">
+                                            <i class="la la-{{$nama}}" ></i>
+                                        </a>
+                                    </div>
+                                    @elseif ($item->nama != 'Whatsapp')
+                                    <div class="col-12">
+                                        <a href="{{$item->content}}" class="action-btn" target="_blank">
+                                            <i class="la la-{{$nama}}"></i>
+                                        </a>
+                                    </div>
+                                    @endif
+                                    @endforeach
                                 </div>
                             </div>
                             <div class="product-info plr--20">
@@ -190,79 +183,48 @@
 </section>
 <!-- Blog Area End -->
 
-<section class="product-tab-area mb--30 mb-md--10">
+<section class="blog-area mb--70 mb-md--50">
     <div class="container">
+        <div class="col-12 text-center mb-5">
+            <h2>Founder Of Orcana Universal</h2>
+        </div>
         <div class="row mb--28 mb-md--18 mb-sm--33">
-            <div class="col-md-3 text-md-start text-center">
-                <h2>About Us</h2>
-            </div>
             <div class="row">
                 <div class="col-12">
                     <div class="row">
                         <div class="col-lg-3 col-sm-6 mb--45">
-                            <div class="ft-product HTfadeInUp">
-                                <div class="product-inner">
-                                    <div class="product-image">
-                                        <figure class="product-image--holder">
-                                            <img src="assets/img/products/prod-04-270x300.jpg" alt="Product">
-                                        </figure>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-category">
-                                            <a href="product-details.html">Name</a>
-                                        </div>
-                                        
-                                    </div>
+                            <img src="https://www.kindpng.com/picc/m/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png" class="rounded-circle mb-5" alt="Product" width="270px" height="270px">
+                            <div class="product-info">
+                                <div class="product-category text-center">
+                                    <a href="product-details.html"><h1><strong>Name</strong></h1></a>
+                                    <h2>Position</h2>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-sm-6 mb--45">
-                            <div class="ft-product HTfadeInUp">
-                                <div class="product-inner">
-                                    <div class="product-image">
-                                        <figure class="product-image--holder">
-                                            <img src="assets/img/products/prod-05-270x300.jpg" alt="Product">
-                                        </figure>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-category">
-                                            <a href="product-details.html">Name</a>
-                                        </div>
-                                    </div>
+                            <img src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png" class="rounded-circle mb-5" alt="Product" width="270px" height="270px">
+                            <div class="product-info">
+                                <div class="product-category text-center">
+                                    <a href="product-details.html"><h1><strong>Name</strong></h1></a>
+                                    <h2>Position</h2>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-sm-6 mb--45">
-                            <div class="ft-product HTfadeInUp">
-                                <div class="product-inner">
-                                    <div class="product-image">
-                                        <figure class="product-image--holder">
-                                            <img src="assets/img/products/prod-06-270x300.jpg" alt="Product">
-                                        </figure>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-category">
-                                            <a href="product-details.html">Name</a>
-                                        </div>
-                                        
-                                    </div>
+                            <img src="https://www.kindpng.com/picc/m/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png" class="rounded-circle mb-5" alt="Product" width="270px" height="270px">
+                            <div class="product-info">
+                                <div class="product-category text-center">
+                                    <a href="product-details.html"><h1><strong>Name</strong></h1></a>
+                                    <h2>Position</h2>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-sm-6 mb--45">
-                            <div class="ft-product HTfadeInUp">
-                                <div class="product-inner">
-                                    <div class="product-image">
-                                        <figure class="product-image--holder">
-                                            <img src="assets/img/products/prod-09-270x300.png" alt="Product">
-                                        </figure>
-                                    </div>
-                                    <div class="product-info">
-                                        <div class="product-category">
-                                            <a href="product-details.html">Name</a>
-                                        </div>
-                                        
-                                    </div>
+                            <img src="https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png" class="rounded-circle mb-5" alt="Product" width="270px" height="270px">
+                            <div class="product-info">
+                                <div class="product-category text-center">
+                                    <a href="product-details.html"><h1><strong>Name</strong></h1></a>
+                                    <h2>Position</h2>
                                 </div>
                             </div>
                         </div>
