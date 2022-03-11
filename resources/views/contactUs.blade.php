@@ -14,7 +14,7 @@
                             <hr class="delimeter">
                         </div>
                         <div class="contact-info mb--20">
-                            <p><i class="fa fa-map-marker"></i>221b Baker St, Marylebone <br>London NW1 6XE, UK</p>
+                            <p><i class="fa fa-map-marker"></i>Wonosari, Jember, East Java, Indonesia 68164</p>
                             <p><i class="fa fa-phone"></i> +1-202-242-8157</p>
                             <p><i class="fa fa-fax"></i> +1-202-501-1829</p>
                             <p><i class="fa fa-clock-o"></i> Mon – Fri : 9:00 – 18:00</p>

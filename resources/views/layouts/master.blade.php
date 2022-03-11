@@ -154,10 +154,10 @@
                                     <h3 class="widget-title mb--35 mb-sm--20">Company</h3>
                                     <div class="footer-widget">
                                         <ul class="footer-menu">
-                                            <li><a href="index.html">About Us</a></li>
+                                            <li><a href="{{ url('about-us') }}">About Us</a></li>
                                             <li><a href="blog.html">Blogs</a></li>
                                             <li><a href="#">Careers</a></li>
-                                            <li><a href="contact-us.html">Contact</a></li>
+                                            <li><a href="{{ url('contact-us') }}">Contact</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -190,13 +190,12 @@
                             </div>
                             <div class="col-lg-2 col-md-3 col-sm-4">
                                 <div class="footer-widget">
-                                    <h3 class="widget-title mb--35 mb-sm--20">Social Network</h3>
+                                    <h3 class="widget-title mb--35 mb-sm--20">Social Media</h3>
                                     <div class="footer-widget">
                                         <ul class="footer-menu">
-                                            <li><a href="#">Facebook</a></li>
-                                            <li><a href="#">Twitter</a></li>
-                                            <li><a href="#">Linkedin</a></li>
-                                            <li><a href="#">Google +</a></li>
+                                            <li><a href="https://wa.me/6282234676734" target="_blank">WhatsApp</a></li>
+                                            <li><a href="https://instagram.com/orcana.universal?utm_medium=copy_link"  target="_blank">Instagram</a></li>
+                                            <li><a href="https://www.facebook.com/profile.php?id=100077552217335" target="_blank">Facebook</a></li>
                                         </ul>
                                     </div>
                                 </div>
