@@ -131,7 +131,7 @@
         </div>
     </div>
     <!-- Searchform Popup Start -->
-    <div class="searchform__popup" id="searchForm">
+    {{-- <div class="searchform__popup" id="searchForm">
         <a href="#" class="btn-close"><i class="la la-remove"></i></a>
         <div class="searchform__body">
             <p>Start typing and press Enter to search</p>
@@ -140,6 +140,6 @@
                 <button type="submit" class="searchform__submit" data-dismiss="#searchForm"><i class="la la-search"></i></button>
             </form>
         </div>
-    </div>
+    </div> --}}
     <!-- Searchform Popup End -->
 </div>

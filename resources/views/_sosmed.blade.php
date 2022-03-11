@@ -1,6 +1,6 @@
 @extends('layouts._master')
 @extends('layouts._header')
-@section('headerName', 'Sosial Media')
+@section('headerName', 'Social Media')
 @section('nav', 'Data Social Media')
 @section('headerURL', 'sosmed-admin')
 

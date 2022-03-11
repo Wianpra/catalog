@@ -65,8 +65,8 @@
                                                     </a>
                                                 </li>
                                                 <li class="mainmenu__item">
-                                                    <a href="{{ url('product-catalog') }}" class="mainmenu__link">
-                                                        <span class="mm-text">Catalog</span>
+                                                    <a href="{{ url('/about-us') }}" class="mainmenu__link">
+                                                        <span class="mm-text">About Us</span>
                                                     </a>
                                                 </li>
                                                 <li class="mainmenu__item">
@@ -75,8 +75,8 @@
                                                     </a>
                                                 </li>
                                                 <li class="mainmenu__item">
-                                                    <a href="#" class="mainmenu__link">
-                                                        <span class="mm-text">About Us</span>
+                                                    <a href="{{ url('product-catalog') }}" class="mainmenu__link">
+                                                        <span class="mm-text">Catalog</span>
                                                     </a>
                                                 </li>
                                                 <li class="mainmenu__item">
@@ -84,41 +84,19 @@
                                                         <span class="mm-text">Contact Us</span>
                                                     </a>
                                                 </li>
-                                                <li class="mainmenu__item">
-                                                    @if (!Auth::check())
-                                                    <a href="{{ route('login') }}" class="mainmenu__link">
-                                                        <span class="mm-text">Login</span>
-                                                    </a>
-                                                    @else
-                                                    
-                                                    <li class="mainmenu__item menu-item-has-children">
-                                                        <a href="#" class="mainmenu__link">
-                                                            <span class="mm-text">{{ Auth::user()->name }}</span>
-                                                        </a>
-                                                        <ul class="sub-menu">
-                                                            <li>
-                                                                <a href="{{ url('product-admin') }}">
-                                                                    <span class="mm-text">Dashboard</span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="{{ route('logout') }}"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                                                    <span class="mm-text">Logout</span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                                        {{ csrf_field() }}
-                                                    </form>
-                                                    @endif
-                                                    
-                                                </li>
                                             </ul>
                                         </nav>
                                     </div>
                                     <div class="header__main-right">
-                                        <div class="header-toolbar-wrap">
+                                        @yield('search')
+                                        <form wire:submit.prevent="Searching">
+                                            <div class="input-group mb-3">
+                                                <input style="border:none" type="text" class="form-control" wire:model.defer="search" name="search" id="search" placeholder="search..." aria-label="search..." aria-describedby="basic-addon2">
+                                                
+                                                <button type="submit" wire:click="Searching" style="background-color:white; border:none" class="input-group-text" id="basic-addon2"><i class="la la-search"></i></button>
+                                            </div>
+                                        </form>
+                                        {{-- <div class="header-toolbar-wrap">
                                             <div class="header-toolbar">
                                                 <div class="header-toolbar__item header-toolbar--search-btn">
                                                     <a href="#searchForm" class="header-toolbar__btn toolbar-btn">
@@ -138,7 +116,7 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>
@@ -229,9 +207,30 @@
                 <div class="footer-bottom">
                     <div class="container-fluid">
                         <div class="row border-top ptb--20">
-                            <div class="col-12 text-center">
-                                <p class="copyright-text">&copy; Lunarian</p>
+                            <div class="row">
+                                <div class="col-3"></div>
+                                <p class="copyright-text col-6 text-center">&copy; Lunarian</p>
+                                @if (!Auth::check())
+                                <a href="{{ route('login') }}" class="col-3" style="text-align: right">
+                                    Login
+                                </a>
+                                @else
+                                <div class="col-3"  style="text-align: right">
+                                    <div class="row">
+                                        <a href="{{ url('product-admin') }}" class="col-8">
+                                            Dashboard
+                                        </a>
+                                        <a href="{{ route('logout') }}" class="col-3" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            Logout
+                                        </a>
+                                    </div>
+                                </div>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+                                @endif
                             </div>
+                            
                         </div>
                     </div>
                 </div>

@@ -340,21 +340,21 @@
             })
         })
         
-
+        
         function updateDescription(id) {
-                var productDescription = $('#quill-description > .ql-editor').html();
-                $.ajax({
-                    type: 'POST',
-                    url: '{{ url('/save-description/update') }}' + '/' + id,
-                    data: {description: productDescription},
-                    headers: {
-                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                    },
-                    success: function(data){
-                        location.replace("{{ url('/product-admin')}}")
-                    }
-                });
-            }
+            var productDescription = $('#quill-description > .ql-editor').html();
+            $.ajax({
+                type: 'POST',
+                url: '{{ url('/save-description/update') }}' + '/' + id,
+                data: {description: productDescription},
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                },
+                success: function(data){
+                    location.replace("{{ url('/product-admin')}}")
+                }
+            });
+        }
     </script>
     {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script> --}}
     @endsection

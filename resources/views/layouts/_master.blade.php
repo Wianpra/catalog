@@ -70,7 +70,7 @@
                 <span class="nav-link-text">Dashboard</span>
               </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
               <a class="nav-link" href="#navbar-products" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-products">
                 <i class="ni ni-archive-2 text-green"></i>
                 <span class="nav-link-text">Products</span>
@@ -85,6 +85,12 @@
                   </li>
                 </ul>
               </div>
+            </li> --}}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('product-admin') }}">
+                <i class="ni ni-archive-2 text-green"></i>
+                <span class="nav-link-text">Products</span>
+              </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ url('category-admin') }}">
@@ -96,6 +102,12 @@
               <a class="nav-link" href="{{ route('sosmed-admin') }}">
                 <i class="la la-whatsapp text-green"></i>
                 <span class="nav-link-text">Social Media</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/about-admin') }}">
+                <i class="ni ni ni-compass-04 text-info"></i>
+                <span class="nav-link-text">About Us</span>
               </a>
             </li>
             <li class="nav-item">
