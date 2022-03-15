@@ -187,11 +187,8 @@
                                 <div class="footer-widget">
                                     <h3 class="widget-title mb--35 mb-sm--20">Product</h3>
                                     <div class="footer-widget">
-                                        <ul class="footer-menu">
-                                            <li><a href="#">Pricing</a></li>
-                                            <li><a href="#">Features</a></li>
-                                            <li><a href="#">Customers</a></li>
-                                            <li><a href="#">Demos</a></li>
+                                        <ul class="footer-menu" id="foot-product">
+                                            
                                         </ul>
                                     </div>
                                 </div>
@@ -201,10 +198,7 @@
                                     <h3 class="widget-title mb--35 mb-sm--20">Helps</h3>
                                     <div class="footer-widget">
                                         <ul class="footer-menu">
-                                            <li><a href="#">Introduction</a></li>
-                                            <li><a href="#">Feedback</a></li>
-                                            <li><a href="#">Referals</a></li>
-                                            <li><a href="#">Network Status</a></li>
+                                            <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -232,7 +226,7 @@
                                 <p class="copyright-text col-6 text-center">&copy; Lunarian</p>
                                 @if (!Auth::check())
                                 <a href="{{ route('login') }}" class="col-3" style="text-align: right">
-                                    Login
+                                    Admin
                                 </a>
                                 @else
                                 <div class="col-3"  style="text-align: right">
@@ -333,16 +327,17 @@
                         data[0].forEach(function (item) {
                             $('#sub-menu').append(`
                                 <li class="menu-item-has-children">
-                                    <a href="${item.id}"><span class="mm-text">${item.main_category}</span></a>
+                                    <a href="{{url('/product-category/${item.id}')}}"><span class="mm-text">${item.main_category}</span></a>
                                     <ul class="sub-menu" id="${item.id}">
                                         `+data[1].map(function (value) {
                                             if (item.id == value.main_category) {
-                                                return "<li><a href="+value.id+">"+value.category+"</a></li>"
+                                                return "<li><a href='{{url('/product-subcategory/')}}/"+value.id+"'>"+value.category+"</a></li>"
                                             }
                                         }).join("")+`
                                     </ul>
                                 </li>
                             `);
+                            $('#foot-product').append(`<li><a href="{{url('/product-category/${item.id}')}}">${item.main_category}</a></li>`)
                         })
                     },
                     error: function(error){

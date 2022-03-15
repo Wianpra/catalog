@@ -29,7 +29,21 @@ class ProductController extends Controller
 
     public function index()
     {
-        return view('product');
+        $id = null;
+        $id_sub = null;
+        return view('product', compact('id', 'id_sub'));
+    }
+
+    public function category($id)
+    {
+        $id_sub = null;
+        return view('product', compact('id', 'id_sub'));
+    }
+
+    public function subCategory($id_sub)
+    {
+        $id = null;
+        return view('product', compact('id', 'id_sub'));
     }
 
     public function detail($id)

@@ -15,7 +15,18 @@ class ProductCatalog extends Component
     public $mainCategoryId;
     public $orderBy;
     public $search;
+    public $id_mainCategory;
+    public $id_subCategory;
     
+    public function mount($id_mainCategory, $id_subCategory)
+    {
+        if ($id_mainCategory != null) {
+            $this->mainCategoryId = $id_mainCategory;
+        }elseif ($id_subCategory != null) {
+            $this->categoryId = $id_subCategory;
+        }
+    }
+
     public function filterCategory($id)
     {
         $this->categoryId = $id;
