@@ -64,20 +64,41 @@
                                                         <span class="mm-text">Home</span>
                                                     </a>
                                                 </li>
-                                                <li class="mainmenu__item">
-                                                    <a href="{{ url('/about-us') }}" class="mainmenu__link">
+                                                
+                                                <li class="mainmenu__item menu-item-has-children">
+                                                    <a href="#" class="mainmenu__link">
                                                         <span class="mm-text">About Us</span>
                                                     </a>
+                                                    <ul class="sub-menu">
+                                                        <li>
+                                                            <a href="{{ url('/about-us') }}">
+                                                                <span class="mm-text">Vision, Mission, & History</span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">
+                                                                <span class="mm-text">Management</span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">
+                                                                <span class="mm-text">Core Value</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
                                                 </li>
                                                 <li class="mainmenu__item">
                                                     <a href="#" class="mainmenu__link">
                                                         <span class="mm-text">Knowledges</span>
                                                     </a>
                                                 </li>
-                                                <li class="mainmenu__item">
+                                                <li class="mainmenu__item menu-item-has-children">
                                                     <a href="{{ url('product-catalog') }}" class="mainmenu__link">
                                                         <span class="mm-text">Catalog</span>
                                                     </a>
+                                                    <ul class="sub-menu" id="sub-menu">
+                                                        
+                                                    </ul>
                                                 </li>
                                                 <li class="mainmenu__item">
                                                     <a href="{{ route('contact-us') }}" class="mainmenu__link">
@@ -303,6 +324,33 @@
         
         <!-- Main JS -->
         <script src="{{ asset('/') }}assets/js/main.js"></script>
+        <script>
+            $(document).ready(function(){
+                $.ajax({
+                    url: `/getData-mainCategory`,
+                    method: "GET",
+                    success: function(data){
+                        data[0].forEach(function (item) {
+                            $('#sub-menu').append(`
+                                <li class="menu-item-has-children">
+                                    <a href="${item.id}"><span class="mm-text">${item.main_category}</span></a>
+                                    <ul class="sub-menu" id="${item.id}">
+                                        `+data[1].map(function (value) {
+                                            if (item.id == value.main_category) {
+                                                return "<li><a href="+value.id+">"+value.category+"</a></li>"
+                                            }
+                                        }).join("")+`
+                                    </ul>
+                                </li>
+                            `);
+                        })
+                    },
+                    error: function(error){
+                        console.log(error)
+                    },
+                })
+            });
+        </script>
         @livewireScripts
         @yield('script')
     </body>

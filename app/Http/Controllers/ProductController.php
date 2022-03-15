@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Product;
 use App\Category;
 use App\SocialMedia;
+use App\mainCategories;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -16,6 +17,14 @@ class ProductController extends Controller
         $new = Product::orderBy('created_at', 'asc')->take(3)->get();
         $data = SocialMedia::all();
         return view('index', compact('top', 'data', 'new'));
+    }
+
+    public function getMain()
+    {
+        $data1 = mainCategories::all();
+        $data2 = Category::all();
+        $data = [$data1, $data2];
+        return response()->json($data);
     }
 
     public function index()

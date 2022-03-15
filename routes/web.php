@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', 'ProductController@home');
+Route::get('/getData-mainCategory', 'ProductController@getMain');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/product-catalog', 'ProductController@index');
 Route::get('/product-detail/{id}', 'ProductController@detail');
