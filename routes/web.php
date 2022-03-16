@@ -17,12 +17,15 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', 'ProductController@home');
+Route::get('/getData-mainCategory', 'ProductController@getMain');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/product-catalog', 'ProductController@index');
 Route::get('/product-detail/{id}', 'ProductController@detail');
 Route::get('contact-us', 'ContactUsContoroller@index')->name('contact-us');
 Route::get('print-history', 'AboutUsController@pdf');
 Route::get('about-us', 'AboutUsHomeController@index');
+Route::get('/product-category/{id}', 'ProductController@category');
+Route::get('/product-subcategory/{id}', 'ProductController@subcategory');
 
 Route::group(['middleware' => 'auth'], function (){
     Route::get('/product-admin', 'ProductAdminController@index');

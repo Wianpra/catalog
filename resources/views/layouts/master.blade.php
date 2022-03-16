@@ -64,20 +64,41 @@
                                                         <span class="mm-text">Home</span>
                                                     </a>
                                                 </li>
-                                                <li class="mainmenu__item">
-                                                    <a href="{{ url('/about-us') }}" class="mainmenu__link">
+                                                
+                                                <li class="mainmenu__item menu-item-has-children">
+                                                    <a href="#" class="mainmenu__link">
                                                         <span class="mm-text">About Us</span>
                                                     </a>
+                                                    <ul class="sub-menu">
+                                                        <li>
+                                                            <a href="{{ url('/about-us') }}">
+                                                                <span class="mm-text">Vision, Mission, & History</span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">
+                                                                <span class="mm-text">Management</span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">
+                                                                <span class="mm-text">Core Value</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
                                                 </li>
                                                 <li class="mainmenu__item">
                                                     <a href="#" class="mainmenu__link">
                                                         <span class="mm-text">Knowledges</span>
                                                     </a>
                                                 </li>
-                                                <li class="mainmenu__item">
+                                                <li class="mainmenu__item menu-item-has-children">
                                                     <a href="{{ url('product-catalog') }}" class="mainmenu__link">
                                                         <span class="mm-text">Catalog</span>
                                                     </a>
+                                                    <ul class="sub-menu" id="sub-menu">
+                                                        
+                                                    </ul>
                                                 </li>
                                                 <li class="mainmenu__item">
                                                     <a href="{{ route('contact-us') }}" class="mainmenu__link">
@@ -166,11 +187,8 @@
                                 <div class="footer-widget">
                                     <h3 class="widget-title mb--35 mb-sm--20">Product</h3>
                                     <div class="footer-widget">
-                                        <ul class="footer-menu">
-                                            <li><a href="#">Pricing</a></li>
-                                            <li><a href="#">Features</a></li>
-                                            <li><a href="#">Customers</a></li>
-                                            <li><a href="#">Demos</a></li>
+                                        <ul class="footer-menu" id="foot-product">
+                                            
                                         </ul>
                                     </div>
                                 </div>
@@ -180,10 +198,7 @@
                                     <h3 class="widget-title mb--35 mb-sm--20">Helps</h3>
                                     <div class="footer-widget">
                                         <ul class="footer-menu">
-                                            <li><a href="#">Introduction</a></li>
-                                            <li><a href="#">Feedback</a></li>
-                                            <li><a href="#">Referals</a></li>
-                                            <li><a href="#">Network Status</a></li>
+                                            <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -211,7 +226,7 @@
                                 <p class="copyright-text col-6 text-center">&copy; Lunarian</p>
                                 @if (!Auth::check())
                                 <a href="{{ route('login') }}" class="col-3" style="text-align: right">
-                                    Login
+                                    Admin
                                 </a>
                                 @else
                                 <div class="col-3"  style="text-align: right">
@@ -303,6 +318,34 @@
         
         <!-- Main JS -->
         <script src="{{ asset('/') }}assets/js/main.js"></script>
+        <script>
+            $(document).ready(function(){
+                $.ajax({
+                    url: `/getData-mainCategory`,
+                    method: "GET",
+                    success: function(data){
+                        data[0].forEach(function (item) {
+                            $('#sub-menu').append(`
+                                <li class="menu-item-has-children">
+                                    <a href="{{url('/product-category/${item.id}')}}"><span class="mm-text">${item.main_category}</span></a>
+                                    <ul class="sub-menu" id="${item.id}">
+                                        `+data[1].map(function (value) {
+                                            if (item.id == value.main_category) {
+                                                return "<li><a href='{{url('/product-subcategory/')}}/"+value.id+"'>"+value.category+"</a></li>"
+                                            }
+                                        }).join("")+`
+                                    </ul>
+                                </li>
+                            `);
+                            $('#foot-product').append(`<li><a href="{{url('/product-category/${item.id}')}}">${item.main_category}</a></li>`)
+                        })
+                    },
+                    error: function(error){
+                        console.log(error)
+                    },
+                })
+            });
+        </script>
         @livewireScripts
         @yield('script')
     </body>

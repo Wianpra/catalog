@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Product;
 use App\Category;
 use App\SocialMedia;
+use App\mainCategories;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -18,9 +19,31 @@ class ProductController extends Controller
         return view('index', compact('top', 'data', 'new'));
     }
 
+    public function getMain()
+    {
+        $data1 = mainCategories::all();
+        $data2 = Category::all();
+        $data = [$data1, $data2];
+        return response()->json($data);
+    }
+
     public function index()
     {
-        return view('product');
+        $id = null;
+        $id_sub = null;
+        return view('product', compact('id', 'id_sub'));
+    }
+
+    public function category($id)
+    {
+        $id_sub = null;
+        return view('product', compact('id', 'id_sub'));
+    }
+
+    public function subCategory($id_sub)
+    {
+        $id = null;
+        return view('product', compact('id', 'id_sub'));
     }
 
     public function detail($id)
