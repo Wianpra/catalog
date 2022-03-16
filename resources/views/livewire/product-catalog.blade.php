@@ -36,7 +36,7 @@
                                 @foreach ($product as $item)
                                 <div class="col-xl-4 col-sm-6 mb--50">
                                     <a href="{{ url('/product-detail') }}/{{ $item->id }}">
-                                        <div class="ft-product">
+                                        <div class="ft-product HTfadeInUp">
                                             <div class="product-inner">
                                                 <div class="product-image">
                                                     <figure class="product-image--holder">
@@ -49,6 +49,29 @@
                                                         <img src="{{ asset('images/'.$img[0]) }}"  style=" height: 300px !important; " alt="Product" class="img-thumbnail">
                                                         @endif
                                                     </figure>
+                                                    <a href="{{ url('/product-detail') }}/{{ $item->id }}" class="product-overlay"></a>
+                                                    <div class="product-action">
+                                                        @foreach ($data as $item)
+                                                        @php
+                                                        $nama = strtolower($item->nama);
+                                                        $content1 = Str::substr($item->content, 0, 2);
+                                                        $content2 = Str::substr($item->content, 2);
+                                                        @endphp
+                                                        @if ($item->nama == 'Whatsapp' && $item->fungsi == "Coconut Product")
+                                                        <div class="col-12">
+                                                            <a href="https://wa.me/{{$item->content}}" class="action-btn" target="_blank">
+                                                                <i class="la la-{{$nama}}" ></i>
+                                                            </a>
+                                                        </div>
+                                                        @elseif ($item->nama != 'Whatsapp')
+                                                        <div class="col-12">
+                                                            <a href="{{$item->content}}" class="action-btn" target="_blank">
+                                                                <i class="la la-{{$nama}}"></i>
+                                                            </a>
+                                                        </div>
+                                                        @endif
+                                                        @endforeach
+                                                    </div>
                                                 </div>
                                                 <div class="product-info">
                                                     <div class="product-category">

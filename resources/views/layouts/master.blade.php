@@ -57,7 +57,7 @@
                                         </div>
                                     </div>
                                     <div class="header__main-center">
-                                        <nav class="main-navigation text-centerk">
+                                        <nav class="main-navigation text-center d-none d-lg-block">
                                             <ul class="mainmenu">
                                                 <li class="mainmenu__item">
                                                     <a href="{{ url('/') }}" class="mainmenu__link">

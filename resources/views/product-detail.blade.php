@@ -102,10 +102,10 @@
                     @endphp
                 </p>
                 <div class="product-action d-flex flex-sm-row align-items-sm-center flex-column align-items-start mb--10">
-                    <button type="button" class="btn btn-size-sm btn-shape-square col-3" id="button1" onclick="fungsiShow({{$data}})">
+                    <button type="button" class="btn btn-size-sm btn-shape-square col-3" id="button1" onclick="fungsiShow({{$data}})" style="color: black">
                         Order
                     </button>
-                    <button type="button" class="btn btn-size-sm btn-shape-square col-3" id="button2" onclick="fungsiHide({{$data}})" hidden>
+                    <button type="button" class="btn btn-size-sm btn-shape-square col-3" id="button2" onclick="fungsiHide({{$data}})" style="color: black" hidden>
                         X
                     </button>
                     @foreach ($data as $item)
@@ -116,11 +116,11 @@
                     @endphp
                     @if ($item->nama == 'Whatsapp' && $item->fungsi == "Coconut Product")
                     <a href="https://wa.me/{{$item->content}}" class="btn btn-size-sm btn-shape-square col-3" id="{{$item->nama}}" target="_blank" hidden>
-                        <i class="la la-{{$nama}}" ></i>
+                        <i class="la la-{{$nama}} la-lg" style="color: black"></i>
                     </a>
                     @elseif ($item->nama != 'Whatsapp')
                     <a href="{{$item->content}}" class="btn btn-size-sm btn-shape-square col-3" id="{{$item->nama}}" target="_blank" hidden>
-                        <i class="la la-{{$nama}}"></i>
+                        <i class="la la-{{$nama}} la-lg" style="color: black"></i>
                     </a>
                     @endif
                     @endforeach
