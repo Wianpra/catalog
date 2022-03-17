@@ -66,7 +66,7 @@
                                                 </li>
                                                 
                                                 <li class="mainmenu__item menu-item-has-children">
-                                                    <a href="#" class="mainmenu__link">
+                                                    <a href="{{ url('/about-us') }}" class="mainmenu__link">
                                                         <span class="mm-text">About Us</span>
                                                     </a>
                                                     <ul class="sub-menu">
@@ -109,12 +109,12 @@
                                         </nav>
                                     </div>
                                     <div class="header__main-right">
-                                        @yield('search')
-                                        <form wire:submit.prevent="Searching">
+                                        {{-- @yield('search') --}}
+                                        <form action="{{url('search')}}" method="POST">
+                                            @csrf
                                             <div class="input-group mb-3">
-                                                <input style="border:none" type="text" class="form-control" wire:model.defer="search" name="search" id="search" placeholder="search..." aria-label="search..." aria-describedby="basic-addon2">
-                                                
-                                                <button type="submit" wire:click="Searching" style="background-color:white; border:none" class="input-group-text" id="basic-addon2"><i class="la la-search"></i></button>
+                                                <input style="border:none" type="text" class="form-control" name="search" placeholder="search...">
+                                                <button type="submit" style="background-color:white; border:none" class="input-group-text"><i class="la la-search"></i></button>
                                             </div>
                                         </form>
                                         {{-- <div class="header-toolbar-wrap">
@@ -231,7 +231,7 @@
                                 @else
                                 <div class="col-3"  style="text-align: right">
                                     <div class="row">
-                                        <a href="{{ url('product-admin') }}" class="col-8">
+                                        <a href="{{ url('dashboard') }}" class="col-8">
                                             Dashboard
                                         </a>
                                         <a href="{{ route('logout') }}" class="col-3" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -283,7 +283,7 @@
                                 <a href="#">{{ Auth::user()->name }}</a>
                                 <ul class="sub-menu">
                                     <li>
-                                        <a href="{{ url('product-admin') }}">Dashboard</a>
+                                        <a href="{{ url('dashboard') }}">Dashboard</a>
                                     </li>
                                     <li>
                                         <a href="{{ route('logout') }}"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
@@ -326,16 +326,16 @@
                     success: function(data){
                         data[0].forEach(function (item) {
                             $('#sub-menu').append(`
-                                <li class="menu-item-has-children">
-                                    <a href="{{url('/product-category/${item.id}')}}"><span class="mm-text">${item.main_category}</span></a>
-                                    <ul class="sub-menu" id="${item.id}">
-                                        `+data[1].map(function (value) {
-                                            if (item.id == value.main_category) {
-                                                return "<li><a href='{{url('/product-subcategory/')}}/"+value.id+"'>"+value.category+"</a></li>"
-                                            }
-                                        }).join("")+`
-                                    </ul>
-                                </li>
+                            <li class="menu-item-has-children">
+                                <a href="{{url('/product-category/${item.id}')}}"><span class="mm-text">${item.main_category}</span></a>
+                                <ul class="sub-menu" id="${item.id}">
+                                    `+data[1].map(function (value) {
+                                        if (item.id == value.main_category) {
+                                            return "<li><a href='{{url('/product-subcategory/')}}/"+value.id+"'>"+value.category+"</a></li>"
+                                        }
+                                    }).join("")+`
+                                </ul>
+                            </li>
                             `);
                             $('#foot-product').append(`<li><a href="{{url('/product-category/${item.id}')}}">${item.main_category}</a></li>`)
                         })

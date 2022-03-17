@@ -118,6 +118,9 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
+                                    <div class="col-8 pl-0">
+                                        <h3>Data History for PDF</h3>
+                                    </div>
                                     <div id="display-quill-history" style="display:none">
                                         <div data-toggle="quill" id="quill-history"></div>
                                         <div class="text-center">

@@ -31,19 +31,30 @@ class ProductController extends Controller
     {
         $id = null;
         $id_sub = null;
-        return view('product', compact('id', 'id_sub'));
+        $search_a = null;
+        return view('product', compact('id', 'id_sub', 'search_a'));
     }
 
     public function category($id)
     {
         $id_sub = null;
-        return view('product', compact('id', 'id_sub'));
+        $search_a = null;
+        return view('product', compact('id', 'id_sub', 'search_a'));
     }
 
     public function subCategory($id_sub)
     {
         $id = null;
-        return view('product', compact('id', 'id_sub'));
+        $search_a = null;
+        return view('product', compact('id', 'id_sub', 'search_a'));
+    }
+
+    public function search(Request $request)
+    {
+        $id = null;
+        $id_sub = null;
+        $search_a = $request->search;
+        return view('product', compact('id', 'id_sub', 'search_a'));
     }
 
     public function detail($id)

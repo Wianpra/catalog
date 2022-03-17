@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
+use App\mainCategories;
+use App\Category;
+use App\Product;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -13,7 +16,16 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('_dashboard');
+        $main = mainCategories::all();
+        $main2 = mainCategories::all();
+        $sub = Category::all();
+        $sum = Product::sum('seen');
+        $seen = number_format($sum, 0, '.', '');
+        $count_c = mainCategories::count();
+        $count_p = Product::count();
+        $product = Product::all();
+        $category = Category::all();
+        return view('_dashboard', compact('main','main2', 'sub', 'seen', 'count_p', 'count_c', 'product', 'category'));
     }
     
     public function profile()
