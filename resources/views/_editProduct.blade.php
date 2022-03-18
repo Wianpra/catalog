@@ -7,7 +7,7 @@
 @section('css')
 <link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/select2/dist/css/select2.min.css">
 <link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/quill/dist/quill.core.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.css">
 @endsection
 
 @section('content')
@@ -19,7 +19,6 @@
         </div>
         <!-- Card body -->
         <div class="card-body">
-                
                 <!-- Input groups with icon -->
                 <div class="row" id="updateProduct">
                     <div class="col-md-6">
@@ -50,14 +49,11 @@
                     $img = json_encode(unserialize($product->img));
                     @endphp
                     <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="form-control-label">File Upload</label>
-                            <div class="needsclick dropzone" id="dropzone">
-                            </div>
-                        </div>
-                        <div class="text-center">
-                            <button type="button" onclick="updateProduk({{$product->id}})" class="btn btn-primary my-2">Add Product</button>
-                        </div>
+                        <label class="form-control-label">File Upload</label>
+                        <div class="dropzone" id="dropzone"></div>
+                    </div>
+                    <div class="text-center">
+                        <button type="button" onclick="updateProduk({{$product->id}})" class="btn btn-primary my-2">Add Product</button>
                     </div>
                 </div>
         </div>
@@ -75,7 +71,7 @@
                 $('#quill-description > .ql-editor').html(`{!! $product->description !!}`);
                 $('.dz-image img').attr('width', 125);
                 $('.dz-image img').attr('height', 125);
-                // $('.dz-remove').addClass('mt-3 btn btn-danger btn-sm')
+                $('.dz-remove').addClass('mt-3 btn btn-danger btn-sm')
                 // $('#jenis_stok').trigger('change')
                 // $('#jenis_diskon').trigger('change')
                 // console.log(gambar);
@@ -85,7 +81,7 @@
             {
                 url: '{{route('store-gambar')}}',
                 maxFiles: 5, 
-                maxFilesize: 10,
+                maxFilesize: 25,
                 renameFile: function (file) {
                     var dt = new Date();
                     var time = dt.getTime();
@@ -106,16 +102,21 @@
 
                         $('#updateProduct').append('<input type="hidden" name="imgs[]" value="' + key + '">')
                     })
+
+                    $('.dz-details').remove()
+                    $('.dz-remove').addClass('mt-3 btn btn-danger btn-sm')
                 },
                 headers: {
                     'X-CSRF-TOKEN': "{{ csrf_token() }}"
                 },
-                acceptedFiles: ".jpeg,.jpg,.png,.gif",
+                acceptedFiles: ".jpeg,.jpg,.png",
                 addRemoveLinks: true,
                 timeout: 60000,
                 success: function (file, response) {
                     console.log(response)
                     $('#updateProduct').append('<input type="hidden" name="imgs[]" value="' + response.name + '">')
+                    $('.dz-details').remove()
+                    $('.dz-remove').addClass('mt-3 btn btn-danger btn-sm')
                 },
                 error: function (file, response) {
                     return false;

@@ -88,7 +88,7 @@
                                                     </ul>
                                                 </li>
                                                 <li class="mainmenu__item">
-                                                    <a href="#" class="mainmenu__link">
+                                                    <a href="{{route('product-knowledge')}}" class="mainmenu__link">
                                                         <span class="mm-text">Knowledges</span>
                                                     </a>
                                                 </li>

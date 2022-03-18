@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Category;
+use App\ProductKnowledge;
 use App\Product;
 use Illuminate\Support\Str;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -104,9 +105,11 @@ class ProductAdminController extends Controller
         $product = Product::findOrFail($id);
 
         $img = unserialize($product->img);
-        for ($i=0; $i < count($img); $i++) { 
-            $fileName = public_path('images/').$img[$i];
-            unlink($fileName);
+        if ($img != null) {
+            for ($i=0; $i < count($img); $i++) { 
+                $fileName = public_path('images/').$img[$i];
+                unlink($fileName);
+            }
         }
         
         DB::transaction(function () use ($product) {
@@ -150,6 +153,13 @@ class ProductAdminController extends Controller
         return view('show-img', compact('img'));
     }
 
+    public function getProduct()
+    {
+        $data = Product::all();
+        return response()->json($data);
+
+    }
+
     public function getImage($id)
     {
         $img = unserialize(Product::findOrFail($id)->img);
@@ -182,5 +192,85 @@ class ProductAdminController extends Controller
             $product->update($params);
         });
         return response()->json();
+    }
+
+    public function productKnowledge()
+    {
+        $data = ProductKnowledge::all();
+        return view('_productKnowledge', compact('data'));
+    }
+
+    public function storeKnowledge(Request $request)
+    {
+        $request->validate([
+            'id_product' => 'required',
+            'title' => 'required|max:255',
+            'description' => 'required|max:65535',
+        ]);
+        $img = serialize($request->imgs);
+
+        $knowledge = new ProductKnowledge;
+        $knowledge->id_product = $request->id_product;
+        $knowledge->title = $request->title;
+        $knowledge->article = $request->description;
+        $knowledge->img = $img;
+        $knowledge->save();
+        return response()->json();
+    }
+
+    public function editKnowledge($id)
+    {
+        $data = ProductKnowledge::findOrFail($id);
+        return view('_editProductKnowledge', compact('data'));
+    }
+
+    public function updateKnowledge(Request $request, $id)
+    {
+        $img = serialize($request->imgs);
+        $data = [
+            'id_product' => $request->input('id_product'),
+            'title' => $request->input('title'),
+            'article' => $request->input('description'),
+            'img' => $img,
+        ];
+        
+        DB::transaction(function () use($data, $id) {
+            ProductKnowledge::findOrFail($id)->update($data);
+        });
+
+        return response()->json();
+    }
+
+    public function deleteKnowledge($id)
+    {
+        $knowledge = ProductKnowledge::findOrFail($id);
+
+        $img = unserialize($knowledge->img);
+        if ($img != null) {
+            for ($i=0; $i < count($img); $i++) { 
+                $fileName = public_path('images/').$img[$i];
+                unlink($fileName);
+            }
+        }
+        
+        DB::transaction(function () use ($knowledge) {
+            $knowledge->delete();
+        });
+        
+        Alert::success('Deleted', 'Data deleted successfully');
+        return redirect('productKnowledge');
+    }
+
+    public function getKnowledge($id)
+    {
+        $data = ProductKnowledge::findOrFail($id);
+        return response()->json($data);
+    }
+
+    public function getKnowledgeImg($id)
+    {
+        $data = ProductKnowledge::findOrFail($id);
+        $data = unserialize($data->img);
+        return response()->json($data);
     }
 }

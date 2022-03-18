@@ -26,6 +26,9 @@ Route::get('print-history', 'AboutUsController@pdf');
 Route::get('about-us', 'AboutUsHomeController@index');
 Route::get('/product-category/{id}', 'ProductController@category');
 Route::get('/product-subcategory/{id}', 'ProductController@subcategory');
+Route::get('getProduct/{id}', 'ProductController@getProduct');
+Route::get('product-knowledge', 'ProductController@productKnowledge')->name('product-knowledge');
+Route::get('detail-knowledge/{id}', 'ProductController@detailKnowledge');
 
 Route::group(['middleware' => 'auth'], function (){
     Route::get('/product-admin', 'ProductAdminController@index');
@@ -40,6 +43,7 @@ Route::group(['middleware' => 'auth'], function (){
     Route::post('store-gambar', 'ProductAdminController@storeGambar')->name('store-gambar');
     Route::post('remove-gambar', 'ProductAdminController@removeGambar')->name('remove-gambar');
     Route::post('delete-gambar/{id}', 'ProductAdminController@deleteGambar')->name('delete-gambar');
+    Route::get('get-product', 'ProductAdminController@getProduct');
     Route::get('get-image/{id}', 'ProductAdminController@getImage');
     
     Route::get('/category-admin', 'CategoryAdminController@index');
@@ -77,4 +81,26 @@ Route::group(['middleware' => 'auth'], function (){
     Route::post('postData-visi/{id}', 'AboutUsController@postDataVisi');
     Route::post('postData-misi/{id}', 'AboutUsController@postDataMisi');
     Route::post('postData-history/{id}', 'AboutUsController@postDataHistory');
+
+    Route::get('productKnowledge', 'ProductAdminController@productKnowledge');
+    Route::post('store-knowledge', 'ProductAdminController@storeKnowledge');
+    Route::post('update-knowledge/{id}', 'ProductAdminController@updateKnowledge');
+    Route::get('delete-knowledge/{id}', 'ProductAdminController@deleteKnowledge'); 
+    Route::get('get-knowledge/{id}', 'ProductAdminController@getKnowledge');
+    Route::get('get-knowledge-img/{id}', 'ProductAdminController@getKnowledgeImg');
+    Route::get('edit-knowledge/{id}', 'ProductAdminController@editKnowledge');
+
+    Route::get('founder-index', 'FounderControler@index');
+    Route::post('store-founder', 'FounderControler@store');
+    Route::get('edit-founder/{id}', 'FounderControler@edit');
+    Route::post('update-founder/{id}' , 'FounderControler@update');
+    Route::get('delete-founder/{id}', 'FounderControler@destroy');
+    Route::get('get-founder-img/{id}', 'FounderControler@getFounderImg');
+
+    Route::get('index-banner', 'BannerController@index');
+    Route::post('store-banner', 'BannerController@store');
+    Route::get('edit-banner/{id}', 'BannerController@edit');
+    Route::post('update-banner/{id}' , 'BannerController@update');
+    Route::get('delete-banner/{id}', 'BannerController@destroy');
+    Route::get('get-banner-img/{id}', 'BannerController@getBannerImg');
 });

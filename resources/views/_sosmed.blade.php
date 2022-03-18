@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css">
 <link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-select-bs4/css/select.bootstrap4.min.css">
+<link rel="stylesheet" href="{{asset('assets/_admin/assets/vendor/select2/dist/css/select2.min.css')}}">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 @endsection
 
@@ -28,8 +29,8 @@
                             <h3 class="mb-0">Social Media</h3>
                         </div>
                         <div class="col-lg-6 col-5 text-right">
-                            <button type="button" class="btn btn-sm btn-neutral" onclick="addSosmed()">Add Other Social Media</button>
-                            <button type="button" class="btn btn-sm btn-neutral" onclick="addWA()">Add Social Media Whatsapp</button>
+                            <button type="button" class="btn btn-sm btn-primary" onclick="addSosmed()">Add Other Social Media</button>
+                            <button type="button" class="btn btn-sm btn-primary" onclick="addWA()">Add Social Media Whatsapp</button>
                         </div>
                     </div>
                 </div>
@@ -95,15 +96,16 @@
 </div>
 @endsection
 @section('script')
+<script src="{{asset('assets/_admin/assets/vendor/select2/dist/js/select2.min.js')}}"></script>
 <script>
     $('document').ready(function () {
         $.ajax({
             url: "{{ route('get-sosmed') }}",
             success: function (data) {
-                if (data == "") {
+                if (data[0] == "") {
                     console.log(data);
                 }else {
-                    data.forEach(function (item, index) {
+                    data[0].forEach(function (item, index) {
                         if (item.nama == 'Whatsapp') {
                         $('#formWhatsapp').append(`
                         <div class="form-group">
@@ -115,10 +117,11 @@
                                 <div class="col-4">
                                     <label for="">Function</label>
                                     <select name="function[]" id="`+item.id+`" class="form-control">
-                                        <option value="">-- Choose Function --</option>
-                                        <option value="Complain">Complain</option>
-                                        <option value="Wood Product & Marine Product">Wood Product & Marine Product</option>
-                                        <option value="Coconut Product">Coconut Product</option>
+                                        <option value="Complain">Complain</option>`+
+                                        data[1].map(function (value) {
+                                                return '<option value="'+value.main_category+'">'+ value.main_category +'</option>'
+                                        }).join("")
+                                        +`
                                     </select>
                                 </div>
                                 <div class="col-4">
@@ -129,6 +132,9 @@
                             <input type="hidden" class="form-control" name="nama[]" value="`+ item.nama +`">
                             <input type="hidden" class="form-control" name="data[]" value="`+ item.id +`">
                         </div>`)
+                        $("#"+item.id).select2()
+                        $("#"+item.id).val(item.fungsi)
+                        $("#"+item.id).trigger('change')
                         $("#"+item.id+" option[value='"+item.fungsi+"']").prop('selected', true)
                         } else {
                             $('#formSosmed').append(`
@@ -183,32 +189,39 @@
     }
     
     function addWA() {
-        $('#formWhatsapp').append(`
-        <div class="form-group">
-            <div class="row">
-                <div class="col-4">
-                    <label for="">Number</label>
-                    <input type="text" class="form-control" name="content[]">
-                </div>
-                <div class="col-4">
-                    <label for="">Function</label>
-                    <select name="function[]" class="form-control">
-                        <option value="">-- Choose Function --</option>
-                        <option value="Complain">Complain</option>
-                        <option value="Wood Product & Marine Product">Wood Product & Marine Product</option>
-                        <option value="Coconut Product">Coconut Product</option>
-                    </select>
-                </div>
-                <div class="col-4">
-                    <label for="">Username</label>
-                    <input type="text" class="form-control" name="user[]">
-                </div>
-            </div>
-            <input type="hidden" class="form-control" name="nama[]" value="Whatsapp">
-            <input type="hidden" class="form-control" name="data[]" value="new">
-        </div>`)
-        $('#buttonSosmed').html('')
-        $('#buttonSosmed').append(`<button type="submit" class="btn btn-primary">Simpan</button>`)
+        $.ajax({
+            url: "{{ route('get-sosmed') }}",
+            success: function (data) {
+                $('#formWhatsapp').append(`
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="">Number</label>
+                            <input type="text" class="form-control" name="content[]">
+                        </div>
+                        <div class="col-4">
+                            <label for="">Function</label>
+                            <select name="function[]" class="form-control select2" id="fungsi">
+                                <option value="Complain">Complain</option>`+
+                                data[1].map(function (value) {
+                                        return '<option value="'+ value.main_category +'">'+ value.main_category +'</option>'
+                                }).join("")
+                                +`
+                            </select>
+                        </div>
+                        <div class="col-4">
+                            <label for="">Username</label>
+                            <input type="text" class="form-control" name="user[]">
+                        </div>
+                    </div>
+                    <input type="hidden" class="form-control" name="nama[]" value="Whatsapp">
+                    <input type="hidden" class="form-control" name="data[]" value="new">
+                </div>`)
+                $("#fungsi").select2()
+                $('#buttonSosmed').html('')
+                $('#buttonSosmed').append(`<button type="submit" class="btn btn-primary">Simpan</button>`)
+            }
+        })
     }
 </script>
 @endsection

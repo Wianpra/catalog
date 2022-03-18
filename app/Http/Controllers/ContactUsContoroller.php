@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\mainCategories;
 use Illuminate\Http\Request;
 use App\SocialMedia;
 use Laravel\Ui\Presets\React;
@@ -22,12 +23,15 @@ class ContactUsContoroller extends Controller
 
     public function getSosmed()
     {
-        $data = SocialMedia::all();
+        $sosmed = SocialMedia::all();
+        $main_category = mainCategories::all();
+        $data = [$sosmed, $main_category];
         return response()->json($data);
     }
 
     public function storeSosmed(Request $request)
     {
+        dd($request->all());
         $request->validate([
             'nama' => 'required',
             'content' => 'required', 

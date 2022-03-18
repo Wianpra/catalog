@@ -42,6 +42,8 @@
                                                     <figure class="product-image--holder">
                                                         @php
                                                         $img = unserialize($item->img);
+                                                        $idCategory = App\Category::findOrFail($item->category)->main_category;
+                                                        $idMain = App\mainCategories::findOrFail($idCategory)->main_category;
                                                         @endphp
                                                         @if ( $img == null )
                                                         <img src="assets/img/products/prod-04-270x300.jpg" class="img-thumbnail" alt="Products">
@@ -51,18 +53,20 @@
                                                     </figure>
                                                     <a href="{{ url('/product-detail') }}/{{ $item->id }}" class="product-overlay"></a>
                                                     <div class="product-action">
-                                                        @foreach ($data as $item)
+                                                        @foreach ($datas as $item)
                                                         @php
                                                         $nama = strtolower($item->nama);
                                                         $content1 = Str::substr($item->content, 0, 2);
                                                         $content2 = Str::substr($item->content, 2);
                                                         @endphp
-                                                        @if ($item->nama == 'Whatsapp' && $item->fungsi == "Coconut Product")
+                                                        @if ($item->nama == 'Whatsapp')
+                                                        @if ($item->fungsi == $idMain)
                                                         <div class="col-12">
                                                             <a href="https://wa.me/{{$item->content}}" class="action-btn" target="_blank">
                                                                 <i class="la la-{{$nama}}" ></i>
                                                             </a>
                                                         </div>
+                                                        @endif
                                                         @elseif ($item->nama != 'Whatsapp')
                                                         <div class="col-12">
                                                             <a href="{{$item->content}}" class="action-btn" target="_blank">

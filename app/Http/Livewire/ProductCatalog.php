@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Category;
 use App\mainCategories;
 use App\Product;
+use App\SocialMedia;
 use Livewire\WithPagination;
 
 class ProductCatalog extends Component
@@ -70,6 +71,7 @@ class ProductCatalog extends Component
         }
         $category = Category::all();
         $main_category = mainCategories::all();
-        return view('livewire.product-catalog', compact('product', 'category', 'countProduct', 'countProductAll', 'main_category'));
+        $datas = SocialMedia::all();
+        return view('livewire.product-catalog', compact('product', 'category', 'countProduct', 'countProductAll', 'main_category', 'datas'));
     }
 }

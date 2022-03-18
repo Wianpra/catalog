@@ -7,7 +7,7 @@
 @section('css')
 <link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/select2/dist/css/select2.min.css">
 <link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/quill/dist/quill.core.css">
-<link rel="stylesheet" href="{{ asset('/') }}assets/css/dropzone.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.css">
 <link rel="stylesheet" href="{{ asset('/') }}assets/css/basic.min.css">
 @endsection
 
@@ -71,7 +71,7 @@
         <script src="{{ asset('/') }}assets/_admin/assets/vendor/nouislider/distribute/nouislider.min.js"></script>
         <script src="{{ asset('/') }}assets/_admin/assets/vendor/quill/dist/quill.min.js"></script>
         <script src="{{ asset('/') }}assets/_admin/assets/vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
-        <script src="{{ asset('/') }}assets/js/dropzone.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.js"></script>
         <script>
             Dropzone.options.dropzone =
             {
@@ -91,6 +91,8 @@
                 timeout: 60000,
                 success: function (file, response) {
                     $('#createProduct').append('<input type="hidden" name="imgs[]" value="' + response.name + '">')
+                    $('.dz-details').remove()
+                    $('.dz-remove').addClass('mt-3 btn btn-danger btn-sm')
                 },
                 error: function (file, response) {
                     return false;

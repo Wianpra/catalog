@@ -106,10 +106,28 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/about-admin') }}">
-                <i class="ni ni ni-compass-04 text-info"></i>
+                <i class="ni ni-compass-04 text-info"></i>
                 <span class="nav-link-text">About Us</span>
               </a>
             </li>
+            <li>
+              <a class="nav-link" href="{{url('productKnowledge')}}">
+                <i class="ni ni-collection text-blue"></i>
+                <span class="nav-link-text">Product Knowledges</span>
+              </a>
+            </li> 
+            <li>
+              <a class="nav-link" href="{{url('founder-index')}}">
+                <i class="fa fa-user text-info"></i>
+                <span class="nav-link-text">Founder Management</span>
+              </a>
+            </li> 
+            <li>
+              <a class="nav-link" href="{{url('index-banner')}}">
+                <i class="fa fa-image text-black"></i>
+                <span class="nav-link-text">Banner Management</span>
+              </a>
+            </li> 
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/') }}">
                 <i class="ni ni-atom text-danger"></i>

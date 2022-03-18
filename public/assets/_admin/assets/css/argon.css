@@ -3099,15 +3099,15 @@ fieldset:disabled a.btn
 .btn-primary
 {
     color: #fff;
-    border-color: #5e72e4;
-    background-color: #5e72e4;
+    border-color: #ac8c56;
+    background-color: #ac8c56;
     box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
 }
 .btn-primary:hover
 {
     color: #fff;
-    border-color: #5e72e4; 
-    background-color: #5e72e4;
+    border-color: #ac8c56; 
+    background-color: #ac8c56;
 }
 .btn-primary:focus,
 .btn-primary.focus
@@ -8443,7 +8443,7 @@ a.close.disabled
 
 .bg-primary
 {
-    background-color: #5e72e4 !important;
+    background-color: #ac8c56 !important;
 }
 
 a.bg-primary:hover,
@@ -8451,7 +8451,7 @@ a.bg-primary:focus,
 button.bg-primary:hover,
 button.bg-primary:focus
 {
-    background-color: #324cdd !important;
+    background-color: #ac8c56 !important;
 }
 
 .bg-secondary
@@ -29526,10 +29526,10 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
     margin: 0 0 .25rem .25rem;
     padding: 0 .5rem;
 
-    color: #8898aa; 
+    color: #eee; 
     border: none;
     border-radius: .25rem;
-    background-color: #adb5bd;
+    background-color: #ac8c56;
 }
 
 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove
