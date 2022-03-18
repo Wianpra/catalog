@@ -16,15 +16,18 @@ class ProductCatalog extends Component
     public $mainCategoryId;
     public $orderBy;
     public $search;
+    public $search_a;
     public $id_mainCategory;
     public $id_subCategory;
     
-    public function mount($id_mainCategory, $id_subCategory)
+    public function mount($id_mainCategory, $id_subCategory, $search_a)
     {
         if ($id_mainCategory != null) {
             $this->mainCategoryId = $id_mainCategory;
         }elseif ($id_subCategory != null) {
             $this->categoryId = $id_subCategory;
+        }elseif ($search_a != null) {
+            $this->search = $search_a;
         }
     }
 
@@ -61,7 +64,7 @@ class ProductCatalog extends Component
 
         }elseif ( $this->categoryId == null ) {
             $countProductAll = Product::count();
-            $countProduct = Product::count();
+            $countProduct = $this->search === null ? Product::count() : Product::where('name', 'like', '%' . $this->search . '%')->count();
             $product = $this->search === null ? Product::paginate(9) : Product::where('name', 'like', '%' . $this->search . '%')->paginate(9);
 
         } else {

@@ -118,6 +118,9 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
+                                    <div class="col-8 pl-0">
+                                        <h3>Data History for PDF</h3>
+                                    </div>
                                     <div id="display-quill-history" style="display:none">
                                         <div data-toggle="quill" id="quill-history"></div>
                                         <div class="text-center">
@@ -144,33 +147,17 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Footer -->
-        <footer class="footer pt-0">
-            <div class="row align-items-center justify-content-lg-between">
-                <div class="col-lg-6">
-                    <div class="copyright text-center text-lg-left text-muted">
-                        &copy; 2019 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative Tim</a>
+            <!-- Footer -->
+            <footer class="footer pt-0">
+                <div class="row align-items-center justify-content-lg-between">
+                    <div class="col-lg-6">
+                        <div class="copyright text-center text-lg-left text-muted">
+                            &copy; 2022 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Lunarian</a>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                        <li class="nav-item">
-                            <a href="https://www.creative-tim.com" class="nav-link" target="_blank">Creative Tim</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="https://www.creative-tim.com/license" class="nav-link" target="_blank">License</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </footer>
+            </footer>
+        </div>
     </div>
 </div>
 @endsection
