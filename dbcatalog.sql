@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 21 Mar 2022 pada 08.03
+-- Waktu pembuatan: 21 Mar 2022 pada 08.09
 -- Versi server: 10.4.19-MariaDB
 -- Versi PHP: 7.4.23
 
@@ -20,6 +20,51 @@ SET time_zone = "+00:00";
 --
 -- Database: `dbcatalog`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `abouts`
+--
+
+CREATE TABLE `abouts` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `visi` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `misi` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `history` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `abouts`
+--
+
+INSERT INTO `abouts` (`id`, `visi`, `misi`, `history`, `created_at`, `updated_at`) VALUES
+(1, '<p>Become a world-class company that is competitive, reliable, trusted, and has the best product quality in the export sector.&nbsp; a</p>', '<p>Creating economic value for stakeholders, especially customers, shareholders and employees through product services in the export sector.</p>', '<p>Orcana Craft and Furniture is a project from PT. Orcana Universal Group was founded based on awareness of the high potential of natural resources around us, while protecting nature and having a desire to contribute to reducing the amount of plastic use that destroys the earth.</p>', NULL, '2022-03-18 05:45:21');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `banners`
+--
+
+CREATE TABLE `banners` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `img` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `banners`
+--
+
+INSERT INTO `banners` (`id`, `img`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'N;', '2022-03-18 00:20:43', '2022-03-18 00:29:56', '2022-03-18 00:29:56'),
+(2, 'a:1:{i:0;s:62:\"1647592629861_dchkpki-77530ce0-7e57-42a2-9ae2-e0cb8e9c222f.jpg\";}', '2022-03-18 00:32:22', '2022-03-18 00:37:11', NULL),
+(3, 'a:1:{i:0;s:47:\"1647593102920_efedf2ac4ecfc_424600.png_list.png\";}', '2022-03-18 00:45:04', '2022-03-18 00:45:04', NULL);
 
 -- --------------------------------------------------------
 
@@ -63,6 +108,36 @@ CREATE TABLE `failed_jobs` (
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `founders`
+--
+
+CREATE TABLE `founders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `img` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `position` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `founders`
+--
+
+INSERT INTO `founders` (`id`, `img`, `name`, `position`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'a:1:{i:0;s:45:\"1647609061840_10653066_202108080641060739.jpg\";}', 'Revo Wisnu', 'President Director', '2022-03-17 22:34:46', '2022-03-18 05:11:04', NULL),
+(2, 'a:1:{i:0;s:19:\"1647586262538_2.png\";}', 'Leo Ridho', 'Trucking Manager', '2022-03-17 22:51:28', '2022-03-17 22:51:35', '2022-03-17 22:51:35'),
+(3, 'a:1:{i:0;s:19:\"1647586376454_2.png\";}', 'Leo Ridho', 'Trucking Manager', '2022-03-17 22:53:22', '2022-03-17 22:53:33', '2022-03-17 22:53:33'),
+(4, 'a:1:{i:0;s:19:\"1647603540098_2.png\";}', 'Leo Ridho', 'Trucking Manager', '2022-03-18 03:39:27', '2022-03-18 03:39:27', NULL),
+(5, 'a:1:{i:0;s:19:\"1647603577810_3.png\";}', 'Ahmad', 'Production Manager', '2022-03-18 03:39:54', '2022-03-18 03:39:54', NULL),
+(6, 'a:1:{i:0;s:19:\"1647603609700_4.png\";}', 'Dewi', 'Marketing Manager', '2022-03-18 03:40:20', '2022-03-18 03:40:20', NULL),
+(7, 'a:1:{i:0;s:19:\"1647603632953_5.png\";}', 'Putri', 'Marketing Executive', '2022-03-18 03:40:48', '2022-03-18 03:40:48', NULL),
+(8, 'a:1:{i:0;s:19:\"1647603661234_6.png\";}', 'Alfita', 'Financial Manager', '2022-03-18 03:41:11', '2022-03-18 03:41:11', NULL);
 
 -- --------------------------------------------------------
 
@@ -163,6 +238,32 @@ INSERT INTO `products` (`id`, `img`, `name`, `category`, `description`, `seen`, 
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `product_knowledge`
+--
+
+CREATE TABLE `product_knowledge` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `id_product` int(11) DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `article` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `img` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `seen` varchar(225) COLLATE utf8mb4_unicode_ci DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `product_knowledge`
+--
+
+INSERT INTO `product_knowledge` (`id`, `id_product`, `title`, `article`, `img`, `seen`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(2, 18, 'Reasons We Should Use Bamboo Straws', '<p class=\"ql-align-justify\"><span style=\"color: black;\">The main reason why we should use bamboo straws is that it is one of the easiest steps we can take to help solve the problem of plastic waste on our planet.</span></p><p class=\"ql-align-justify\"><span style=\"color: rgb(51, 51, 51);\">1.&nbsp;&nbsp;&nbsp;</span>Reusable and long lasting</p><p class=\"ql-align-justify\">	<span style=\"color: black;\">In order to ensure the longevity of your bamboo straws, after hand washing, make sure to let them fully dry by laying them flat (not vertical) to prevent any water buildup at the bottom of the straw and always store them in a well-ventilated area. Avoid airtight containers or jars as this will cause potential moisture buildup inside the straws.</span></p><p class=\"ql-align-justify\"><span style=\"color: rgb(51, 51, 51);\">2.&nbsp;&nbsp;&nbsp;</span>Cost-Effective</p><p class=\"ql-align-justify\">	<span style=\"color: black;\">Money aside, consider the&nbsp;</span><strong style=\"color: black;\">real environmental cost</strong><span style=\"color: black;\">&nbsp;of using plastic drinking straws. It’s estimated that nearly&nbsp;</span><a href=\"https://www.nytimes.com/2018/07/19/business/plastic-straws-ban-fact-check-nyt.html\" target=\"_blank\" style=\"color: black;\">170-390 million</a><span style=\"color: black;\">&nbsp;disposable plastic straws are used in the United States every day – which comes to&nbsp;</span><a href=\"https://www.nytimes.com/2018/07/19/business/plastic-straws-ban-fact-check-nyt.html\" target=\"_blank\" style=\"color: black;\">63 billion to 142 billion</a><span style=\"color: black;\">&nbsp;straws per year! And that’s just in the USA, this number is even higher when you add in the global population. This massive cost can easily be prevented by switching over to a bamboo straw.</span></p><p class=\"ql-align-justify\"><span style=\"color: rgb(51, 51, 51);\">3.&nbsp;&nbsp;&nbsp;</span>Healthy and Chemical-Free</p><p class=\"ql-align-justify\">	<span style=\"color: black;\">Plastic straws are made from a petroleum-derived chemical, polypropylene. The FDA determines this material is safe for food contact, but research evidence has shown that it can&nbsp;</span><a href=\"https://www.ncbi.nlm.nih.gov/pubmed/18988846\" target=\"_blank\" style=\"color: black;\">leach chemicals into liquids</a><span style=\"color: black;\">. With hot beverages, the plastic can become heated and these chemicals can leak out of your straw and contaminate your drink. Even small amounts of&nbsp;</span><a href=\"https://www.ncbi.nlm.nih.gov/pubmed/18988846\" target=\"_blank\" style=\"color: black;\">highly acidic beverages and UV light</a><span style=\"color: black;\">&nbsp;can break down these harmful compounds and infuse them into your drink. </span></p><p class=\"ql-align-justify\"><span style=\"color: black;\">BPA (bisphenol A) can also be found in some hard plastics and based on animal studies, the FDA has placed concern about the&nbsp;</span><a href=\"https://www.webmd.com/children/bpa#1\" target=\"_blank\" style=\"color: black;\">potential health effects of BPA</a><span style=\"color: black;\">.</span></p><p class=\"ql-align-justify\"><span style=\"color: black;\">The good news is that the bamboo plant has&nbsp;</span><a href=\"https://www.researchgate.net/publication/233402755_The_origin_of_the_antibacterial_property_of_bamboo\" target=\"_blank\" style=\"color: black;\">naturally antimicrobial properties</a><span style=\"color: black;\">&nbsp;meaning they are less likely to harbor bacteria over time and be more resistant to spoiling or rotting over time. Bamboo is also grown chemical-free, not requiring the need for chemical fertilizers or pesticides.</span></p><p class=\"ql-align-justify\">&nbsp;</p><p class=\"ql-align-justify\"><span style=\"color: rgb(51, 51, 51);\">4.&nbsp;&nbsp;&nbsp;</span><span style=\"color: black;\">Stylish and Fun</span></p><p class=\"ql-align-justify\">&nbsp;</p><p class=\"ql-align-justify\"><span style=\"color: black;\">Bamboo is eye-catching and stylish. A quick photo of a bamboo drinking straw in any beverage will be Instagram worthy. Kids love the novelty of a fun looking straw and will be encouraged to finish their healthy juice or smoothie. It also serves as a great opportunity to educate your children or guests about the dangers of plastic waste due to single-use plastic drinking straws.</span></p><p class=\"ql-align-justify\">&nbsp;</p><p class=\"ql-align-justify\"><span style=\"color: rgb(51, 51, 51);\">5.&nbsp;&nbsp;&nbsp;</span><span style=\"color: black;\">Durable</span></p><p class=\"ql-align-justify\">&nbsp;</p><p class=\"ql-align-justify\"><span style=\"color: black;\">Many bamboo drinking straws come finished and treated with polish. This gives the straws no sharp edges or lower risks of breakage. They are child-friendly with smooth edges that won’t cause any irritation when using. Bamboo drinking straws can be used for both hot or cold beverages. Bamboo is also used in buildings and bridges in some parts of the world. As a material, bamboo has a higher specific compressive strength (ability to withstand heavy loads) than wood, brick or concrete, and a specific tensile strength (how hard it is to pull a material apart) that is&nbsp;</span><a href=\"https://engineeringdiscoveries.com/2018/12/02/why-bamboo-is-more-stronger-than-steel-reinforcement/\" target=\"_blank\" style=\"color: black;\">close to steel</a><span style=\"color: black;\">. This makes bamboo one of the strongest&nbsp;</span><a href=\"https://householdwonders.com/most-eco-friendly-materials/\" target=\"_blank\" style=\"color: black;\">eco-friendly materials</a><span style=\"color: black;\">&nbsp;on earth.</span></p><p class=\"ql-align-justify\">&nbsp;</p><p class=\"ql-align-justify\"><span style=\"color: rgb(51, 51, 51);\">6.&nbsp;&nbsp;&nbsp;</span><span style=\"color: black;\">Easy Cleanup</span></p><p class=\"ql-align-justify\">&nbsp;</p><p class=\"ql-align-justify\"><span style=\"color: black;\">When I use my wider bamboo drinking straws for smoothies, I like having a brush to clean out any leftover residue inside of the straw. Regardless of the diameter, I highly recommend choosing a pack that offers a cleaning brush as it will ensure the life of your straws and keep them sanitary, especially when using them with smoothies, fresh juices, or milkshakes. If your bamboo drinking straws are treated and finished with polish, they are safe to wash at high temperatures in the dishwasher. Otherwise, a simple hand washing with lukewarm soapy water will do the trick. You can also shake the straws in a jar full of warm soapy water for cleaning many at once. Your straws should be laid out and air-dried before using again to prevent any moisture from building up inside.</span></p><p class=\"ql-align-justify\">&nbsp;</p><p class=\"ql-align-justify\"><span style=\"color: rgb(51, 51, 51);\">7.&nbsp;&nbsp;&nbsp;</span><span style=\"color: black;\">Portable On-The-Go</span></p><p class=\"ql-align-justify\">&nbsp;</p><p class=\"ql-align-justify\"><span style=\"color: black;\">Super-lightweight (less than 1oz), bamboo drinking straws don’t take up much space. You can simply toss your straw in your bag and take it with you on-the-go. The first set of straws I purchased also came with a small and convenient carrying pouch that fits easily inside my purse or tucks away in the kitchen drawer.</span></p><p class=\"ql-align-justify\"><span style=\"color: black;\">When I stop at my local coffee shop for an iced coffee, I will always opt to use my bamboo drinking straw with my travel coffee cup instead of the single-use plastic straws that are available.</span></p><p class=\"ql-align-justify\">&nbsp;</p><p class=\"ql-align-justify\"><span style=\"color: rgb(51, 51, 51);\">8.&nbsp;&nbsp;&nbsp;</span>An Eco-Friendly and Renewable Resource</p><p class=\"ql-align-justify\">Bamboo is a super plant! Famously known as one of the world’s most&nbsp;<a href=\"https://householdwonders.com/most-eco-friendly-materials/\" target=\"_blank\" style=\"color: windowtext;\">renewable materials</a>, it is the&nbsp;<a href=\"https://householdwonders.com/how-fast-does-bamboo-grow/\" target=\"_blank\" style=\"color: windowtext;\">fastest-growing plant</a>&nbsp;in the world being able to grow up to three feet a day. Bamboo requires no pesticides, and little water- especially compared to other crops such as cotton. When bamboo is harvested, the plant easily regenerates itself. Bamboo does its job for the environment by offering&nbsp;<a href=\"https://www.theguardian.com/environment/2003/mar/20/research.science\" target=\"_blank\" style=\"color: windowtext;\">35% more oxygen</a>&nbsp;than trees and actually helps absorb CO2 from the atmosphere. Bamboo drinking straws are made from 100% all-natural bamboo and carry all of the eco-friendly properties of the plant in its original form.</p><p class=\"ql-align-justify\">&nbsp;</p><p class=\"ql-align-justify\"><span style=\"color: rgb(51, 51, 51);\">9.&nbsp;&nbsp;&nbsp;</span>Eliminates Plastic Waste</p><p class=\"ql-align-justify\"><span style=\"color: black;\">Plastic is polluting our oceans at an alarming rate, with an estimated&nbsp;</span><a href=\"https://phys.org/news/2018-04-science-amount-straws-plastic-pollution.html\" target=\"_blank\" style=\"color: black;\">9 million tons</a><span style=\"color: black;\">&nbsp;in the world’s oceans and coastlines each year. . And that is just the plastic that’s in the ocean, with more than&nbsp;</span><a href=\"https://phys.org/news/2018-04-science-amount-straws-plastic-pollution.html\" target=\"_blank\" style=\"color: black;\">35 million tons</a><span style=\"color: black;\">&nbsp;of plastic waste produced globally. When plastic waste makes it into the ocean seabirds can ingest nearly&nbsp;</span><a href=\"https://phys.org/news/2018-04-science-amount-straws-plastic-pollution.html\" target=\"_blank\" style=\"color: black;\">8 percent</a><span style=\"color: black;\">&nbsp;of their body weight in plastic which can have harmful results. can accidentally ingest them causing a 50 percent mortality rate in seabirds and turtles.</span></p><p class=\"ql-align-justify\"><span style=\"color: black;\">Any straws that are not ingested break down into smaller and smaller pieces known as “</span><a href=\"https://www.nationalgeographic.com/magazine/2018/06/plastic-planet-health-pollution-waste-microplastics/\" target=\"_blank\" style=\"color: black;\">microplastics</a><span style=\"color: black;\">” rather than naturally biodegrading, which clog up waterways and threaten ecosystems of marine life.</span></p><p class=\"ql-align-justify\"><span style=\"color: black;\">According to&nbsp;</span><a href=\"http://www3.weforum.org/docs/WEF_The_New_Plastics_Economy.pdf\" target=\"_blank\" style=\"color: black;\">a report by the Ellen MacArthur Foundation</a><span style=\"color: black;\">, it’s estimated that by 2050 there will be more plastic waste in the ocean than fish! When thinking about my children’s future, these thoughts are frightening. Bamboo drinking straws are a safe and natural alternative that won’t endanger marine life or pollute the environment. It is a simple step you can take towards solving the problem of plastic waste on our planet.</span></p><p class=\"ql-align-justify\">&nbsp;</p><p class=\"ql-align-justify\"><span style=\"color: rgb(51, 51, 51);\">10. </span>Biodegradable</p><p class=\"ql-align-justify\"><span style=\"color: black;\">Bamboo is a&nbsp;</span><a href=\"https://householdwonders.com/most-eco-friendly-materials/\" target=\"_blank\" style=\"color: black;\">biodegradable material</a><span style=\"color: black;\">, which comes from the earth and goes back to the earth, decomposing within 4-6 months. On the contrary, according to 4Ocean, plastic drinking straws can up to&nbsp;</span><a href=\"https://medium.com/green-zine/plastic-straws-a-single-use-that-lasts-a-lifetime-191f3682c262\" target=\"_blank\" style=\"color: black;\">200 years</a><span style=\"color: black;\">&nbsp;to fully decompose!</span></p><p class=\"ql-align-justify\"><span style=\"color: black;\">When your straws show natural signs of wear and tear such as splitting or fraying at the ends, it’s time to dispose of them. Rather than throwing them in the garbage, you can simply compost them in the soil allowing them to decompose and return to the earth. I suggest breaking them in half or using plant trimmers if you want to spread out smaller pieces in your compost garden.</span></p><p class=\"ql-align-justify\">&nbsp;</p><p class=\"ql-align-justify\">Source : https://householdwonders.com/reasons-to-use-bamboo-drinking-straws/&nbsp;</p><p><br></p>', 'N;', '3', '2022-03-16 03:18:53', '2022-03-18 01:50:38', NULL),
+(3, 18, 'Plastic Straws Trash', '<p class=\"ql-align-justify\">Currently, Indonesia is entering the waste emergency phase. Data from the Ministry of Environment and Forestry (KLHK) estimates that the waste heap in Indonesia in 2020 is 67.8 million tons. Ironically, most plastic waste in Indonesia is straw. Of course, this problem cannot be taken lightly.</p><p class=\"ql-align-justify\"><br></p><p class=\"ql-align-justify\">Director of Environmental Partnerships (Directorate General of PSKL) of the Ministry of Environment and Forestry, Jo Kumala Dewi, said that during the pandemic the problem of waste was increasing. This is because people\'s consumption while at home has changed, especially the use of packaged products including plastic straws. For this reason, cooperation with participation and partnership from all parties is needed to be able to synergize and move together to overcome these environmental problems.</p><p class=\"ql-align-justify\"><br></p><p class=\"ql-align-justify\">\"One of them is with the producers in finding solutions to the straws problem which cannot be taken lightly,\" he said on the sidelines of the webinar \"National Waste Care Day (HPSN): Frisian Flag Indonesia\", Friday (19/2/2021).</p><p class=\"ql-align-justify\"><br></p><p class=\"ql-align-justify\">Corporate Affairs Director of PT Frisian Flag Indonesia (FFI) Andrew F Saputro said as a solution to the problem of plastic waste, especially straws, his party began to provide environmentally friendly paper straws for low-fat ready-to-drink liquid milk products. To provide safety and convenience for consumers, the paper straws that we produce have also been food tested, food grade certified and free of gluten allergens. The selected materials use environmentally friendly materials, can be recycled (recycleable) and have received FSC (Forest Stewardship Council) certification.</p><p class=\"ql-align-justify\">“The presence of the goodness of paper straws in our low-fat ready-to-drink liquid milk products is the company\'s first step in presenting products and packaging that are more environmentally friendly. In the future, we will continue this initiative and we will strengthen it, in order to realize our commitment to 100% recyclable packaging by 2025,\" said Andrew.</p><p class=\"ql-align-justify\"><br></p><p class=\"ql-align-justify\">In addition, Andrew added, his party also invites the younger generation to jointly start small changes, which can have a positive impact on the environment, through the #JagaGiziJagaBumi campaign. In involving the younger generation to initiate good change is not without reason. The latest data from the Central Statistics Agency shows that currently Indonesia is dominated by Generation Z and millennials. Gen Z dominates up to 27.94% and millennials as much as 25.87%. This means that the younger generation has a crucial role in forming new habits and having an impact on the sustainability of the earth in the future.</p><p class=\"ql-align-justify\"><br></p><p class=\"ql-align-justify\">\"Through this initiative, we invite the public to continue to maintain daily nutrition, while preserving the earth, starting with the use of paper straws - so that they can contribute to saving up to 10 tons of plastic waste per year,\" he concluded.</p><p class=\"ql-align-justify\">&nbsp;</p><p class=\"ql-align-justify\">Source : <a href=\"https://www.beritasatu.com/nasional/735965/sampah-sedotan-plastik-tak-bisa-dianggap-sepele\" target=\"_blank\">https://www.beritasatu.com/nasional/735965/sampah-sedotan-plastik-tak-bisa-dianggap-sepele</a> </p><p><br></p>', 'a:1:{i:0;s:44:\"1647439878482_logo-golkar-www_ratio-16x9.jpg\";}', '8', '2022-03-16 06:11:36', '2022-03-18 05:14:45', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `social_media`
 --
 
@@ -218,6 +319,18 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 --
 
 --
+-- Indeks untuk tabel `abouts`
+--
+ALTER TABLE `abouts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `banners`
+--
+ALTER TABLE `banners`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `categories`
 --
 ALTER TABLE `categories`
@@ -227,6 +340,12 @@ ALTER TABLE `categories`
 -- Indeks untuk tabel `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `founders`
+--
+ALTER TABLE `founders`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -254,6 +373,12 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeks untuk tabel `product_knowledge`
+--
+ALTER TABLE `product_knowledge`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `social_media`
 --
 ALTER TABLE `social_media`
@@ -271,6 +396,18 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT untuk tabel `abouts`
+--
+ALTER TABLE `abouts`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT untuk tabel `banners`
+--
+ALTER TABLE `banners`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT untuk tabel `categories`
 --
 ALTER TABLE `categories`
@@ -281,6 +418,12 @@ ALTER TABLE `categories`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `founders`
+--
+ALTER TABLE `founders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `main_categories`
@@ -299,6 +442,12 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `products`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT untuk tabel `product_knowledge`
+--
+ALTER TABLE `product_knowledge`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `social_media`
