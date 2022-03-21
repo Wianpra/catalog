@@ -81,7 +81,7 @@
                                                             </a>
                                                         </li>
                                                         <li>
-                                                            <a href="#">
+                                                            <a href="{{ url('/core-value') }}">
                                                                 <span class="mm-text">Core Value</span>
                                                             </a>
                                                         </li>

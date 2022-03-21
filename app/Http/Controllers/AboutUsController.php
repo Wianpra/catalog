@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\About;
+use App\Core;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\DB;
 use PDF;
 
@@ -14,7 +16,48 @@ class AboutUsController extends Controller
     {
         $about = About::select('*')->first();
         $count = About::count();
-        return view('_about-us', compact('about', 'count'));
+        $core = Core::all();
+        $count_b = Core::count();
+        return view('_about-us', compact('about', 'count', 'core', 'count_b'));
+    }
+
+    public function getDataCore($id)
+    {
+        $data = Core::findOrFail($id);
+        return response()->json($data);
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|max:65535',
+            'text' => 'required|max:255',
+        ]);
+        $data = [
+            'name' => $request->input('name'),
+            'text' => $request->input('text'),
+        ];
+        DB::transaction(function () use($data) {
+            Core::create($data);
+        });
+        Alert::success('Success', 'Data added successfully');
+        return response()->json();
+    }
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|max:65535',
+            'text' => 'required|max:255',
+        ]);
+        $data = [
+            'name' => $request->input('name'),
+            'text' => $request->input('text'),
+        ];
+        DB::transaction(function () use($data, $id) {
+            Core::findOrFail($id)->update($data);
+        });
+        Alert::success('Success', 'Data update successfully');
+        return response()->json();
     }
     
     public function getDataVisi($id)

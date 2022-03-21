@@ -25,6 +25,7 @@ Route::get('/product-detail/{id}', 'ProductController@detail');
 Route::get('contact-us', 'ContactUsContoroller@index')->name('contact-us');
 Route::get('print-history', 'AboutUsController@pdf');
 Route::get('about-us', 'AboutUsHomeController@index');
+Route::get('core-value', 'AboutUsHomeController@core');
 Route::get('/product-category/{id}', 'ProductController@category');
 Route::get('/product-subcategory/{id}', 'ProductController@subcategory');
 Route::get('getProduct/{id}', 'ProductController@getProduct');
@@ -82,6 +83,9 @@ Route::group(['middleware' => 'auth'], function (){
     Route::post('postData-visi/{id}', 'AboutUsController@postDataVisi');
     Route::post('postData-misi/{id}', 'AboutUsController@postDataMisi');
     Route::post('postData-history/{id}', 'AboutUsController@postDataHistory');
+    Route::post('/save-add-core/store', 'AboutUsController@store');
+    Route::post('/save-edit-core/update/{id}', 'AboutUsController@update');
+    Route::get('/getData-core/{id}', 'AboutUsController@getDataCore');
 
     Route::get('productKnowledge', 'ProductAdminController@productKnowledge');
     Route::post('store-knowledge', 'ProductAdminController@storeKnowledge');

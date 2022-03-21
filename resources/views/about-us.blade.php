@@ -68,58 +68,6 @@
             </div>
         </section>
         <!-- Contact Area End -->
-        
-        <!-- Google Map Area Start -->
-        <div class="google-map-area">
-            <div id="google-map"></div>
-        </div>
-        <!-- Google Map Area End -->
-        
-        <!-- Brand Logo Area Start -->
-        <div class="brand-logo-area bg-color ptb--75" data-bg-color="#e9fefd">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="element-carousel"
-                        data-slick-options='{
-                            "slidesToShow": 5,
-                            "autoplay": true
-                        }'
-                        data-slick-responsive='[
-                        {"breakpoint": 1200, "settings": {"slidesToShow": 4}},
-                        {"breakpoint": 992, "settings": {"slidesToShow": 3}},
-                        {"breakpoint": 768, "settings": {"slidesToShow": 2}},
-                        {"breakpoint": 480, "settings": {"slidesToShow": 1}}
-                        ]'>
-                        <div class="item">
-                            <figure>
-                                <img src="assets/img/brand/brand-01.png" alt="Brand" class="mx-auto">
-                            </figure>
-                        </div>
-                        <div class="item">
-                            <figure>
-                                <img src="assets/img/brand/brand-02.png" alt="Brand" class="mx-auto">
-                            </figure>
-                        </div>
-                        <div class="item">
-                            <figure>
-                                <img src="assets/img/brand/brand-03.png" alt="Brand" class="mx-auto">
-                            </figure>
-                        </div>
-                        <div class="item">
-                            <figure>
-                                <img src="assets/img/brand/brand-04.png" alt="Brand" class="mx-auto">
-                            </figure>
-                        </div>
-                        <div class="item">
-                            <figure>
-                                <img src="assets/img/brand/brand-05.png" alt="Brand" class="mx-auto">
-                            </figure>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
     <!-- Brand Logo Area End -->
 </div>

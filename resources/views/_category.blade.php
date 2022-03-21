@@ -48,6 +48,9 @@
 <link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css">
 <link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-select-bs4/css/select.bootstrap4.min.css">
+<link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/select2/dist/css/select2.min.css">
+<link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/vendor/quill/dist/quill.core.css">
 @endsection
 
 @section('content')
@@ -59,7 +62,7 @@
             <div class="card">
                 <!-- Card header -->
                 <div class="card-header">
-                    <h3 class="mb-0">Data Category</h3>
+                    <h3 class="mb-0">List Category</h3>
                 </div>
                 <div class="table-responsive py-4">
                     <table class="table table-flush" id="datatable-basic">

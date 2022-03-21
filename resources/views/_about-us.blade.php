@@ -144,26 +144,207 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Footer -->
-            <footer class="footer pt-0">
-                <div class="row align-items-center justify-content-lg-between">
-                    <div class="col-lg-6">
-                        <div class="copyright text-center text-lg-left text-muted">
-                            &copy; 2022 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Lunarian</a>
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-5">
+                                            <h3>Data Core Value</h3>
+                                        </div>
+                                        <div class="col-lg-6 col-5 text-right">
+                                            <button type="button" onclick="addCore()" class="btn btn-sm btn-neutral">Add Core Value</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive py-4">
+                                        <table class="table table-flush" id="datatable-basic">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th class="col-1">No</th>
+                                                    <th class="col-3">Name Core</th>
+                                                    <th>Text Core</th>
+                                                    <th class="col-1">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tfoot>
+                                                <tr>
+                                                    <th class="col-1">No</th>
+                                                    <th class="col-3">Name Core</th>
+                                                    <th>Text Core</th>
+                                                    <th class="col-1">Action</th>
+                                                </tr>
+                                            </tfoot>
+                                            <tbody>
+                                                @if ($count_b == "0")
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                @else
+                                                
+                                                @php
+                                                $no = 0;
+                                                @endphp
+                                                @foreach ($core as $items)
+                                                <tr>
+                                                    <td>{{ ++$no }}</td>
+                                                    <td>{{ $items->name }}</td>
+                                                    <td>
+                                                        @php
+                                                        echo $items->text;
+                                                        @endphp
+                                                    </td>
+                                                    <td>
+                                                        <a type="button" class="table-action btn-edit-core table-action-edit" data-id="{{ $items->id }}">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                                @endif
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </footer>
+            </div>
         </div>
     </div>
 </div>
 @endsection
+
+@section('modal')
+
+<div class="modal fade" id="modal-add-core" tabindex="-1" role="dialog" aria-labelledby="modal-add-core" aria-hidden="true">
+    <div class="modal-dialog modal- modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Core</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body modal-add-body p-0">
+                <div class="card bg-secondary border-0 mb-0">
+                    <div class="card-body">
+                        <div class="form-group">
+                            
+                            <label class="form-control-label">Name Core</label>
+                            <input type="text" class="form-control mb-3" id="name-add-core" placeholder="Name Core">
+                            
+                            <label class="form-control-label">Text Core</label>
+                            <div data-toggle="quill" id="quill-add-core" data-quill-placeholder="Text Core"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center modal-footer">
+                <button type="submit" class="btn btn-primary" onclick="saveAddCore()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-edit-core" tabindex="-1" role="dialog" aria-labelledby="modal-edit-core" aria-hidden="true">
+    <div class="modal-dialog modal- modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Core</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body modal-edit-body p-0">
+                <div class="card bg-secondary border-0 mb-0">
+                    <div class="card-body">
+                        <div class="form-group">
+                            
+                            <label class="form-control-label">Name Core</label>
+                            <input type="text" class="form-control mb-3" id="name-edit-core">
+                            
+                            <label class="form-control-label">Text Core</label>
+                            <div  data-toggle="quill" id="quill-edit-core"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary mb-5" id="button-save-edit">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
 @section('script')
 <script src="{{ asset('/') }}assets/_admin/assets/vendor/quill/dist/quill.min.js"></script>
+<script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+<script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
+<script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="{{ asset('/') }}assets/_admin/assets/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 <script>
+    function addCore() {
+        $('#modal-add-core').modal('show')
+    }
+    $('.btn-edit-core').on('click', function(){
+        let id = $(this).data('id')
+        $.ajax({
+            url: '{{ url('/getData-core/') }}' + '/' + id,
+            method: "GET",
+            success: function(data){
+                $('#name-edit-core').val(data.name)
+                $('#quill-edit-core > .ql-editor').html(data.text)
+                $('#modal-edit-core').modal('show')
+                $('#button-save-edit').attr('onClick', 'updateCore(' + id + ')')
+            },
+            error: function(error){
+                console.log(error)
+            },
+        })
+    })
+    function saveAddCore() {
+        var name = $("#name-add-core").val()
+        var text = $('#quill-add-core > .ql-editor').html()
+        
+        $.ajax({
+            type: 'POST',
+            url: '{{ url('/save-add-core/store') }}',
+            data: {name: name, text: text},
+            headers: {
+                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+            },
+            success: function(data){
+                location.replace("{{ url('/about-admin')}}")
+            }
+        });
+    }
+    function updateCore(id) {
+        
+        var name = $("#name-edit-core").val()
+        var text = $('#quill-edit-core > .ql-editor').html()
+        
+        $.ajax({
+            type: 'POST',
+            url: '{{ url('/save-edit-core/update') }}' + '/' + id,
+            data: {name: name, text: text},
+            headers: {
+                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+            },
+            success: function(data){
+                location.replace("{{ url('/about-admin')}}")
+            }
+        });
+    }
     function editVisi(id) {
         document.getElementById('display-quill-visi').style.display = 'block';
         document.getElementById('display-quill-misi').style.display = 'none';
