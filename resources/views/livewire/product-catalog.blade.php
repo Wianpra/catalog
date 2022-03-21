@@ -57,23 +57,23 @@
                                                     </figure>
                                                     <a href="{{ url('/product-detail') }}/{{ $item->id }}" class="product-overlay"></a>
                                                     <div class="product-action">
-                                                        @foreach ($datas as $item)
+                                                        @foreach ($datas as $items)
                                                         @php
-                                                        $nama = strtolower($item->nama);
-                                                        $content1 = Str::substr($item->content, 0, 2);
-                                                        $content2 = Str::substr($item->content, 2);
+                                                        $nama = strtolower($items->nama);
+                                                        $content1 = Str::substr($items->content, 0, 2);
+                                                        $content2 = Str::substr($items->content, 2);
                                                         @endphp
-                                                        @if ($item->nama == 'Whatsapp')
-                                                        @if ($item->fungsi == $idMain)
+                                                        @if ($items->nama == 'Whatsapp')
+                                                        @if ($items->fungsi == $idMain)
                                                         <div class="col-12">
-                                                            <a href="https://wa.me/{{$item->content}}" class="action-btn" target="_blank">
+                                                            <a href="https://wa.me/{{$items->content}}" class="action-btn" target="_blank">
                                                                 <i class="la la-{{$nama}}" ></i>
                                                             </a>
                                                         </div>
                                                         @endif
-                                                        @elseif ($item->nama != 'Whatsapp')
+                                                        @elseif ($items->nama != 'Whatsapp')
                                                         <div class="col-12">
-                                                            <a href="{{$item->content}}" class="action-btn" target="_blank">
+                                                            <a href="{{$items->content}}" class="action-btn" target="_blank">
                                                                 <i class="la la-{{$nama}}"></i>
                                                             </a>
                                                         </div>

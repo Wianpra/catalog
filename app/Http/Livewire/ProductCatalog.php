@@ -75,6 +75,7 @@ class ProductCatalog extends Component
         $category = Category::all();
         $main_category = mainCategories::all();
         $datas = SocialMedia::all();
+        // dd($product);
         return view('livewire.product-catalog', compact('product', 'category', 'countProduct', 'countProductAll', 'main_category', 'datas'));
     }
 }

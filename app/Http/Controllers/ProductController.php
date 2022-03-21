@@ -67,7 +67,7 @@ class ProductController extends Controller
         $id_main = Product::select('categories.main_category as id_main')
             ->join('categories', 'categories.id', '=' ,'products.category')
             ->first();
-        $recomendation = Product::select('products.name as name', 'categories.category as category', 'products.img as img')
+        $recomendation = Product::select('products.name as name', 'categories.category as category', 'products.img as img', 'products.id as id')
             ->join('categories', 'categories.id', '=' ,'products.category')
             ->where('categories.main_category', $id_main->id_main)
             ->take(4)

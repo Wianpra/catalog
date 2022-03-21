@@ -180,7 +180,7 @@
                                     <img src="{{ asset('images/'.$img[0]) }}"  style=" height: 300px !important; " alt="Product" class="img-thumbnail">
                                     @endif
                                 </figure>
-                                <a href="product-details.html" class="product-overlay"></a>
+                                <a href="{{ url('/product-detail') }}/{{ $item->id }}" class="product-overlay"></a>
                                 <div class="product-action">
                                     <a data-bs-toggle="modal" data-bs-target="#productModal" class="action-btn">
                                         <i class="la la-eye"></i>
