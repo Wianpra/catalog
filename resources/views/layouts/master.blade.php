@@ -176,9 +176,7 @@
                                     <div class="footer-widget">
                                         <ul class="footer-menu">
                                             <li><a href="{{ url('about-us') }}">About Us</a></li>
-                                            <li><a href="blog.html">Blogs</a></li>
-                                            <li><a href="#">Careers</a></li>
-                                            <li><a href="{{ url('contact-us') }}">Contact</a></li>
+                                            <li><a href="{{url('product-knowledge')}}">Product Knowledge</a></li>
                                         </ul>
                                     </div>
                                 </div>

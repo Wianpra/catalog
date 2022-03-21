@@ -9,9 +9,9 @@
                     <button type="button" class="nav-item nav-link active" id="new-all-tab" data-bs-toggle="tab" data-bs-target="#new-all" role="tab" aria-controls="new-all" aria-selected="true">
                         <span class="nav-text">All</span>
                     </button>
-                    @foreach ($category as $value)
+                    @foreach ($main_category as $value)
                     <button type="button" class="nav-item nav-link" id="new-{{ $value->id }}-tab" data-bs-toggle="tab" data-bs-target="#new-{{ $value->id }}" role="tab" aria-controls="new-{{ $value->id }}" aria-selected="false">
-                        <span class="nav-text">{{$value->category}}</span>
+                        <span class="nav-text">{{$value->main_category}}</span>
                     </button>
                     @endforeach
                 </div>
@@ -84,11 +84,11 @@
                         <a href="{{url('/product-catalog')}}" class="btn btn-white btn-sm" >More Product</a>
                     </div>
                 </div>
-                @foreach ($category as $value)
+                @foreach ($main_category as $value)
                 <div class="tab-pane fade" id="new-{{$value->id}}" role="tabpanel" aria-labelledby="new-{{$value->id}}-tab">
                     <div class="row">
                         @php
-                            $productsplit = App\Product::where('category', $value->id)->paginate(4);
+                            $productsplit = App\Product::join('categories', 'categories.id', '=', 'products.category')->where('categories.main_category', $value->id)->orderBy('seen', 'desc')->take(4)->get();
                         @endphp
                         @foreach ($productsplit as $item)
                         <div class="col-lg-3 col-sm-6 mb--45">
@@ -97,8 +97,7 @@
                                     <div class="product-image">
                                         @php
                                             $img = unserialize($item->img);
-                                            $idCategory = App\Category::findOrFail($item->category)->main_category;
-                                            $idMain = App\mainCategories::findOrFail($idCategory)->main_category;
+                                            $idMain = App\mainCategories::findOrFail($value->id)->main_category;
                                         @endphp
                                         <figure class="product-image--holder">
                                             <img src="{{ asset('images/'.$img[0]) }}" alt="Product">
@@ -141,9 +140,6 @@
                         </div>
                         @endforeach
                     </div>
-                    @if (count($productsplit))
-                    {{ $productsplit->links('livewire-pagitation-product-link') }}
-                    @endif
                 </div>
                 @endforeach
             </div>

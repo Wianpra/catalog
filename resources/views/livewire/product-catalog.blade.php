@@ -42,8 +42,12 @@
                                                     <figure class="product-image--holder">
                                                         @php
                                                         $img = unserialize($item->img);
-                                                        $idCategory = App\Category::findOrFail($item->category)->main_category;
-                                                        $idMain = App\mainCategories::findOrFail($idCategory)->main_category;
+                                                        if ($item->main_category == null) {
+                                                            $idCategory = App\Category::findOrFail($item->category)->main_category;
+                                                            $idMain = App\mainCategories::findOrFail($idCategory)->main_category;
+                                                        }else {
+                                                            $idMain = App\mainCategories::findOrFail($item->main_category)->main_category;
+                                                        }                                                        
                                                         @endphp
                                                         @if ( $img == null )
                                                         <img src="assets/img/products/prod-04-270x300.jpg" class="img-thumbnail" alt="Products">

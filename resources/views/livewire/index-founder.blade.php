@@ -6,13 +6,13 @@
         <div class="row mb--28 mb-md--18 mb-sm--33">
             <div class="row">
                 <div class="col-12">
-                    <div class="row">
+                    <div class="row text-center">
                         @foreach ($founder as $item)
-                        <div class="col-lg-3 col-sm-6 mb--45">
+                        <div class="col-lg-4 col-sm-6 mb--45">
                             @php
                                 $img = unserialize($item->img);
                             @endphp
-                            <img src="{{ asset('images/'.$img[0]) }}" class="rounded-circle mb-5" alt="Product">
+                            <img src="{{ asset('images/'.$img[0]) }}" class="mb-5" alt="Product" style="border-radius: 50%">
                             <div class="product-info">
                                 <div class="product-category text-center">
                                     <a href="#"><h1><strong>{{$item->name}}</strong></h1></a>

@@ -108,16 +108,22 @@
                     <button type="button" class="btn btn-size-sm btn-shape-square col-3" id="button2" onclick="fungsiHide({{$data}})" style="color: black" hidden>
                         X
                     </button>
+                    @php
+                        $idCategory = App\Category::findOrFail($product->id)->main_category;
+                        $idMain = App\mainCategories::findOrFail($idCategory)->main_category;
+                    @endphp
                     @foreach ($data as $item)
                     @php
                     $nama = strtolower($item->nama);
                     $content1 = Str::substr($item->content, 0, 2);
                     $content2 = Str::substr($item->content, 2);
                     @endphp
-                    @if ($item->nama == 'Whatsapp' && $item->fungsi == "Coconut Product")
+                    @if ($item->nama == 'Whatsapp')
+                    @if ($item->fungsi == $idMain)
                     <a href="https://wa.me/{{$item->content}}" class="btn btn-size-sm btn-shape-square col-3" id="{{$item->nama}}" target="_blank" hidden>
                         <i class="la la-{{$nama}} la-lg" style="color: black"></i>
                     </a>
+                    @endif
                     @elseif ($item->nama != 'Whatsapp')
                     <a href="{{$item->content}}" class="btn btn-size-sm btn-shape-square col-3" id="{{$item->nama}}" target="_blank" hidden>
                         <i class="la la-{{$nama}} la-lg" style="color: black"></i>

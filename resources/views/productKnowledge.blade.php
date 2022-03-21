@@ -26,7 +26,7 @@
                                 <ul class="post-list">
                                     @foreach ($seen as $item)
                                     <li>
-                                        <a href="{{url('detail-knowledge/'.$item->id)}}">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</a>
+                                        <a href="{{url('detail-knowledge/'.$item->id)}}">{{$item->title}}</a>
                                         <span><i class="fa fa-clock-o"></i>{{date_diff(date_create(date('d-m-Y', strtotime($item->created_at))),date_create(date('d-m-Y', strtotime(Carbon\Carbon::now()))))->d}} Days Ago</span>
                                     </li>
                                     @endforeach
