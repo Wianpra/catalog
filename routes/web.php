@@ -26,6 +26,7 @@ Route::get('contact-us', 'ContactUsContoroller@index')->name('contact-us');
 Route::get('print-history', 'AboutUsController@pdf');
 Route::get('about-us', 'AboutUsHomeController@index');
 Route::get('core-value', 'AboutUsHomeController@core');
+Route::get('management', 'AboutUsHomeController@management');
 Route::get('/product-category/{id}', 'ProductController@category');
 Route::get('/product-subcategory/{id}', 'ProductController@subcategory');
 Route::get('getProduct/{id}', 'ProductController@getProduct');
@@ -79,6 +80,12 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('/getData-visi/{id}', 'AboutUsController@getDataVisi');
     Route::get('/getData-misi/{id}', 'AboutUsController@getDataMisi');
     Route::get('/getData-history/{id}', 'AboutUsController@getDataHistory');
+    Route::get('index-management', 'AboutUsController@indexManagement');
+    Route::post('store-management', 'AboutUsController@storeManagement');
+    Route::get('edit-management/{id}', 'AboutUsController@editManagement');
+    Route::post('update-management/{id}', 'AboutUsController@updateManagemnt');
+    Route::get('delete-management/{id}', 'AboutUsController@destroyManagement');
+    Route::get('get-management-img/{id}', 'AboutUsController@getManagementImg');
 
     Route::post('postData-visi/{id}', 'AboutUsController@postDataVisi');
     Route::post('postData-misi/{id}', 'AboutUsController@postDataMisi');

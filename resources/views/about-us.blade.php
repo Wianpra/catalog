@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('headerName', 'Product Detail')
+@section('headerName', 'About Us')
 @section('content')
 <!-- Main Content Wrapper Start -->
 <main class="main-content-wrapper">

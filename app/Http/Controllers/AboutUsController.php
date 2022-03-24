@@ -6,9 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\About;
 use App\Core;
+use App\Management;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\DB;
-use PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class AboutUsController extends Controller
 {
@@ -122,5 +123,71 @@ class AboutUsController extends Controller
         $count = About::count();
         $pdf = PDF::loadView('history', compact('about', 'count'))->setPaper('A4','potrait');
         return $pdf->stream('history.pdf');
+    }
+
+    public function indexManagement()
+    {
+        $data = Management::where('deleted_at', null)->get();
+        return view('_management', compact('data'));
+    }
+
+    public function storeManagement(Request $request)
+    {
+        $request->validate([
+            'imgs' => 'required',
+        ]);
+        $img = serialize($request->imgs);
+
+        $founder = new Management;
+        $founder->img = $img;
+        $founder->save();
+        return response()->json();
+    }
+
+    public function editManagement($id)
+    {
+        $data = Management::findOrFail($id);
+        return view('_editManagement', compact('data'));
+    }
+
+    public function updateManagemnt(Request $request, $id)
+    {
+        $img = serialize($request->imgs);
+        $data = [
+            'img' => $img,
+        ];
+        
+        DB::transaction(function () use($data, $id) {
+            Management::findOrFail($id)->update($data);
+        });
+
+        return response()->json();
+    }
+
+    public function destroyManagement($id)
+    {
+        $management = Management::findOrFail($id);
+
+        $img = unserialize($management->img);
+        if ($img != null) {
+            for ($i=0; $i < count($img); $i++) { 
+                $fileName = public_path('images/').$img[$i];
+                unlink($fileName);
+            }
+        }
+        
+        DB::transaction(function () use ($management) {
+            $management->delete();
+        });
+
+        Alert::success('Deleted', 'Data deleted successfully');
+        return redirect('index-management');
+    }
+
+    public function getManagementImg($id)
+    {
+        $data = Management::findOrFail($id)->img;
+        $data = unserialize($data);
+        return response()->json($data);
     }
 }

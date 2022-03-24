@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('headerName', 'Product Detail')
+@section('headerName', 'About us')
 @section('content')
 <div  class="main-content-wrapper">
     <div class="text-center mt-5 py-4" style="background-color: rgb(253, 237, 201)">CORE VALUE</div>

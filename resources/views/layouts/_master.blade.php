@@ -128,6 +128,12 @@
                 <span class="nav-link-text">Banner Management</span>
               </a>
             </li> 
+            <li>
+              <a class="nav-link" href="{{url('index-management')}}">
+                <i class="fa fa-image text-black"></i>
+                <span class="nav-link-text">Management</span>
+              </a>
+            </li> 
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/') }}">
                 <i class="ni ni-atom text-danger"></i>
@@ -198,7 +204,17 @@
     @yield('header')
     @include('sweetalert::alert')
     @yield('content')
-    
+    <!-- Footer -->
+    <footer class="footer pt-0">
+      <div class="row align-items-center justify-content-lg-between">
+          <div class="col-lg-6">
+              <div class="copyright text-center text-lg-left text-muted">
+                Copyright &copy;2022 <a href="{{url('/')}}" class="font-weight-bold ml-1 text-dark" target="_blank">Oracana Universal</a>
+              </div>
+          </div>
+      </div>
+  </footer>
+</div>
     @yield('modal')
   </div>
   <!-- Argon Scripts -->

@@ -3098,16 +3098,16 @@ fieldset:disabled a.btn
 
 .btn-primary
 {
-    color: #fff;
-    border-color: #ac8c56;
-    background-color: #ac8c56;
+    color: #000;
+    border-color: #fdedc9;
+    background-color: #fdedc9;
     box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
 }
 .btn-primary:hover
 {
-    color: #fff;
-    border-color: #ac8c56; 
-    background-color: #ac8c56;
+    color: #000;
+    border-color: #fdedc9; 
+    background-color: #fdedc9;
 }
 .btn-primary:focus,
 .btn-primary.focus
@@ -3117,7 +3117,7 @@ fieldset:disabled a.btn
 .btn-primary.disabled,
 .btn-primary:disabled
 {
-    color: #fff;
+    color: #000;
     border-color: #5e72e4; 
     background-color: #5e72e4;
 }
@@ -6243,7 +6243,7 @@ input[type='button'].btn-block
     list-style: none;
 
     border-radius: .375rem; 
-    background-color: #f6f9fc;
+    background-color: #000;
 
     flex-wrap: wrap;
 }
@@ -6260,7 +6260,7 @@ input[type='button'].btn-block
 
     content: '-'; 
 
-    color: #8898aa;
+    color: #000;
 }
 
 .breadcrumb-item + .breadcrumb-item:hover::before
@@ -6275,7 +6275,7 @@ input[type='button'].btn-block
 
 .breadcrumb-item.active
 {
-    color: #8898aa;
+    color: #000;
 }
 
 .pagination
@@ -8443,7 +8443,7 @@ a.close.disabled
 
 .bg-primary
 {
-    background-color: #ac8c56 !important;
+    background-color: #fdedc9 !important;
 }
 
 a.bg-primary:hover,
@@ -8451,7 +8451,7 @@ a.bg-primary:focus,
 button.bg-primary:hover,
 button.bg-primary:focus
 {
-    background-color: #ac8c56 !important;
+    background-color: #fdedc9 !important;
 }
 
 .bg-secondary
@@ -18062,7 +18062,7 @@ a.text-darker:focus
 
 .breadcrumb-dark
 {
-    background-color: #172b4d;
+background-color: #000;
 }
 .breadcrumb-dark .breadcrumb-item
 {
@@ -18070,19 +18070,19 @@ a.text-darker:focus
 }
 .breadcrumb-dark .breadcrumb-item a
 {
-    color: #f6f9fc;
+    color: #000;
 }
 .breadcrumb-dark .breadcrumb-item a:hover
 {
-    color: #fff;
+    color: #eee;
 }
 .breadcrumb-dark .breadcrumb-item + .breadcrumb-item::before
 {
-    color: #adb5bd;
+    color: #000;
 }
 .breadcrumb-dark .breadcrumb-item.active
 {
-    color: #dee2e6;
+    color: #000;
 }
 
 .breadcrumb-links
@@ -29529,7 +29529,7 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
     color: #eee; 
     border: none;
     border-radius: .25rem;
-    background-color: #ac8c56;
+    background-color: #fdedc9;
 }
 
 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove

@@ -1,8 +1,8 @@
 @extends('layouts._master')
 @extends('layouts._header')
-@section('headerName', 'Banner Management')
-@section('nav', 'Data Banner')
-@section('headerURL', 'index-banner')
+@section('headerName', 'Management')
+@section('nav', 'Data Management')
+@section('headerURL', 'index-management')
 
 @section('css')
 <!-- Page plugins -->
@@ -22,10 +22,10 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-6">
-                    <h3 class="mb-0">List Banner</h3>
+                    <h3 class="mb-0">List Management</h3>
                 </div>
                 <div class="col-6 text-right">
-                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalCreateBanner">Create Banner</button>
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalCreateManagement">Create Management</button>
                 </div>
             </div>
         </div>
@@ -45,10 +45,10 @@
                             <td>{{$loop->iteration}}</td>
                             <td><a type="button" class="btn btn-sm btn-neutral" onclick="viewImage({{$item->id}})">View Images</a></td>
                             <td>
-                                <a href="{{url('edit-banner/'.$item->id)}}" class="table-action table-action-edit" data-toggle="tooltip" data-original-title="Edit Product Knowledge">
+                                <a href="{{url('edit-management/'.$item->id)}}" class="table-action table-action-edit" data-toggle="tooltip" data-original-title="Edit Product Knowledge">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="#!" class="table-action table-action-delete btn-delete-product" data-toggle="tooltip" data-original-title="Delete Product Knowledge" onclick="deleteBanner({{$item->id}})">
+                                <a href="#!" class="table-action table-action-delete btn-delete-product" data-toggle="tooltip" data-original-title="Delete Product Knowledge" onclick="deleteManagement({{$item->id}})">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </td>
@@ -60,21 +60,20 @@
         </div>
     </div>
 </div>
-<input type="hidden" name="hiddenImg" id="hiddenImg">
 @endsection
 
 @section('modal')
-<div class="modal fade" id="modalCreateBanner" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalCreateManagement" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Create Banner</h5>
+                <h5 class="modal-title">Create Management</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div class="form-group" id="storeBanner">
+                <div class="form-group" id="storeManagement">
                     <label for="title">Images</label>
                     <div class="dz-default dropzone" id="dropzone">
                         
@@ -82,7 +81,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="btn btn-primary" class="btn btn-primary" id="save-banner">Save</button>
+                <button type="btn btn-primary" class="btn btn-primary" id="save-management">Save</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
@@ -110,11 +109,11 @@
     </div>
 </div>
 
-<div class="modal fade" id="modalDeleteBanner" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="modalDeleteManagement" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Delete Banner</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Delete Management</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -124,7 +123,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <a id="deleteBanner">
+                <a id="deleteManagement">
                     <button type="button" class="btn btn-primary">Delete</button>
                 </a>
             </div>
@@ -156,7 +155,7 @@
         addRemoveLinks: true,
         timeout: 60000,
         success: function (file, response) {
-            $('#storeBanner').append('<input type="hidden" name="imgs[]" value="' + response.name + '">')
+            $('#storeManagement').append('<input type="hidden" name="imgs[]" value="' + response.name + '">')
             $('.dz-details').remove()
             $('.dz-remove').addClass('mt-3 btn btn-danger btn-sm')
         },
@@ -176,37 +175,37 @@
                 success: function(response){
                 }
             });
-            $('#storeBanner').find('input[name="imgs[]"][value="' + file.upload.filename + '"]').remove()
+            $('#storeManagement').find('input[name="imgs[]"][value="' + file.upload.filename + '"]').remove()
             var _ref;
             return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
         },
     };
 </script>
 <script>
-    $('#save-banner').on('click', function() { 
+    $('#save-management').on('click', function() { 
         var gambar = $("input[name='imgs[]']").map(function(){return $(this).val();}).get();
         $.ajax({
             type: 'POST',
-            url: "{{url('store-banner')}}",
+            url: "{{url('store-management')}}",
             data: {imgs: gambar},
             headers: {
                 'X-CSRF-TOKEN': "{{ csrf_token() }}"
             },
             success: function(data){
-                location.replace("{{ url('index-banner')}}")
+                location.replace("{{ url('index-management')}}")
             }
         });
     })
     
-    function deleteBanner(id) {
-        $('#deleteBanner').attr('href', 'delete-banner/'+id)
-        $('#modalDeleteBanner').modal('show')
+    function deleteManagement(id) {
+        $('#deleteManagement').attr('href', 'delete-management/'+id)
+        $('#modalDeleteManagement').modal('show')
     }
     
     function viewImage(id) {
         $.ajax({
             type: 'GET',
-            url: "{{url('get-banner-img')}}"+ '/' + id,
+            url: "{{url('get-management-img')}}"+ '/' + id,
             beforeSend: function() {
                 $('#data-image').html('')
             },

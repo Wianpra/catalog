@@ -76,7 +76,7 @@
                                                             </a>
                                                         </li>
                                                         <li>
-                                                            <a href="#">
+                                                            <a href="{{url('management')}}">
                                                                 <span class="mm-text">Management</span>
                                                             </a>
                                                         </li>
@@ -166,7 +166,7 @@
                                         <figure class="footer-logo mb--30">
                                             <img src="{{ asset('/') }}assets/img/logo-black2.png" alt="Logo" width="290 px" height="80px">
                                         </figure>
-                                        <p>On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms. </p>
+                                        <p style="font-size: 10pt">ORCANA UNIVERSAL GROUP IS AN EXPORT COMPANY THAT HAS COLLABORATED WITH MANY SUPPLIERS IN INDONESIA. ORCANA CRAFT COOPERATES WITH MANY CRAFTSMEN OF HANDICRAFT PRODUCTS FROM BOTH MANUFACTURES AND HOME INDUSTRIES, ESPECIALLY ON THE ISLAND OF JAVA.</p>
                                     </div>
                                 </div>
                             </div>
@@ -221,7 +221,7 @@
                         <div class="row border-top ptb--20">
                             <div class="row">
                                 <div class="col-3"></div>
-                                <p class="copyright-text col-6 text-center">&copy; Lunarian</p>
+                                <p class="copyright-text col-6 text-center"> Copyright &copy;2022 Oracana Universal</p>
                                 @if (!Auth::check())
                                 <a href="{{ route('login') }}" class="col-3" style="text-align: right">
                                     Admin

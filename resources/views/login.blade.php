@@ -31,24 +31,19 @@
     <link rel="stylesheet" href="{{ asset('/') }}assets/_admin/assets/css/argon.css?v=1.1.0" type="text/css">
 </head>
 
-<body class="bg-default">
+<body class="bg-secondary">
     <!-- Main content -->
     <div class="main-content">
         <!-- Header -->
-        <div class="header bg-gradient-primary py-7 py-lg-8 pt-lg-9">
+        <div class="header bg-primary py-7 py-lg-8 pt-lg-9">
             <div class="container">
                 <div class="header-body text-center mb-1">
                     <div class="row justify-content-center">
                         <div class="col-xl-5 col-lg-6 col-md-8 px-5">
-                            <h1 class="text-white">LOGIN</h1>
+                            <h1 class="text-dark">LOGIN</h1>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="separator separator-bottom separator-skew zindex-100">
-                <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                    <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
-                </svg>
             </div>
         </div>
         <!-- Page content -->
@@ -83,7 +78,7 @@
                     </div>
                     <div class="row mt-3">
                         <div class="col-6">
-                            <a href="{{ url('/') }}" class="text-light"><small><< Back to home</small></a>
+                            <a href="{{ url('/') }}" class="text-dark"><small><< Back to home</small></a>
                         </div>
                     </div>
                 </div>
@@ -96,24 +91,8 @@
             <div class="row align-items-center justify-content-xl-between">
                 <div class="col-xl-6">
                     <div class="copyright text-center text-xl-left text-muted">
-                        &copy; 2019 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative Tim</a>
+                        Copyright &copy;2022 <a href="{{url('/')}}" class="font-weight-bold ml-1 text-dark" target="_blank">Oracana Universal</a>
                     </div>
-                </div>
-                <div class="col-xl-6">
-                    <ul class="nav nav-footer justify-content-center justify-content-xl-end">
-                        <li class="nav-item">
-                            <a href="https://www.creative-tim.com" class="nav-link" target="_blank">Creative Tim</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="https://www.creative-tim.com/license" class="nav-link" target="_blank">License</a>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>

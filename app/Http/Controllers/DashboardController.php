@@ -22,10 +22,11 @@ class DashboardController extends Controller
         $sum = Product::sum('seen');
         $seen = number_format($sum, 0, '.', '');
         $count_c = mainCategories::count();
+        $count_s = Category::count();
         $count_p = Product::count();
         $product = Product::all();
         $category = Category::all();
-        return view('_dashboard', compact('main','main2', 'sub', 'seen', 'count_p', 'count_c', 'product', 'category'));
+        return view('_dashboard', compact('main','main2', 'sub', 'seen', 'count_p', 'count_c', 'count_s', 'product', 'category'));
     }
     
     public function profile()
